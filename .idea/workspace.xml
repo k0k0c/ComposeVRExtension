@@ -2,317 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2dec5d8-d7a6-4daa-9db5-011b509309fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DAWModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/events/TrackSelectionChangeEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/APCConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/APCControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/APCControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/APCmkIControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/APCmkIIControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/continuous/CrossfaderCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/continuous/DeviceKnobRowCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/APCBrowserCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/APCCursorCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/APCRecordCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/BankLeftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/BankRightCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/CrossfadeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/DeviceLeftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/DeviceOnOffCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/DeviceRightCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/MasterCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/MuteCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/NudgeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/PanelLayoutCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/QuantizeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/RecArmCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/SelectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/SendCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/SessionRecordCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/ShiftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/SoloCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/StopAllClipsCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/StopClipCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/command/trigger/ToggleDeviceFrameCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/controller/APCColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/controller/APCControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/controller/APCMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/controller/APCPadGrid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/BaseMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/BrowserMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/CrossfadeMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/Modes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/PanMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/mode/SendMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/DrumView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/RaindropsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/SequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/SessionView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/ShiftView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apc/view/Views.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/APCminiConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/APCminiControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/APCminiControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/command/trigger/ShiftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/command/trigger/SoloCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/command/trigger/TrackSelectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/controller/APCminiColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/controller/APCminiControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/controller/APCminiMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/controller/APCminiPadGrid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/controller/APCminiScales.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/BaseMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/DeviceMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/Modes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/PanMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/SendMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/mode/VolumeMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/APCminiView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/BrowserView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/DrumView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/RaindropsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/SequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/SessionView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/ShiftView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/TrackButtons.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/apcmini/view/Views.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/BaseBeatstepControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/BeatstepConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/BeatstepControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/BeatstepControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/BeatstepProControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/command/continuous/BeatstepPlayPositionCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/command/continuous/KnobRowViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/command/trigger/StepCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/controller/BeatstepColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/controller/BeatstepControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/controller/BeatstepMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/controller/BeatstepPadGrid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/controller/BeatstepValueChanger.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/BaseSequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/BeatstepView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/BrowserView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/DeviceView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/DrumView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/SequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/SessionView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/ShiftView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/TrackEditing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/TrackView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/beatstep/view/Views.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/LaunchpadConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/LaunchpadControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/LaunchpadControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/LaunchpadMkIIControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/LaunchpadProControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/continuous/FaderCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/AbstractTrackCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/ClickCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/DoubleCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/DuplicateCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/LPSceneCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/LaunchpadCursorCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/LeftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/MuteCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/PanCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/QuantizeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/RecordArmCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/RightCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/SelectDeviceViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/SelectNoteViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/SelectSessionViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/SendsCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/ShiftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/SoloCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/StopClipCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/TrackCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/TrackSelectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/command/trigger/VolumeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/controller/LaunchpadColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/controller/LaunchpadControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/controller/LaunchpadMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/controller/LaunchpadPadGrid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/controller/LaunchpadScales.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/AbstractTrackMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/Modes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/MuteMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/PanMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/RecArmMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/SendMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/SoloMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/StopClipMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/TrackMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/mode/VolumeMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/AbstractFaderView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/BrowserView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DeviceView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DrumView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DrumView4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DrumView64.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DrumView8.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/DrumViewBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/PanView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/RaindropsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/SendsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/SequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/SessionView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/ShiftView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/Views.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/launchpad/view/VolumeView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/OSCColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/protocol/EmptyTrackData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/protocol/OSCModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/protocol/OSCParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/protocol/OSCWriter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/Push1ControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/Push2ControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/PushConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/PushControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/PushControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/continuous/ConfigurePitchbendCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/continuous/MastertrackTouchCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/continuous/SmallKnobTouchCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/pitchbend/PitchbendCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/pitchbend/PitchbendSessionCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/AccentCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/AddEffectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/AddTrackCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/AutomationCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/ClipCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/ConvertCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/DeviceCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/DoubleCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/FixedLengthCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/LayoutCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/MastertrackCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/MuteCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/OctaveCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/PageLeftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/PageRightCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/PanSendCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/PushCursorCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/QuantizeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/ScalesCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/SelectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/SelectPlayViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/SelectSessionViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/SetupCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/ShiftCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/SoloCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/TrackCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/command/trigger/VolumeCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/controller/DisplayMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/controller/PushColors.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/controller/PushControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/controller/PushDisplay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/controller/PushMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/AccentMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/AutomationMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/BaseMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/ConfigurationMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/FixedMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/FrameMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/GrooveMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/InfoMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/Modes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/NoteMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/NoteViewSelectMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/RibbonMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/ScaleLayoutMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/ScalesMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/SessionViewSelectMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/SetupMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/TransportMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceBrowserMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceLayerMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceLayerModePan.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceLayerModeSend.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceLayerModeVolume.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/device/DeviceParamsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/AbstractTrackMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/ClipMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/CrossfaderMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/LayerDetailsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/MasterMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/PanMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/SendMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/TrackDetailsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/TrackMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/mode/track/VolumeMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/ClipView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/ColorView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/DrumView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/DrumView4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/DrumView64.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/DrumView8.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/DrumViewBase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/PianoView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/PrgChangeView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/RaindropsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/ScenePlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/SequencerView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/SessionView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/push/view/Views.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/SLConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/SLControllerExtension.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/SLControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/SLMkIControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/SLMkIIControllerExtensionDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/DeviceKnobRowCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/FaderCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/TapTempoInitMkICommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/TapTempoMkICommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/TouchpadCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/continuous/TrackKnobRowCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/trigger/ButtonRowSelectCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/trigger/ButtonRowViewCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/trigger/P1ButtonCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/trigger/P2ButtonCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/command/trigger/TransportButtonCommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/controller/SLControlSurface.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/controller/SLDisplay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/controller/SLKeysMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/controller/SLMidiInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/FixedMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/FrameMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/FunctionMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/MasterMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/Modes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/PlayOptionsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/SessionMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/TrackMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/TrackTogglesMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/ViewSelectMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/VolumeMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/device/DeviceParamsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/mode/device/DevicePresetsMode.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/view/ControlView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/view/PlayView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/view/SLView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/view/TransportControl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/sl/view/Views.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/ComposeVRConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRConfiguration.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/ComposeVRExtension.java" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/osc/ComposeVRExtensionDefinition.java" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtensionDefinition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/Model.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/continuous/FootswitchCommand.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/continuous/FootswitchCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/trigger/NewCommand.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/trigger/NewCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/trigger/ToggleTrackBanksCommand.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/command/trigger/ToggleTrackBanksCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnItemData.java" afterPath="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnItemData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/services/com.bitwig.extension.ExtensionDefinition" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/services/com.bitwig.extension.ExtensionDefinition" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRConfiguration.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -346,83 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
-                <element signature="e#5169#5170#0" expanded="true" />
-                <element signature="e#5228#5229#0" expanded="true" />
-                <element signature="e#5595#5596#0" expanded="true" />
-                <element signature="e#5655#5656#0" expanded="true" />
-                <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
-                <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApplicationCommandReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="593">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#481#482#0" expanded="true" />
-                <element signature="e#509#510#0" expanded="true" />
-                <element signature="e#1441#1449#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="968">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
-                <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SoundModule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BrowserRequest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+            <state relative-caret-position="90">
+              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#731#732#0" expanded="true" />
@@ -445,6 +63,87 @@
                 <element signature="e#1376#1377#0" expanded="true" />
                 <element signature="e#1424#1425#0" expanded="true" />
                 <element signature="e#1464#1465#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
+                <element signature="e#5169#5170#0" expanded="true" />
+                <element signature="e#5228#5229#0" expanded="true" />
+                <element signature="e#5595#5596#0" expanded="true" />
+                <element signature="e#5655#5656#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="53" lean-forward="false" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowserProxy.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3824">
+              <caret line="463" column="57" lean-forward="false" selection-start-line="463" selection-start-column="57" selection-end-line="463" selection-end-column="57" />
+              <folding>
+                <element signature="method#enableObservers#0;class#BrowserProxy#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationCommandReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="473">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#481#482#0" expanded="true" />
+                <element signature="e#509#510#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandRouter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="968">
+              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+                <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoundModule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -500,9 +199,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
       </list>
     </option>
   </component>
@@ -573,6 +272,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="composevr" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ComposeVRExtension" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ComposeVRExtension" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="composevr" type="462c0819:PsiDirectoryNode" />
+              <item name="requests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ComposeVRExtension" type="b2602c69:ProjectViewProjectNode" />
@@ -741,11 +449,18 @@
       <option name="presentableId" value="Default" />
       <updated>1507677667190</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add source">
+      <created>1517169994599</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1517169994599</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -755,7 +470,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17529412" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20555556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -791,6 +506,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add source" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add source" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -892,7 +611,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#481#482#0" expanded="true" />
             <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1441#1449#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -982,7 +700,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#481#482#0" expanded="true" />
             <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1441#1449#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1139,16 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="463" column="57" lean-forward="false" selection-start-line="463" selection-start-column="57" selection-end-line="463" selection-end-column="57" />
-          <folding>
-            <element signature="method#enableObservers#0;class#BrowserProxy#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DrumPadCommandReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1199,10 +906,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="87" column="87" lean-forward="false" selection-start-line="87" selection-start-column="87" selection-end-line="87" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+            <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="53" lean-forward="false" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+        <state relative-caret-position="90">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#731#732#0" expanded="true" />
@@ -1229,65 +990,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="87" column="87" lean-forward="false" selection-start-line="87" selection-start-column="87" selection-end-line="87" selection-end-column="87" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
-            <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1441#1449#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="326">
+          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
@@ -1295,8 +1001,16 @@
             <element signature="e#5228#5229#0" expanded="true" />
             <element signature="e#5595#5596#0" expanded="true" />
             <element signature="e#5655#5656#0" expanded="true" />
-            <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
-            <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3824">
+          <caret line="463" column="57" lean-forward="false" selection-start-line="463" selection-start-column="57" selection-end-line="463" selection-end-column="57" />
+          <folding>
+            <element signature="method#enableObservers#0;class#BrowserProxy#0" expanded="false" />
           </folding>
         </state>
       </provider>
