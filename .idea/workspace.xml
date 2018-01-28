@@ -4,6 +4,7 @@
     <list default="true" id="d2dec5d8-d7a6-4daa-9db5-011b509309fc" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandReceiver.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DAWModel.java" />
@@ -336,7 +337,7 @@
       <file leaf-file-name="ComposeVRExtension.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
+            <state relative-caret-position="478">
               <caret line="87" column="87" lean-forward="false" selection-start-line="87" selection-start-column="87" selection-end-line="87" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -345,34 +346,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
+      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="201">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+                <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
+                <element signature="e#5169#5170#0" expanded="true" />
+                <element signature="e#5228#5229#0" expanded="true" />
+                <element signature="e#5595#5596#0" expanded="true" />
+                <element signature="e#5655#5656#0" expanded="true" />
+                <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
+                <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
+      <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+            <state relative-caret-position="450">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
-                <element signature="e#5069#5245#0" expanded="true" />
-                <element signature="e#5244#5245#0" expanded="true" />
-                <element signature="e#5497#5672#0" expanded="true" />
-                <element signature="e#5671#5672#0" expanded="true" />
-                <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
-                <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
-                <element signature="method#changePage#0;class#BrowserModel#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationCommandReceiver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="593">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#481#482#0" expanded="true" />
+                <element signature="e#509#510#0" expanded="true" />
+                <element signature="e#1441#1449#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandRouter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="968">
+              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+                <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -390,48 +418,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationCommandReceiver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#509#510#0" expanded="true" />
-                <element signature="e#1437#1445#0" expanded="true" />
-                <marker date="1517103720000" expanded="true" signature="571:1572" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BrowserRequest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+            <state relative-caret-position="0">
+              <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#636#637#0" expanded="true" />
-                <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#701#702#0" expanded="true" />
-                <element signature="e#743#744#0" expanded="true" />
-                <element signature="e#790#791#0" expanded="true" />
-                <element signature="e#833#834#0" expanded="true" />
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#919#920#0" expanded="true" />
-                <element signature="e#954#955#0" expanded="true" />
-                <element signature="e#992#993#0" expanded="true" />
-                <element signature="e#1024#1025#0" expanded="true" />
-                <element signature="e#1058#1059#0" expanded="true" />
-                <element signature="e#1094#1095#0" expanded="true" />
-                <element signature="e#1132#1133#0" expanded="true" />
-                <element signature="e#1177#1178#0" expanded="true" />
-                <element signature="e#1215#1216#0" expanded="true" />
-                <element signature="e#1250#1251#0" expanded="true" />
-                <element signature="e#1281#1282#0" expanded="true" />
-                <element signature="e#1329#1330#0" expanded="true" />
-                <element signature="e#1369#1370#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
+                <element signature="e#759#760#0" expanded="true" />
+                <element signature="e#796#797#0" expanded="true" />
+                <element signature="e#838#839#0" expanded="true" />
+                <element signature="e#885#886#0" expanded="true" />
+                <element signature="e#928#929#0" expanded="true" />
+                <element signature="e#974#975#0" expanded="true" />
+                <element signature="e#1014#1015#0" expanded="true" />
+                <element signature="e#1049#1050#0" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
+                <element signature="e#1119#1120#0" expanded="true" />
+                <element signature="e#1153#1154#0" expanded="true" />
+                <element signature="e#1189#1190#0" expanded="true" />
+                <element signature="e#1227#1228#0" expanded="true" />
+                <element signature="e#1272#1273#0" expanded="true" />
+                <element signature="e#1310#1311#0" expanded="true" />
+                <element signature="e#1345#1346#0" expanded="true" />
+                <element signature="e#1376#1377#0" expanded="true" />
+                <element signature="e#1424#1425#0" expanded="true" />
+                <element signature="e#1464#1465#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -480,15 +493,16 @@
         <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnItemData.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/TrackCommandReceiver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandReceiver.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/events/TrackSelectionChangeEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DAWModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java" />
       </list>
     </option>
   </component>
@@ -780,7 +794,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -829,6 +843,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+            <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -875,9 +890,9 @@
           <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
             <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1437#1445#0" expanded="true" />
-            <marker date="1517103720000" expanded="true" signature="571:1572" ph="{...}" />
+            <element signature="e#1441#1449#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -918,6 +933,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+            <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -964,9 +980,9 @@
           <caret line="24" column="37" lean-forward="false" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
             <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1437#1445#0" expanded="true" />
-            <marker date="1517103720000" expanded="true" signature="571:1572" ph="{...}" />
+            <element signature="e#1441#1449#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1082,7 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/bitwig/extension-api/2/extension-api-2.jar!/com/bitwig/extension/callback/NoArgsCallback.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1184,52 +1199,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#509#510#0" expanded="true" />
-            <element signature="e#1437#1445#0" expanded="true" />
-            <marker date="1517103720000" expanded="true" signature="571:1572" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+        <state relative-caret-position="0">
+          <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#636#637#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#701#702#0" expanded="true" />
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#790#791#0" expanded="true" />
-            <element signature="e#833#834#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#919#920#0" expanded="true" />
-            <element signature="e#954#955#0" expanded="true" />
-            <element signature="e#992#993#0" expanded="true" />
-            <element signature="e#1024#1025#0" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-            <element signature="e#1094#1095#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1177#1178#0" expanded="true" />
-            <element signature="e#1215#1216#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
-            <element signature="e#1281#1282#0" expanded="true" />
-            <element signature="e#1329#1330#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#759#760#0" expanded="true" />
+            <element signature="e#796#797#0" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#885#886#0" expanded="true" />
+            <element signature="e#928#929#0" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#1014#1015#0" expanded="true" />
+            <element signature="e#1049#1050#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1119#1120#0" expanded="true" />
+            <element signature="e#1153#1154#0" expanded="true" />
+            <element signature="e#1189#1190#0" expanded="true" />
+            <element signature="e#1227#1228#0" expanded="true" />
+            <element signature="e#1272#1273#0" expanded="true" />
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="true" />
+            <element signature="e#1376#1377#0" expanded="true" />
+            <element signature="e#1424#1425#0" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRExtension.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
+        <state relative-caret-position="478">
           <caret line="87" column="87" lean-forward="false" selection-start-line="87" selection-start-column="87" selection-end-line="87" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1239,11 +1241,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/CommandRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="968">
+          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#routeCommand#0;class#CommandRouter#0" expanded="false" />
+            <element signature="method#routeMidi#0;class#CommandRouter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1258,20 +1261,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ApplicationCommandReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+            <element signature="e#1441#1449#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+        <state relative-caret-position="201">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BrowserModel#0;class#BrowserModel#0" expanded="false" />
-            <element signature="e#5069#5245#0" expanded="true" />
-            <element signature="e#5244#5245#0" expanded="true" />
-            <element signature="e#5497#5672#0" expanded="true" />
-            <element signature="e#5671#5672#0" expanded="true" />
+            <element signature="e#5169#5170#0" expanded="true" />
+            <element signature="e#5228#5229#0" expanded="true" />
+            <element signature="e#5595#5596#0" expanded="true" />
+            <element signature="e#5655#5656#0" expanded="true" />
             <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
             <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
-            <element signature="method#changePage#0;class#BrowserModel#0" expanded="false" />
           </folding>
         </state>
       </provider>
