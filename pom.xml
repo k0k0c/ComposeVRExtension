@@ -9,7 +9,6 @@
 	<version>SNAPSHOT-1</version>
 
 	<!-- https://mvnrepository.com/artifact/com.illposed.osc/javaosc-core -->
-
 	<repositories>
 	  <repository>
             <id>bitwig</id>
@@ -25,6 +24,14 @@
 			<artifactId>extension-api</artifactId>
 			<version>2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20171018</version>
+		</dependency>
+
 
 	</dependencies>
 
