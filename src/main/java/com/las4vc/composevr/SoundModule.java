@@ -21,12 +21,14 @@ public class SoundModule extends CommandReceiver{
     private Track track;
     private String id;
 
-    public SoundModule(DAWModel model, String id){
+    public SoundModule(DAWModel model, String id, Track t){
         super(model);
         this.id = id;
+        this.track = t;
     }
 
     public void requestBrowser(ArrayList<String> params){
+        model.host.println("Browser request");
         BrowserRequest request = new BrowserRequest(params, track, id);
         model.browser.requestBrowser(request);
     }

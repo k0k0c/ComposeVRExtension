@@ -80,6 +80,7 @@ public class BrowserProxy
         this.cursorResult.name ().markInterested ();
 
         this.resultsItemBank = (BrowserResultsItemBank) this.cursorResult.createSiblingsBank (this.numResults);
+        this.resultsItemBank.scrollPosition().markInterested();
         this.resultData = this.createResultData (this.numResults);
     }
 
@@ -419,6 +420,10 @@ public class BrowserProxy
     public void nextResultPage ()
     {
         this.resultsItemBank.scrollPageForwards ();
+    }
+
+    public int getResultsPage(){
+        return this.resultsItemBank.scrollPosition().get();
     }
 
 

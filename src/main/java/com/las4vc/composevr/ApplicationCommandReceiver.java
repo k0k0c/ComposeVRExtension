@@ -40,7 +40,7 @@ public class ApplicationCommandReceiver extends CommandReceiver{
             newTrack.setName(newTrackID);
         }
 
-        SoundModule newSoundModule = new SoundModule(model, senderID);
+        SoundModule newSoundModule = new SoundModule(model, senderID, newTrack);
 
         //Add the receiver to the router
         model.router.addReceiver(newSoundModule, newTrackID);

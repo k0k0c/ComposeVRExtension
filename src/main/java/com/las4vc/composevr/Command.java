@@ -16,18 +16,25 @@ public class Command {
         ArrayList<String> params = new ArrayList<>();
         params.add(newTrackID);
 
+        model.host.println("TrackCreated");
         model.router.sendCommand(receiver,"TrackCreated", params);
     }
 
-    public static void BrowserResultsChanged(DAWModel model, String receiver, ArrayList<String> results){
-        model.router.sendCommand(receiver, "BrowserResultsChanged", results);
+    public static void BrowserResultsChanged(DAWModel model, String receiver, int scrollPosition, ArrayList<String> results){
+        ArrayList<String> params = new ArrayList<>();
+        params.add(Integer.toString(scrollPosition));
+        params.addAll(results);
+
+        model.router.sendCommand(receiver, "BrowserResultsChanged", params);
     }
 
     public static void DeviceLoaded(DAWModel model, String receiver){
+        model.host.println("DeviceLoaded");
         model.router.sendCommand(receiver, "DeviceLoaded", new ArrayList<String>());
     }
 
     public static void DeviceNotFound(DAWModel model, String receiver){
+        model.host.println("DeviceNotFound");
         model.router.sendCommand(receiver, "DeviceNotFound", new ArrayList<String>());
     }
 }

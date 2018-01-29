@@ -39,18 +39,14 @@ public class BrowserModel implements TrackSelectionChangeEvent {
                     return CLOSED;
                 }
 
-                browser.browserPage = 0;
 
-                if(browser.model.cursorTrack.position().equals(request.getTrack().position())) {
-                    //The cursorTrack is at the desired track already, so open the browser
-                    browser.browserProxy.browseToInsertBeforeDevice();
-                    return OPENING;
-                }else{
-                    //Move the cursorTrack to the desired track
-                    browser.model.addTrackSelectionChangeListener(browser);
-                    browser.model.cursorTrack.selectChannel(request.getTrack());
-                    return SELECTING_TRACK;
-                }
+                browser.browserPage = 0;
+                browser.model.host.println("Selecting track");
+
+                //Move the cursorTrack to the desired track
+                browser.model.addTrackSelectionChangeListener(browser);
+                browser.model.cursorTrack.selectChannel(request.getTrack());
+                return SELECTING_TRACK;
             }
         },
         SELECTING_TRACK{
@@ -60,25 +56,12 @@ public class BrowserModel implements TrackSelectionChangeEvent {
                     return SELECTING_TRACK;
                 }
 
+                browser.model.host.println("Opening browser");
+
                 //Selected track is now the desired track. Begin browsing
                 browser.browserProxy.browseToInsertBeforeDevice();
                 browser.model.removeTrackSelectionChangeListener(browser);
-                return State.OPENING;
-            }
-        },
-        OPENING{
-            @Override
-            State next(BrowserRequest request, BrowserModel browser, Event e){
-                if(e != Event.BROWSER_ACTIVE_CHANGE){
-                    return OPENING;
-                }
-
-                //Browser has been activated, browse for presets
-                if(!browser.browserProxy.isActive()){
-                    browser.browserProxy.browseForPresets();
-                }
-
-                return LOADING_RESULTS;
+                return State.LOADING_RESULTS;
             }
         },
         LOADING_RESULTS{
@@ -102,7 +85,7 @@ public class BrowserModel implements TrackSelectionChangeEvent {
                 //Handle changes to the filter
 
                 //Clamp page index
-                browser.browserPage = Math.min(Math.max(0, browser.browserPage), browser.browserProxy.getNumResults() - 1);
+                browser.browserPage = Math.max(0, browser.browserPage);
 
                 BrowserColumnItemData[] pageResults = browser.browserProxy.getResultColumnItems();
 
@@ -119,14 +102,14 @@ public class BrowserModel implements TrackSelectionChangeEvent {
                 }
 
                 //Create list of results on current page
-                ArrayList<String> params = new ArrayList<>();
+                ArrayList<String> results = new ArrayList<>();
 
                 for(BrowserColumnItemData item : pageResults){
-                    params.add(item.getName());
+                    results.add(item.getName());
                 }
 
                 //Send page results to client
-                Command.BrowserResultsChanged(browser.model, request.getSenderID(), params);
+                Command.BrowserResultsChanged(browser.model, request.getSenderID(), browser.browserProxy.getResultsPage(), results);
 
                 return LOADING_RESULTS;
             }
@@ -210,8 +193,9 @@ public class BrowserModel implements TrackSelectionChangeEvent {
 
             if (currentDevice.equals(request.getDeviceName())) {
                 request.setSelectionIndex(pageResults[i].getIndex());
+
                 if (browserPage > 0) {
-                    request.setSelectionIndex(request.getSelectionIndex() + (browserPage - 1) * browserProxy.getNumResults());
+                    request.setSelectionIndex(request.getSelectionIndex() + browserProxy.getResultsPage());
                 }
                 request.setDeviceName("");
                 foundDevice = true;
@@ -220,8 +204,8 @@ public class BrowserModel implements TrackSelectionChangeEvent {
         }
 
         if(!foundDevice && !request.getDeviceName().equals("")){
-            browserProxy.nextResultPage();
             browserPage += 1;
+            browserProxy.nextResultPage();
         }
     }
 

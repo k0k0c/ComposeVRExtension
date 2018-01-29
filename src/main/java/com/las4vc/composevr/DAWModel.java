@@ -36,6 +36,7 @@ public class DAWModel {
     public BrowserModel browser;
 
     private ArrayList<TrackSelectionChangeEvent> trackSelectionChangeListeners;
+    private ArrayList<TrackSelectionChangeEvent> toRemove;
 
 
     private DefaultValueChanger valueChanger;
@@ -45,6 +46,7 @@ public class DAWModel {
         this.valueChanger = valueChanger;
 
         trackSelectionChangeListeners = new ArrayList<>();
+        toRemove = new ArrayList<>();
 
         app = host.createApplication();
         router = new CommandRouter(host);
@@ -72,7 +74,7 @@ public class DAWModel {
     }
 
     public void removeTrackSelectionChangeListener(TrackSelectionChangeEvent listener){
-        trackSelectionChangeListeners.remove(listener);
+        toRemove.add(listener);
     }
 
     private void handleTrackSelectionChange(){
@@ -80,6 +82,12 @@ public class DAWModel {
         for(TrackSelectionChangeEvent e : trackSelectionChangeListeners) {
             e.OnTrackSelectionChange();
         }
+
+        for(TrackSelectionChangeEvent e : toRemove){
+            trackSelectionChangeListeners.remove(e);
+        }
+
+        toRemove.clear();
     }
 
 
