@@ -114,7 +114,7 @@ public class DeviceBrowserMode extends BaseMode
 
             case SELECTION_FILTER:
                 final BrowserColumnItemData [] items = browser.getFilterColumn (this.filterColumn).getItems ();
-                for (int i = 0; i < browser.getNumResults (); i++)
+                for (int i = 0; i < browser.getNumResultsPerPage(); i++)
                     d.setBlock (i / 4, i % 4, (items[i].isSelected () ? ">" : " ") + items[i].getName ());
                 break;
         }

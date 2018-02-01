@@ -12,29 +12,32 @@ import java.util.ArrayList;
  */
 public class Command {
 
-    public static void TrackCreated(DAWModel model, String receiver, String newTrackID){
-        ArrayList<String> params = new ArrayList<>();
-        params.add(newTrackID);
-
-        model.host.println("TrackCreated");
-        model.router.sendCommand(receiver,"TrackCreated", params);
+    /**
+     * Emitted when a sound module is created by the
+     * @param model
+     * @param receiver
+     */
+    public static void SoundModuleCreated(DAWModel model, String receiver){
+        model.host.println("SoundModuleCreated");
+        model.router.sendCommand(receiver,"SoundModuleCreated", new ArrayList<>());
     }
 
-    public static void BrowserResultsChanged(DAWModel model, String receiver, int scrollPosition, ArrayList<String> results){
+    public static void BrowserColumnChanged(DAWModel model, String columnName, int resultsPerPage, int totalResults, ArrayList<String> results){
         ArrayList<String> params = new ArrayList<>();
-        params.add(Integer.toString(scrollPosition));
+        params.add(Integer.toString(resultsPerPage));
+        params.add(Integer.toString(totalResults));
         params.addAll(results);
 
-        model.router.sendCommand(receiver, "BrowserResultsChanged", params);
+        model.router.sendCommand("browser/"+columnName, "BrowserColumnChanged", params);
     }
 
-    public static void DeviceLoaded(DAWModel model, String receiver){
+    public static void DeviceLoaded(DAWModel model){
         model.host.println("DeviceLoaded");
-        model.router.sendCommand(receiver, "DeviceLoaded", new ArrayList<String>());
+        model.router.sendCommand("browser", "DeviceLoaded", new ArrayList<String>());
     }
 
-    public static void DeviceNotFound(DAWModel model, String receiver){
+    public static void DeviceNotFound(DAWModel model){
         model.host.println("DeviceNotFound");
-        model.router.sendCommand(receiver, "DeviceNotFound", new ArrayList<String>());
+        model.router.sendCommand("browser", "DeviceNotFound", new ArrayList<String>());
     }
 }

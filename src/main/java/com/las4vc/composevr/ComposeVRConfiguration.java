@@ -28,7 +28,7 @@ public class ComposeVRConfiguration extends AbstractConfiguration
     private static final String DEFAULT_CLIENT = "192.168.0.29";
 
     private String              UDPClientIP    = DEFAULT_CLIENT;
-    private int                 TCPPort    = 8888;
+    private int                 TCPPort    = 8887;
     private int                 UDPPort       = 8889;
 
 

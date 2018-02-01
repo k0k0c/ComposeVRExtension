@@ -5,6 +5,7 @@
 package de.mossgrabers.framework.daw.data;
 
 import com.bitwig.extension.callback.StringValueChangedCallback;
+import com.bitwig.extension.callback.ValueChangedCallback;
 import com.bitwig.extension.controller.api.BrowserFilterItem;
 import com.bitwig.extension.controller.api.BrowserItem;
 
@@ -30,6 +31,8 @@ public class BrowserColumnItemData
     {
         this.index = index;
         this.item = item;
+
+        this.item.setIsSubscribed(true);
 
         item.exists ().markInterested ();
         item.name ().markInterested ();

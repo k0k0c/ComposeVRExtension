@@ -4,15 +4,10 @@
 package com.las4vc.composevr;
 
 import com.bitwig.extension.controller.ControllerExtension;
-import com.bitwig.extension.callback.BooleanValueChangedCallback;
-import com.bitwig.extension.callback.StringValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
 import de.mossgrabers.framework.controller.DefaultValueChanger;
-import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
 import de.mossgrabers.framework.scale.Scales;
-import de.mossgrabers.framework.daw.BrowserProxy;
-import de.mossgrabers.framework.daw.CursorDeviceProxy;
 
 import java.nio.charset.Charset;
 
@@ -72,8 +67,8 @@ public class ComposeVRExtension extends ControllerExtension
         host.println ("Initializing ComposeVR.");
         host.println("Connecting to udp client at: "+ClientIP);
 
-        socket = host.createRemoteConnection("ComposeVR",serverPort);
-        host.println("Server listening on port: "+serverPort);
+        socket = host.createRemoteConnection("ComposeVR", serverPort);
+        host.println("Server listening on port: "+ serverPort);
         socket.setClientConnectCallback(this::handleConnection);
 
         host.addDatagramPacketObserver ("ComposeVR UDP Host", serverPort, this::handleDatagram);
@@ -85,7 +80,7 @@ public class ComposeVRExtension extends ControllerExtension
         getHost().println("Client connected");
         model.router.setConnection(connection);
 
-        ApplicationCommandReceiver appCommandReceiver = new ApplicationCommandReceiver(model);
+        DAWController appCommandReceiver = new DAWController(model);
         model.router.addReceiver(appCommandReceiver, "app");
 
         connection.setReceiveCallback(this::handleData);
@@ -99,7 +94,9 @@ public class ComposeVRExtension extends ControllerExtension
 
     private void handleData(final byte[] data){
         String command = new String(data,Charset.forName("UTF8"));
-        //getHost().println(command);
+        //may need to split command at }
+
+        model.host.println(command);
         model.router.routeCommand(command);
     }
 

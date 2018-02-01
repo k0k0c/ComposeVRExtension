@@ -5,6 +5,7 @@
 package de.mossgrabers.framework.daw;
 
 import com.bitwig.extension.callback.BooleanValueChangedCallback;
+import com.las4vc.composevr.DAWModel;
 import de.mossgrabers.framework.daw.data.BrowserColumnData;
 import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
 
@@ -15,6 +16,8 @@ import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.CursorBrowserResultItem;
 import com.bitwig.extension.controller.api.CursorTrack;
 import com.bitwig.extension.controller.api.PopupBrowser;
+import com.bitwig.extension.controller.api.BrowserResultsItem;
+import com.bitwig.extension.controller.api.BrowserItem;
 
 
 /**
@@ -34,6 +37,8 @@ public class BrowserProxy
     private int                      numResults;
     private BrowserResultsColumn     resultsColumn;
     private CursorBrowserResultItem  cursorResult;
+    private BrowserResultsItem result;
+
     private BrowserResultsItemBank   resultsItemBank;
     private BrowserColumnItemData [] resultData;
     private int                      numFilterColumnEntries;
@@ -76,6 +81,11 @@ public class BrowserProxy
         this.columnData = this.createFilterColumns (this.filterColumns.length, numFilterColumnEntries);
 
         this.resultsColumn = this.browser.resultsColumn ();
+        this.resultsColumn.entryCount().markInterested();
+
+        //this.result = this.resultsColumn.createCursorItem();
+        //this.result.
+
         this.cursorResult = (CursorBrowserResultItem) this.resultsColumn.createCursorItem ();
         this.cursorResult.name ().markInterested ();
 
@@ -97,6 +107,9 @@ public class BrowserProxy
         this.browser.selectedContentTypeIndex ().setIsSubscribed (enable);
         this.browser.selectedContentTypeName ().setIsSubscribed (enable);
         this.browser.contentTypeNames ().setIsSubscribed (enable);
+
+        this.resultsItemBank.setIsSubscribed(true);
+        this.resultsItemBank.scrollPosition().setIsSubscribed(true);
 
         for (final BrowserColumnData column: this.columnData)
             column.enableObservers (enable);
@@ -169,6 +182,10 @@ public class BrowserProxy
         return this.browser.contentTypeNames ().get ();
     }
 
+    public void setContentType(int i){
+        this.browser.selectedContentTypeIndex().set(i);
+    }
+
 
     /**
      * Open the browser to browse for presets.
@@ -219,8 +236,6 @@ public class BrowserProxy
         else
             this.browser.cancel ();
     }
-
-
     /**
      * Check if the browser is active.
      *
@@ -242,6 +257,10 @@ public class BrowserProxy
         this.columnData[column].resetFilter ();
     }
 
+    public void selectFilterItem(final int column, int pos){
+        this.columnData[column].setScrollPosition(pos);
+    }
+
 
     /**
      * Get a filter column.
@@ -252,6 +271,17 @@ public class BrowserProxy
     public BrowserColumnData getFilterColumn (final int column)
     {
         return this.columnData[column];
+    }
+
+    public int getFilterColumnIndex(String name, DAWModel model){
+
+        for(int i = 0; i < filterColumns.length; i++){
+            //model.host.println(filterColumns[i].name().get());
+            if(filterColumns[i].name().get().equals(name)){
+                return i;
+            }
+        }
+        return -1;
     }
 
 
@@ -289,7 +319,6 @@ public class BrowserProxy
     {
         return this.resultData;
     }
-
 
     /**
      * Select the previous item of a filter column.
@@ -377,6 +406,13 @@ public class BrowserProxy
         this.cursorResult.selectNext ();
     }
 
+    public void selectFirstResult() {
+        this.cursorResult.selectFirst();
+    }
+
+    public void selectCurrentResult(){
+        this.cursorResult.isSelected().set(true);
+    }
 
     /**
      * Get the selected result item.
@@ -411,6 +447,11 @@ public class BrowserProxy
     public void previousResultPage ()
     {
         this.resultsItemBank.scrollPageBackwards ();
+
+    }
+
+    public void setResultsScrollPosition(int i){
+        this.resultsItemBank.scrollPosition().set(i);
     }
 
 
@@ -422,7 +463,7 @@ public class BrowserProxy
         this.resultsItemBank.scrollPageForwards ();
     }
 
-    public int getResultsPage(){
+    public int getResultsScrollPosition(){
         return this.resultsItemBank.scrollPosition().get();
     }
 
@@ -450,9 +491,13 @@ public class BrowserProxy
      *
      * @return The number oif results.
      */
-    public int getNumResults ()
+    public int getNumResultsPerPage()
     {
         return this.numResults;
+    }
+
+    public int getNumTotalResults(){
+        return this.resultsColumn.entryCount().get();
     }
 
     /**

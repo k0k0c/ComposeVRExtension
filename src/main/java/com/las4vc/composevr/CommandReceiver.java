@@ -7,7 +7,7 @@ import java.util.HashMap;
 import com.bitwig.extension.controller.api.*;
 
 /**
- * A CommandReceiver translates incoming messages into method calls using
+ * A CommandReceiver translates incoming messages into method calls using reflection
  *
  * @author Lane Spangler
  */

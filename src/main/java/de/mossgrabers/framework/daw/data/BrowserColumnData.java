@@ -7,7 +7,8 @@ package de.mossgrabers.framework.daw.data;
 import com.bitwig.extension.controller.api.BrowserFilterColumn;
 import com.bitwig.extension.controller.api.BrowserItemBank;
 import com.bitwig.extension.controller.api.CursorBrowserFilterItem;
-import com.bitwig.extension.controller.api.CursorBrowserItem;
+import com.bitwig.extension.controller.api.BrowserItem;
+
 
 
 /**
@@ -39,17 +40,20 @@ public class BrowserColumnData
         column.exists ().markInterested ();
         column.name ().markInterested ();
         column.getWildcardItem ().name ().markInterested ();
+        column.entryCount().markInterested();
 
-        this.itemBank = ((CursorBrowserItem) column.createCursorItem ()).createSiblingsBank (numFilterColumnEntries);
+        this.cursorResult = (CursorBrowserFilterItem)(column.createCursorItem());
+        this.cursorResult.exists ().markInterested ();
+        this.cursorResult.name ().markInterested ();
+
+        this.itemBank = cursorResult.createSiblingsBank (numFilterColumnEntries);
         this.itemBank.cursorIndex ().markInterested ();
+        this.itemBank.scrollPosition().markInterested();
 
         this.items = new BrowserColumnItemData [numFilterColumnEntries];
         for (int i = 0; i < numFilterColumnEntries; i++)
             this.items[i] = new BrowserColumnItemData (this.itemBank.getItemAt (i), i);
 
-        this.cursorResult = (CursorBrowserFilterItem) column.createCursorItem ();
-        this.cursorResult.exists ().markInterested ();
-        this.cursorResult.name ().markInterested ();
     }
 
 
@@ -150,6 +154,9 @@ public class BrowserColumnData
         return this.items;
     }
 
+    public BrowserItem getItemAt(int i){
+        return this.itemBank.getItemAt(i);
+    }
 
     /**
      * Scroll up the items by one page.
@@ -158,6 +165,7 @@ public class BrowserColumnData
     {
         this.itemBank.scrollPageBackwards ();
     }
+
 
 
     /**
@@ -177,6 +185,14 @@ public class BrowserColumnData
         this.itemBank.cursorIndex ().set (0);
     }
 
+    /**
+     * Select first entry in filter column
+     */
+    public void selectFirst(){
+        this.itemBank.scrollPosition().set(0);
+        this.cursorResult.moveToFirst();
+        this.cursorResult.isSelected().set(true);
+    }
 
     /**
      * Select the previous item.
@@ -186,16 +202,15 @@ public class BrowserColumnData
         this.cursorResult.selectPrevious ();
     }
 
-
     /**
      * Select the next item.
      */
     public void selectNextItem ()
     {
-        this.cursorResult.selectNext ();
+        //this.cursorResult.selectNext ();
+        this.cursorResult.moveToNext();
+        this.cursorResult.isSelected().set(true);
     }
-
-
     /**
      * Get the index of the cursor item.
      *
@@ -207,6 +222,13 @@ public class BrowserColumnData
     }
 
 
+    public int getScrollPosition(){ return this.itemBank.scrollPosition().get(); }
+
+    public void setScrollPosition(int pos){
+        this.itemBank.scrollPosition().set(pos);}
+
+    public int getTotalEntries(){ return this.column.entryCount().get(); }
+
     /**
      * Set the cursor index.
      *
@@ -214,6 +236,8 @@ public class BrowserColumnData
      */
     public void setCursorIndex (final int index)
     {
-        this.itemBank.cursorIndex ().set (index);
+        if(doesCursorExist()) {
+            this.itemBank.cursorIndex().set(index);
+        }
     }
 }

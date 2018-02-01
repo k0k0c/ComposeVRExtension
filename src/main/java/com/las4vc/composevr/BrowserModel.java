@@ -5,9 +5,9 @@ import com.bitwig.extension.callback.BooleanValueChangedCallback;
 import com.bitwig.extension.callback.StringValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
-import com.las4vc.composevr.requests.BrowserRequest;
 import de.mossgrabers.framework.daw.BrowserProxy;
 import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
+import de.mossgrabers.framework.daw.data.BrowserColumnData;
 
 import java.util.ArrayList;
 
@@ -17,41 +17,53 @@ import java.util.ArrayList;
  * @author Lane Spangler
  */
 
-public class BrowserModel implements TrackSelectionChangeEvent {
+public class BrowserModel extends CommandReceiver implements TrackSelectionChangeEvent {
 
     public BrowserProxy browserProxy;
     public BrowserColumnItemData[] browserResults;
+    public Track selectedTrack;
     public int browserPage = 0;
 
-    private DAWModel model;
-    private BrowserRequest currentRequest;
-    private Track selectedTrack;
+
+    private int selectionIndex = -1;
+    private int pageChange = 0;
+    private int scrollOffset = 0;
+    private String deviceToFind = "";
+    private String deviceType = "Any Device Type";
 
     private enum Event {
-        TRACK_SELECTION_CHANGE, BROWSER_ACTIVE_CHANGE, BROWSER_RESULTS_CHANGE, NEW_REQUEST
+        TRACK_SELECTION_CHANGE, BROWSER_ACTIVE_CHANGE, BROWSER_RESULTS_CHANGE, OPEN_REQUEST, CLOSE_REQUEST
     }
 
     private enum State {
         CLOSED {
             @Override
-            State next(BrowserRequest request, BrowserModel browser, Event e){
-                if(e != Event.NEW_REQUEST){
+            State next(BrowserModel browser, Event e){
+                if(e != Event.OPEN_REQUEST){
+                    browser.model.host.println(e.toString());
                     return CLOSED;
                 }
 
+                browser.model.host.println("Selecting track");
 
                 browser.browserPage = 0;
-                browser.model.host.println("Selecting track");
 
                 //Move the cursorTrack to the desired track
                 browser.model.addTrackSelectionChangeListener(browser);
-                browser.model.cursorTrack.selectChannel(request.getTrack());
+                browser.model.cursorTrack.selectChannel(browser.selectedTrack);
                 return SELECTING_TRACK;
             }
         },
         SELECTING_TRACK{
             @Override
-            State next(BrowserRequest request, BrowserModel browser, Event e){
+            State next(BrowserModel browser, Event e){
+                if(e == Event.CLOSE_REQUEST){
+                    if(browser.browserProxy.isActive()) {
+                        browser.browserProxy.stopBrowsing(false);
+                    }
+                    return CLOSED;
+                }
+
                 if(e != Event.TRACK_SELECTION_CHANGE){
                     return SELECTING_TRACK;
                 }
@@ -61,69 +73,51 @@ public class BrowserModel implements TrackSelectionChangeEvent {
                 //Selected track is now the desired track. Begin browsing
                 browser.browserProxy.browseToInsertBeforeDevice();
                 browser.model.removeTrackSelectionChangeListener(browser);
-                return State.LOADING_RESULTS;
+
+                return State.LOADING_INITIAL_RESULTS;
+            }
+        },
+        LOADING_INITIAL_RESULTS{
+            @Override
+            State next(BrowserModel browser, Event e){
+
+                if(e == Event.CLOSE_REQUEST) {
+                    if(browser.browserProxy.isActive()) {
+                        browser.browserProxy.stopBrowsing(false);
+                    }
+                    return CLOSED;
+                }
+
+                if(browser.browserProxy.getNumTotalResults() == 0 || !browser.getDeviceType().equals(browser.deviceType)){
+                    return LOADING_INITIAL_RESULTS;
+                }
+
+                return LOADING_RESULTS;
             }
         },
         LOADING_RESULTS{
             @Override
-            State next(BrowserRequest request, BrowserModel browser, Event e){
+            State next(BrowserModel browser, Event e){
 
-                if(!browser.browserProxy.isActive()){
-                    return LOADING_RESULTS;
-                }
-
-                if(request.isCancel()) {
-                    browser.browserProxy.stopBrowsing(false);
+                if(e == Event.CLOSE_REQUEST) {
+                    if(browser.browserProxy.isActive()) {
+                        browser.browserProxy.stopBrowsing(false);
+                    }
                     return CLOSED;
                 }
-
-
-                if(request.getPageChange() != 0){
-                    browser.changePage(request);
-                }
-
-                //Handle changes to the filter
-
-                //Clamp page index
-                browser.browserPage = Math.max(0, browser.browserPage);
-
-                BrowserColumnItemData[] pageResults = browser.browserProxy.getResultColumnItems();
-
-                //Handle request by name
-                if(!request.getDeviceName().equals("")){
-                    browser.findDevice(request, pageResults);
-                }
-
-                //Handle load request
-                if(request.getSelectionIndex() != -1){
-                    browser.loadDevice(request);
-
-                    return CLOSED;
-                }
-
-                //Create list of results on current page
-                ArrayList<String> results = new ArrayList<>();
-
-                for(BrowserColumnItemData item : pageResults){
-                    results.add(item.getName());
-                }
-
-                //Send page results to client
-                Command.BrowserResultsChanged(browser.model, request.getSenderID(), browser.browserProxy.getResultsPage(), results);
 
                 return LOADING_RESULTS;
             }
         };
 
-        abstract  State next(BrowserRequest request, BrowserModel browser, Event e);
+        abstract  State next(BrowserModel browser, Event e);
     }
 
     private State currentState;
 
     public BrowserModel(DAWModel model){
-
-        this.model = model;
-        currentState = State.CLOSED;
+        super(model);
+        model.router.addReceiver(this, "browser");
 
         browserProxy = new BrowserProxy(model.host, model.cursorTrack, model.cursorDeviceProxy, 15, 15);
         browserProxy.enableObservers(true);
@@ -139,41 +133,198 @@ public class BrowserModel implements TrackSelectionChangeEvent {
         //Set up callback for when browser results are updated
         browserResults = browserProxy.getResultColumnItems();
 
-        StringValueChangedCallback browserChangedCallback = new StringValueChangedCallback() {
-            @Override
-            public void valueChanged(String s) {
-                handleBrowserResultsChange();
-            }
-        };
-        browserResults[0].addNameObserver(browserChangedCallback);
-    }
-
-    public void requestBrowser(BrowserRequest request){
-        short prevPageChange = 0;
-        if(currentRequest != null){
-            prevPageChange = currentRequest.getPageChange();
+        for(int i = 0; i < browserResults.length; i++) {
+            final int idx = i;
+            StringValueChangedCallback resultsChangedCallback = new StringValueChangedCallback() {
+                @Override
+                public void valueChanged(String s) {
+                    handleBrowserResultsChange(idx);
+                }
+            };
+            browserResults[i].addNameObserver(resultsChangedCallback);
         }
 
-        currentRequest = request;
-        request.setPageChange((short)(request.getPageChange() + prevPageChange));
 
-        currentState = currentState.next(currentRequest, this, Event.NEW_REQUEST);
+        /*
+        //Set up callbacks for when filter entries are updated
+        for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
+            final int idx = i;
+            StringValueChangedCallback filterEntriesChangedCallback = new StringValueChangedCallback() {
+                @Override
+                public void valueChanged(String s) {
+                    handleFilterEntriesChanged(idx);
+                }
+            };
+            browserProxy.getFilterColumn(i).getItems()[0].addNameObserver(filterEntriesChangedCallback);
+        }*/
+
+        currentState = State.CLOSED;
     }
 
+    /**
+     * Opens the browser on a track
+     * @param t The track to browse on
+     */
+    public void openBrowser(Track t, String contentType){
+        this.selectedTrack = t;
+        this.deviceType = contentType;
+
+        currentState = State.CLOSED;
+        currentState = currentState.next(this, Event.OPEN_REQUEST);
+
+
+    }
+
+
+    /**
+     * Callback when the track selection changes
+     */
     public void OnTrackSelectionChange(){
-        currentState = currentState.next(currentRequest, this, Event.TRACK_SELECTION_CHANGE);
+        currentState = currentState.next(this, Event.TRACK_SELECTION_CHANGE);
     }
 
-    private void handleBrowserResultsChange(){
-        currentState = currentState.next(currentRequest, this, Event.BROWSER_RESULTS_CHANGE);
-    }
 
+    /**
+     * Callback when the browser's active state is changed
+     */
     private void handleBrowserActiveChange(){
-        currentState = currentState.next(currentRequest, this, Event.BROWSER_ACTIVE_CHANGE);
+        currentState = currentState.next(this, Event.BROWSER_ACTIVE_CHANGE);
     }
 
+    /**
+     * Callback for when the results column changes.
+     * Sends results to client
+     */
+    private void handleBrowserResultsChange(int idx){
 
-    public void findDevice(BrowserRequest request, BrowserColumnItemData[] pageResults){
+        setDeviceType();
+
+        State prevState = currentState;
+        currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
+
+        //Wrangling the browser to make the columns display all of their content on the first request
+        if(currentState == State.LOADING_INITIAL_RESULTS){
+            browserProxy.nextResultPage();
+            BrowserColumnItemData[] results = browserProxy.getResultColumnItems();
+
+            if(browserProxy.getNumTotalResults() == 0){
+                browserProxy.nextResultPage();
+
+                for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
+                    if(!browserProxy.getFilterColumn(i).getName().equals("Device Type")) {
+                        browserProxy.getFilterColumn(i).getItems();
+                        browserProxy.nextFilterItemPage(i);
+                    }
+                }
+            }
+        }
+
+        if(currentState != State.LOADING_RESULTS || !browserProxy.isActive()){
+            return;
+        }
+
+        //Reset the browser to its initial state now that we have the
+        if(prevState == State.LOADING_INITIAL_RESULTS){
+            resetBrowser();
+            return;
+        }
+
+        if(pageChange != 0){
+            changeResultsPage();
+        }
+
+        //Clamp page index
+        browserPage = Math.max(0, browserPage);
+
+
+        //Handle request by name
+        if(!deviceToFind.equals("")){
+            findDevice();
+        }
+
+        //Handle load request
+        if(selectionIndex != -1){
+            loadDevice();
+            currentState = currentState.next(this, Event.CLOSE_REQUEST);
+        }
+
+        BrowserColumnItemData[] pageResults = browserProxy.getResultColumnItems();
+
+        //Create list of results on current page
+        ArrayList<String> results = new ArrayList<>();
+
+        for(BrowserColumnItemData item : pageResults){
+            results.add(item.getName());
+        }
+
+        //Send page results to client
+        Command.BrowserColumnChanged(model,
+                "Results",
+                browserProxy.getNumResultsPerPage(),
+                browserProxy.getNumTotalResults(),
+                results);
+
+        //Send filter data
+        for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
+            handleFilterEntriesChanged(i);
+        }
+
+    }
+
+    /**
+     * Sets cursor to point at the first item for the results column and every filter column
+     */
+    private void resetBrowser(){
+        browserProxy.setResultsScrollPosition(0);
+        browserProxy.selectFirstResult();
+
+        for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
+            if(!browserProxy.getFilterColumn(i).getName().equals("Device Type")) {
+                browserProxy.getFilterColumn(i).selectFirst();
+            }
+        }
+    }
+
+    private String getDeviceType(){
+        int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
+        BrowserColumnData deviceTypeColumn = browserProxy.getFilterColumn(deviceTypeIndex);
+        return deviceTypeColumn.getCursorName();
+    }
+    /**
+     * Set device type filter based on BrowserModel deviceType
+     */
+    private void setDeviceType(){
+
+        int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
+
+        if(deviceTypeIndex != -1) {
+            BrowserColumnData deviceTypeColumn = browserProxy.getFilterColumn(deviceTypeIndex);
+            deviceTypeColumn.selectFirst();
+
+            int itemIndex = -1;
+
+            for (int i = 0; i < deviceTypeColumn.getItems().length; i++) {
+
+                if (deviceTypeColumn.getItems()[i].getName().equals(deviceType)) {
+                    itemIndex = i;
+                    break;
+                }
+            }
+
+            if(itemIndex != -1){
+                for(int i = 0; i < itemIndex; i++){
+                    deviceTypeColumn.selectNextItem();
+                }
+            }
+        }
+    }
+
+    /**
+     * Finds the device with the same name as deviceToFind
+     */
+    private void findDevice(){
+        BrowserColumnItemData[] pageResults = browserProxy.getResultColumnItems();
+
         boolean foundDevice = false;
 
         for (int i = 0; i < pageResults.length; i++) {
@@ -183,38 +334,43 @@ public class BrowserModel implements TrackSelectionChangeEvent {
             if (currentDevice.equals("")) {
                 if (browserPage > 1) {
                     //Can't find device
-                    request.setDeviceName("");
+                    deviceToFind = "";
 
                     //Notify client
-                    Command.DeviceNotFound(model, request.getSenderID());
+                    Command.DeviceNotFound(model);
                 }
                 break;
             }
 
-            if (currentDevice.equals(request.getDeviceName())) {
-                request.setSelectionIndex(pageResults[i].getIndex());
+            if (currentDevice.equals(deviceToFind)) {
+                selectionIndex = pageResults[i].getIndex();
 
                 if (browserPage > 0) {
-                    request.setSelectionIndex(request.getSelectionIndex() + browserProxy.getResultsPage());
+                    selectionIndex += browserProxy.getResultsScrollPosition();
                 }
-                request.setDeviceName("");
+
+                deviceToFind = "";
                 foundDevice = true;
                 break;
             }
         }
 
-        if(!foundDevice && !request.getDeviceName().equals("")){
+        if(!foundDevice && !deviceToFind.equals("")){
             browserPage += 1;
             browserProxy.nextResultPage();
         }
     }
 
-    public void loadDevice(BrowserRequest request){
+
+    /**
+     * Loads the device at selectionIndex
+     */
+    private void loadDevice(){
         int currentIndex = browserProxy.getSelectedResultIndex();
 
         //Navigate to the supplied index
-        while (currentIndex != request.getSelectionIndex()) {
-            if (currentIndex < request.getSelectionIndex()) {
+        while (currentIndex != selectionIndex) {
+            if (currentIndex < selectionIndex) {
                 currentIndex++;
                 browserProxy.selectNextResult();
             } else {
@@ -223,25 +379,178 @@ public class BrowserModel implements TrackSelectionChangeEvent {
             }
         }
 
+        selectionIndex = -1;
+
         //Load the selected device and stop browsing
         browserProxy.stopBrowsing(true);
 
         //Send confirmation to client
-        Command.DeviceLoaded(model, request.getSenderID());
+        Command.DeviceLoaded(model);
     }
 
-    public void changePage(BrowserRequest request){
-        //Increment the page in the specified direction
-        if(request.getPageChange() > 0){
-            browserProxy.nextResultPage();
-            browserPage += 1;
-            request.setPageChange((short)(request.getPageChange() - 1));
-        }else{
-            browserProxy.previousResultPage();
-            browserPage -= 1;
-            request.setPageChange((short)(request.getPageChange() + 1));
+
+    /**
+     * Changes the results page according to the value of pageChange
+     */
+    private void changeResultsPage(){
+        //Increment the page by the specified amount
+        while(pageChange != 0) {
+            if (pageChange > 0) {
+                browserProxy.nextResultPage();
+                browserPage += 1;
+                pageChange -= 1;
+                //scrollOffset = -browserProxy.getNumResultsPerPage();
+            } else {
+                browserProxy.previousResultPage();
+                browserPage -= 1;
+                pageChange += 1;
+                //scrollOffset = browserProxy.getNumResultsPerPage();
+            }
         }
     }
 
+
+    /**
+     * Increment or decrement the results page by the specified amount
+     *
+     * @param params [0] Should contain an integer representing the desired change in pages
+     */
+    public void changeResultsPage(ArrayList<String> params){
+        //Just check if the state is LOADING RESULT when the request is received
+        //Open browser, browser active change, browser results change-> state transition
+        if(currentState == State.LOADING_RESULTS){
+            pageChange += Integer.parseInt(params.get(0));
+        }
+
+        changeResultsPage();
+    }
+
+
+    /**
+     * Load the device at the given index OR try to find and load the device with the given name
+     *
+     * @param params [0] The index of the device to load
+     * @param params [1] The name of the device to find and load
+     */
+    public void loadDevice(ArrayList<String> params){
+        int deviceIndex = Integer.parseInt(params.get(0));
+
+        if(deviceIndex != -1){
+            selectionIndex = deviceIndex + browserProxy.getResultsScrollPosition() + scrollOffset;
+            loadDevice();
+        }else if(params.size() > 1){
+            deviceToFind = params.get(1);
+        }
+    }
+
+
+    /**
+     * Close the browser
+     * @param params
+     */
+    public void closeBrowser(ArrayList<String> params){
+        currentState = currentState.next(this, Event.CLOSE_REQUEST);
+    }
+
+
+    /**
+     * Callback for changes in filter column entries. Sends new entries to client.
+     * @param i the index of the column whose entries changed
+     */
+    private void handleFilterEntriesChanged(int i){
+        if(!browserProxy.isActive()){
+            return;
+        }
+
+        if(!browserProxy.getFilterColumn(i).getName().equals("Tag") &&
+                !browserProxy.getFilterColumn(i).getName().equals("Creator") &&
+                !browserProxy.getFilterColumn(i).getName().equals("Category")){
+            return;
+        }
+
+        ArrayList<String> columnEntries = new ArrayList<>();
+        for(BrowserColumnItemData entry : browserProxy.getFilterColumn(i).getItems()){
+            if(entry.getName().length() > 0) {
+                columnEntries.add(entry.getName());
+            }
+        }
+
+        if(columnEntries.size() > 0) {
+            Command.BrowserColumnChanged(model,
+                    browserProxy.getFilterColumn(i).getName(),
+                    browserProxy.getNumFilterColumnEntries(),
+                    browserProxy.getFilterColumn(i).getTotalEntries(),
+                    columnEntries);
+        }
+    }
+
+
+    /**
+     * Selects an entry on a filter column
+     *
+     * @param params [0] the name of the filter column
+     * @param params [1] the index of the entry to select
+     */
+    public void selectFilterEntry(ArrayList<String> params){
+        if(!browserProxy.isActive()){
+            return;
+        }
+
+        int i = browserProxy.getFilterColumnIndex(params.get(0), model);
+
+        if(i == -1){
+            return;
+        }
+
+        int selection = Integer.parseInt(params.get(1)) + browserProxy.getFilterColumn(i).getScrollPosition();
+        browserProxy.getFilterColumn(i).selectFirst();
+
+        model.host.println("Selecting filter item "+selection+" on "+browserProxy.getFilterColumn(i).getName());
+
+        int currentIndex = 0;
+
+        //Navigate to the supplied index
+        while (currentIndex < selection) {
+            browserProxy.getFilterColumn(i).selectNextItem();
+            currentIndex++;
+        }
+
+        model.host.println("Filter cursor at "+browserProxy.getFilterColumn(i).getCursorName());
+
+    }
+
+
+    /**
+     * Changes the page on a filter column
+     *
+     * @param params [0] the name of the filter column
+     * @param params [1] the amount to change the page by
+     */
+    public void changeFilterPage(ArrayList<String> params){
+        if(!browserProxy.isActive()){
+            return;
+        }
+
+        int i = browserProxy.getFilterColumnIndex(params.get(0), model);
+
+        if(i == -1){
+            throw new RuntimeException("Trying to change page on a column that can't be found");
+        }
+
+        int filterPageChange = Integer.parseInt(params.get(1));
+
+        while(filterPageChange != 0) {
+            if (filterPageChange > 0) {
+                browserProxy.nextFilterItemPage(i);
+                filterPageChange -= 1;
+            } else {
+                browserProxy.previousFilterItemPage(i);
+                filterPageChange += 1;
+            }
+        }
+
+        handleFilterEntriesChanged(i);
+
+    }
 
 }
