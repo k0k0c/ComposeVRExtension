@@ -1,5 +1,7 @@
 package com.las4vc.composevr;
 
+import com.bitwig.extension.callback.BooleanValueChangedCallback;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -30,6 +32,17 @@ public class Command {
 
         model.router.sendCommand("browser/"+columnName, "BrowserColumnChanged", params);
     }
+
+    public static void ArrowVisibilityChanged(DAWModel model, String columnName, boolean upArrow, boolean visible){
+
+        ArrayList<String> params = new ArrayList<>();
+        params.add(Boolean.toString(upArrow));
+        params.add(Boolean.toString(visible));
+
+        model.router.sendCommand("browser/"+columnName, "ArrowVisibilityChanged", params);
+    }
+
+
 
     public static void DeviceLoaded(DAWModel model){
         model.host.println("DeviceLoaded");

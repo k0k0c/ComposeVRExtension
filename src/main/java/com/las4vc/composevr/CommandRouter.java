@@ -65,6 +65,10 @@ public class CommandRouter {
     }
 
     public void sendCommand(String receiverID, String methodName, ArrayList<String> params){
+        if(connection == null){
+            return;
+        }
+
         JSONObject command = new JSONObject();
 
         command.put("receiverID",receiverID);
@@ -73,6 +77,7 @@ public class CommandRouter {
 
 
         String commandString = command.toString();
+
 
         try {
             connection.send(commandString.getBytes(Charset.forName("UTF8")));

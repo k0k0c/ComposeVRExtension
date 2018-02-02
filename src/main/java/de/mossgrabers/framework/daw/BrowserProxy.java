@@ -5,19 +5,10 @@
 package de.mossgrabers.framework.daw;
 
 import com.bitwig.extension.callback.BooleanValueChangedCallback;
+import com.bitwig.extension.controller.api.*;
 import com.las4vc.composevr.DAWModel;
 import de.mossgrabers.framework.daw.data.BrowserColumnData;
 import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
-
-import com.bitwig.extension.controller.api.BrowserFilterColumn;
-import com.bitwig.extension.controller.api.BrowserResultsColumn;
-import com.bitwig.extension.controller.api.BrowserResultsItemBank;
-import com.bitwig.extension.controller.api.ControllerHost;
-import com.bitwig.extension.controller.api.CursorBrowserResultItem;
-import com.bitwig.extension.controller.api.CursorTrack;
-import com.bitwig.extension.controller.api.PopupBrowser;
-import com.bitwig.extension.controller.api.BrowserResultsItem;
-import com.bitwig.extension.controller.api.BrowserItem;
 
 
 /**
@@ -91,6 +82,9 @@ public class BrowserProxy
 
         this.resultsItemBank = (BrowserResultsItemBank) this.cursorResult.createSiblingsBank (this.numResults);
         this.resultsItemBank.scrollPosition().markInterested();
+        this.resultsItemBank.canScrollBackwards().markInterested();
+        this.resultsItemBank.canScrollForwards().markInterested();
+
         this.resultData = this.createResultData (this.numResults);
     }
 
@@ -461,6 +455,14 @@ public class BrowserProxy
     public void nextResultPage ()
     {
         this.resultsItemBank.scrollPageForwards ();
+    }
+
+    public BooleanValue hasNextResultPage(){
+        return this.resultsItemBank.canScrollForwards();
+    }
+
+    public BooleanValue hasPreviousResultPage(){
+        return this.resultsItemBank.canScrollBackwards();
     }
 
     public int getResultsScrollPosition(){

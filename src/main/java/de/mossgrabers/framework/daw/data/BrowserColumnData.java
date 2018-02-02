@@ -4,11 +4,8 @@
 
 package de.mossgrabers.framework.daw.data;
 
-import com.bitwig.extension.controller.api.BrowserFilterColumn;
-import com.bitwig.extension.controller.api.BrowserItemBank;
-import com.bitwig.extension.controller.api.CursorBrowserFilterItem;
-import com.bitwig.extension.controller.api.BrowserItem;
-
+import com.bitwig.extension.controller.api.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 
 /**
@@ -49,6 +46,8 @@ public class BrowserColumnData
         this.itemBank = cursorResult.createSiblingsBank (numFilterColumnEntries);
         this.itemBank.cursorIndex ().markInterested ();
         this.itemBank.scrollPosition().markInterested();
+        this.itemBank.canScrollForwards().markInterested();
+        this.itemBank.canScrollBackwards().markInterested();
 
         this.items = new BrowserColumnItemData [numFilterColumnEntries];
         for (int i = 0; i < numFilterColumnEntries; i++)
@@ -225,7 +224,16 @@ public class BrowserColumnData
     public int getScrollPosition(){ return this.itemBank.scrollPosition().get(); }
 
     public void setScrollPosition(int pos){
-        this.itemBank.scrollPosition().set(pos);}
+        this.itemBank.scrollPosition().set(pos);
+    }
+
+    public BooleanValue hasNextFilterPage(){
+        return this.itemBank.canScrollForwards();
+    }
+
+    public BooleanValue hasPreviousFilterPage(){
+        return this.itemBank.canScrollBackwards();
+    }
 
     public int getTotalEntries(){ return this.column.entryCount().get(); }
 

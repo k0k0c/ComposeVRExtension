@@ -144,19 +144,44 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
             browserResults[i].addNameObserver(resultsChangedCallback);
         }
 
+        //Callbacks for scrollability
+        BooleanValueChangedCallback canScrollForwardChangedCallback = new BooleanValueChangedCallback() {
+            @Override
+            public void valueChanged(boolean b) {
+                handleResultsCanScrollForwardChanged(b);
+            }
+        };
+        browserProxy.hasNextResultPage().addValueObserver(canScrollForwardChangedCallback);
 
-        /*
+        BooleanValueChangedCallback canScrollBackwardChangedCallback = new BooleanValueChangedCallback() {
+            @Override
+            public void valueChanged(boolean b) {
+                handleResultsCanScrollBackwardChanged(b);
+            }
+        };
+        browserProxy.hasPreviousResultPage().addValueObserver(canScrollBackwardChangedCallback);
+
+
+
         //Set up callbacks for when filter entries are updated
         for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
             final int idx = i;
-            StringValueChangedCallback filterEntriesChangedCallback = new StringValueChangedCallback() {
+            BooleanValueChangedCallback filterCanScrollForwardChanged = new BooleanValueChangedCallback() {
                 @Override
-                public void valueChanged(String s) {
-                    handleFilterEntriesChanged(idx);
+                public void valueChanged(boolean b) {
+                    handleFilterCanScrollForwardChanged(idx, b);
                 }
             };
-            browserProxy.getFilterColumn(i).getItems()[0].addNameObserver(filterEntriesChangedCallback);
-        }*/
+            browserProxy.getFilterColumn(i).hasNextFilterPage().addValueObserver(filterCanScrollForwardChanged);
+
+            BooleanValueChangedCallback filterCanScrollBackwardChanged = new BooleanValueChangedCallback() {
+                @Override
+                public void valueChanged(boolean b) {
+                    handleFilterCanScrollBackwardChanged(idx, b);
+                }
+            };
+            browserProxy.getFilterColumn(i).hasPreviousFilterPage().addValueObserver(filterCanScrollBackwardChanged);
+        }
 
         currentState = State.CLOSED;
     }
@@ -197,26 +222,14 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
      */
     private void handleBrowserResultsChange(int idx){
 
-        setDeviceType();
+        //setDeviceType();
 
         State prevState = currentState;
         currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
 
         //Wrangling the browser to make the columns display all of their content on the first request
         if(currentState == State.LOADING_INITIAL_RESULTS){
-            browserProxy.nextResultPage();
-            BrowserColumnItemData[] results = browserProxy.getResultColumnItems();
-
-            if(browserProxy.getNumTotalResults() == 0){
-                browserProxy.nextResultPage();
-
-                for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
-                    if(!browserProxy.getFilterColumn(i).getName().equals("Device Type")) {
-                        browserProxy.getFilterColumn(i).getItems();
-                        browserProxy.nextFilterItemPage(i);
-                    }
-                }
-            }
+            setDeviceType();
         }
 
         if(currentState != State.LOADING_RESULTS || !browserProxy.isActive()){
@@ -226,6 +239,7 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
         //Reset the browser to its initial state now that we have the
         if(prevState == State.LOADING_INITIAL_RESULTS){
             resetBrowser();
+            setDeviceType();
             return;
         }
 
@@ -284,6 +298,7 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
             }
         }
     }
+
 
     private String getDeviceType(){
         int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
@@ -425,6 +440,13 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
         changeResultsPage();
     }
 
+    private void handleResultsCanScrollForwardChanged(boolean val){
+        Command.ArrowVisibilityChanged(model, "Results", false, val);
+    }
+
+    private void handleResultsCanScrollBackwardChanged(boolean val){
+        Command.ArrowVisibilityChanged(model, "Results", true, val);
+    }
 
     /**
      * Load the device at the given index OR try to find and load the device with the given name
@@ -485,6 +507,16 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
     }
 
 
+    private void handleFilterCanScrollForwardChanged(int i, boolean val){
+        Command.ArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], false, val);
+    }
+
+    private void handleFilterCanScrollBackwardChanged(int i, boolean val){
+        Command.ArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], true, val);
+    }
+
+
+
     /**
      * Selects an entry on a filter column
      *
@@ -505,8 +537,6 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
         int selection = Integer.parseInt(params.get(1)) + browserProxy.getFilterColumn(i).getScrollPosition();
         browserProxy.getFilterColumn(i).selectFirst();
 
-        model.host.println("Selecting filter item "+selection+" on "+browserProxy.getFilterColumn(i).getName());
-
         int currentIndex = 0;
 
         //Navigate to the supplied index
@@ -514,8 +544,6 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
             browserProxy.getFilterColumn(i).selectNextItem();
             currentIndex++;
         }
-
-        model.host.println("Filter cursor at "+browserProxy.getFilterColumn(i).getCursorName());
 
     }
 
