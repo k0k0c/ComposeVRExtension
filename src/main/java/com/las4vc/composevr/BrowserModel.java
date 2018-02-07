@@ -222,8 +222,6 @@ public class BrowserModel extends CommandReceiver implements TrackSelectionChang
      */
     private void handleBrowserResultsChange(int idx){
 
-        //setDeviceType();
-
         State prevState = currentState;
         currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
 
