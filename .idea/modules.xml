@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/composevr.iml" filepath="$PROJECT_DIR$/composevr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/protobuf-3.5.1/java/core/protobuf-java.iml" filepath="$PROJECT_DIR$/src/protobuf-3.5.1/java/core/protobuf-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/protobuf-3.5.1/java/util/protobuf-java-util.iml" filepath="$PROJECT_DIR$/src/protobuf-3.5.1/java/util/protobuf-java-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/protobuf-3.5.1/java/protobuf-parent.iml" filepath="$PROJECT_DIR$/src/protobuf-3.5.1/java/protobuf-parent.iml" />
     </modules>
   </component>
 </project>

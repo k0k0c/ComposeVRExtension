@@ -7,10 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="composevr" />
+        <module name="protobuf-java" />
+        <module name="protobuf-java-util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="composevr" target="1.8" />
+      <module name="protobuf-java" target="1.6" />
+      <module name="protobuf-java-util" target="1.6" />
+      <module name="protobuf-parent" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

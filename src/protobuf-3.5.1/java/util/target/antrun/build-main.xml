@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <ant antfile="../core/generate-test-sources-build.xml"/>
+  <exec executable="/Users/lspangler/Documents/Personal/Dev/ComposeVRExtension/src/protobuf-3.5.1/java/util/../../src/protoc">
+    <arg value="--java_out=/Users/lspangler/Documents/Personal/Dev/ComposeVRExtension/src/protobuf-3.5.1/java/util/target/generated-test-sources"/>
+    <arg value="--proto_path=/Users/lspangler/Documents/Personal/Dev/ComposeVRExtension/src/protobuf-3.5.1/java/util/../../src"/>
+    <arg value="--proto_path=src/test/proto"/>
+    <arg value="src/test/proto/com/google/protobuf/util/json_test.proto"/>
+  </exec>
+</target>
+</project>

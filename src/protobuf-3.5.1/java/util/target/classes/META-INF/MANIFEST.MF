@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1517982438233
+Build-Jdk: 1.8.0_131
+Built-By: lspangler
+Bundle-Description: Utilities for Protocol Buffers
+Bundle-DocURL: https://developers.google.com/protocol-buffers/
+Bundle-License: https://opensource.org/licenses/BSD-3-Clause
+Bundle-ManifestVersion: 2
+Bundle-Name: Protocol Buffers [Util]
+Bundle-SymbolicName: com.google.protobuf.util
+Bundle-Vendor: Google
+Bundle-Version: 3.5.1
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.google.protobuf.util;version="3.5.1";uses:="com.goog
+ le.protobuf"
+Import-Package: com.google.common.base;version="[19.0,20)",com.google.co
+ mmon.io;version="[19.0,20)",com.google.common.math;version="[19.0,20)",
+ com.google.common.primitives;version="[19.0,20)",com.google.gson;versio
+ n="[2.7,3)",com.google.gson.stream;version="[2.7,3)",com.google.protobu
+ f;version="[3.5,4)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-3.0.0.201509101326
