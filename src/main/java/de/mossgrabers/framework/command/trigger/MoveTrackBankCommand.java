@@ -13,7 +13,7 @@ import de.mossgrabers.mcu.mode.Modes;
 
 
 /**
- * Command to move the window of the track bank by 1 or 8.
+ * Remote to move the window of the track bank by 1 or 8.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

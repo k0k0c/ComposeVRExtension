@@ -17,7 +17,7 @@ import com.bitwig.extension.controller.api.ClipLauncherSlotBank;
 
 
 /**
- * Command to create a new clip on the current track, start it and activate overdub.
+ * Remote to create a new clip on the current track, start it and activate overdub.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

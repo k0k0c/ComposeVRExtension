@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to dis-/enable the metronome. Also toggles metronome ticks when Shift is pressed.
+ * Remote to dis-/enable the metronome. Also toggles metronome ticks when Shift is pressed.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

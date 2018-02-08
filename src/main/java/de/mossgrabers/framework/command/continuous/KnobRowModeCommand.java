@@ -12,7 +12,7 @@ import de.mossgrabers.framework.mode.Mode;
 
 
 /**
- * Command to delegate the moves of a knob/fader row to the active mode.
+ * Remote to delegate the moves of a knob/fader row to the active mode.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

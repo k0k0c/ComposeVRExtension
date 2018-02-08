@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command for saving the current project.
+ * Remote for saving the current project.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

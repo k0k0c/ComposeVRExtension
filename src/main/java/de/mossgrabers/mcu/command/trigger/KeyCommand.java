@@ -14,7 +14,7 @@ import de.mossgrabers.mcu.mode.Modes;
 
 
 /**
- * Command for keys.
+ * Remote for keys.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

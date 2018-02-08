@@ -13,7 +13,7 @@ import de.mossgrabers.framework.daw.TransportProxy;
 
 
 /**
- * Command handle the stop button.
+ * Remote handle the stop button.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

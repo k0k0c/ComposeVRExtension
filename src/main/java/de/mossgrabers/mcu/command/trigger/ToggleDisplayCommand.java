@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for toggling the display header.
+ * Remote for toggling the display header.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

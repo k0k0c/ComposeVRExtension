@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to show/hide panes.
+ * Remote to show/hide panes.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

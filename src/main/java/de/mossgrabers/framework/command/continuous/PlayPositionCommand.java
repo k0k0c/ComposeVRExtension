@@ -11,7 +11,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to change the time (play position).
+ * Remote to change the time (play position).
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

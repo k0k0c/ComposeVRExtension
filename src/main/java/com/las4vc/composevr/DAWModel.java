@@ -1,23 +1,19 @@
 package com.las4vc.composevr;
-import com.las4vc.composevr.events.TrackSelectionChangeEvent;
+import com.las4vc.composevr.browser.BrowserModel;
+import com.las4vc.composevr.browser.TrackSelectionChangeEvent;
 
 import java.util.ArrayList;
 
-import com.bitwig.extension.controller.ControllerExtension;
-import com.bitwig.extension.callback.BooleanValueChangedCallback;
 import com.bitwig.extension.callback.StringValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
 import de.mossgrabers.framework.controller.DefaultValueChanger;
-import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
-import de.mossgrabers.framework.scale.Scales;
-import de.mossgrabers.framework.daw.BrowserProxy;
 import de.mossgrabers.framework.daw.CursorDeviceProxy;
 
 
 
 /**
- * The DAWModel is a collection of objects that every receiver needs.
+ * The DAWModel is a collection of objects that can be used to manipulate the DAW, access its information, and emit remote events.
  *
  * @author Lane Spangler
  */
@@ -26,7 +22,7 @@ public class DAWModel {
 
     public ControllerHost host;
     public Application app;
-    public CommandRouter router;
+    public RemoteEventRouter router;
     public TrackBank mainTrackBank;
 
     public CursorTrack cursorTrack;
@@ -49,7 +45,7 @@ public class DAWModel {
         toRemove = new ArrayList<>();
 
         app = host.createApplication();
-        router = new CommandRouter(host);
+        router = new RemoteEventRouter(host);
         mainTrackBank = host.createMainTrackBank(8,8,8);
 
         cursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor","Primary",1,1,false);
@@ -69,6 +65,7 @@ public class DAWModel {
 
     }
 
+
     public void addTrackSelectionChangeListener(TrackSelectionChangeEvent listener){
         trackSelectionChangeListeners.add(listener);
     }
@@ -77,6 +74,9 @@ public class DAWModel {
         toRemove.add(listener);
     }
 
+    /**
+     * Notifies all listeners that the track selection has changed
+     */
     private void handleTrackSelectionChange(){
 
         for(TrackSelectionChangeEvent e : trackSelectionChangeListeners) {

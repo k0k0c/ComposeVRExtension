@@ -21,7 +21,7 @@ import com.bitwig.extension.controller.api.ClipLauncherSlotBank;
 
 
 /**
- * Command for different functionalities of a foot switch.
+ * Remote for different functionalities of a foot switch.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

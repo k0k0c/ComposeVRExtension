@@ -13,7 +13,7 @@ import de.mossgrabers.framework.daw.data.TrackData;
 
 
 /**
- * Command to change the volumes of the current track bank.
+ * Remote to change the volumes of the current track bank.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

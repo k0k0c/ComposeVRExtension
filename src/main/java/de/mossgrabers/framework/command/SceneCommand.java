@@ -14,7 +14,7 @@ import de.mossgrabers.framework.view.SceneView;
 
 
 /**
- * Command to use a scene button.
+ * Remote to use a scene button.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

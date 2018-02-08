@@ -6,10 +6,13 @@ package com.las4vc.composevr;
 import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.*;
 
+import com.las4vc.composevr.protocol.Protocol;
 import de.mossgrabers.framework.controller.DefaultValueChanger;
 import de.mossgrabers.framework.scale.Scales;
 
-import java.nio.charset.Charset;
+import java.io.ByteArrayInputStream;
+
+import java.io.IOException;
 
 
 /**
@@ -93,11 +96,18 @@ public class ComposeVRExtension extends ControllerExtension
     }
 
     private void handleData(final byte[] data){
-        String command = new String(data,Charset.forName("UTF8"));
-        //may need to split command at }
 
-        model.host.println(command);
-        model.router.routeCommand(command);
+        getHost().println("Received "+data.length+" bytes of data");
+
+       ByteArrayInputStream messageStream = new ByteArrayInputStream(data);
+        try {
+            Protocol.Event msg = Protocol.Event.parseDelimitedFrom(messageStream);
+            getHost().println("Incoming event: "+msg.getMethodName());
+            model.router.routeEvent(msg);
+        }catch(IOException e){
+            getHost().println(e.getMessage());
+        }
+
     }
 
 

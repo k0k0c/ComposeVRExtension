@@ -13,7 +13,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to change the automation parameters.
+ * Remote to change the automation parameters.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

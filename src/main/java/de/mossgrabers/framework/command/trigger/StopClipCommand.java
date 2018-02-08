@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to stop all clips. Also sets a flag to use in combination with pads.
+ * Remote to stop all clips. Also sets a flag to use in combination with pads.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

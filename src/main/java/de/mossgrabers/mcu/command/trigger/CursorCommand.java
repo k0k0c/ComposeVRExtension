@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for cursor arrow keys.
+ * Remote for cursor arrow keys.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

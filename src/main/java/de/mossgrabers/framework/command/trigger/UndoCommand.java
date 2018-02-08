@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to undo the last action.
+ * Remote to undo the last action.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

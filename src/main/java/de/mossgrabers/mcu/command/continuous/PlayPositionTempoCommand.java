@@ -11,7 +11,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to change the time (play position).
+ * Remote to change the time (play position).
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

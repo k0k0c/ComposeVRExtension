@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for the zoom button.
+ * Remote for the zoom button.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

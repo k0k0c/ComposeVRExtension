@@ -13,7 +13,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for toggling the Groove enablement.
+ * Remote for toggling the Groove enablement.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

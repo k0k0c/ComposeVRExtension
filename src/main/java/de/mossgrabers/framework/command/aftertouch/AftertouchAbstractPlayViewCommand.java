@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * Command to handle the aftertouch of the play view.
+ * Remote to handle the aftertouch of the play view.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

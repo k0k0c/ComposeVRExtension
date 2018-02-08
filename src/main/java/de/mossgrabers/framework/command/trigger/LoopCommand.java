@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command handle the Loop/Repeat button.
+ * Remote handle the Loop/Repeat button.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for toggling the arranger and launcher Overdub.
+ * Remote for toggling the arranger and launcher Overdub.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

@@ -11,7 +11,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to change the Master Volume and Metronome Volume.
+ * Remote to change the Master Volume and Metronome Volume.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

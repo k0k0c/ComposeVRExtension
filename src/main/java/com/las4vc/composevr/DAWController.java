@@ -1,6 +1,6 @@
 package com.las4vc.composevr;
 
-import java.util.ArrayList;
+import com.las4vc.composevr.protocol.*;
 
 /**
  * DAWController is responsible for executing higher level commands which create other receivers
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Lane Spangler
  */
 
-public class DAWController extends CommandReceiver{
+public class DAWController extends RemoteEventHandler {
 
 
     public DAWController(DAWModel model){
@@ -17,10 +17,8 @@ public class DAWController extends CommandReceiver{
 
     /**
      * Creates a new sound module with the id specified
-     * @param params
      */
-    public void createSoundModule(ArrayList<String> params){
-        String senderID = params.get(0);
-        SoundModule newSoundModule = new SoundModule(model, senderID);
+    public void CreateSoundModule(Protocol.Event e){
+        SoundModule newSoundModule = new SoundModule(model, e.getModuleEvent().getCreateSoundModuleEvent());
     }
 }

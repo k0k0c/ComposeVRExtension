@@ -11,7 +11,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to change the volume of the master track.
+ * Remote to change the volume of the master track.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

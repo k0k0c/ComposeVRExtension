@@ -1,13 +1,8 @@
 package com.las4vc.composevr;
 
-import com.bitwig.extension.callback.BooleanValueChangedCallback;
-import com.bitwig.extension.callback.StringValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
-import de.mossgrabers.framework.daw.BrowserProxy;
-import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import com.las4vc.composevr.protocol.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 /**
  * A SoundModule contains a reference to a track, an instrument, and a number of device modules
@@ -15,14 +10,14 @@ import java.util.ArrayList;
  * @author Lane Spangler
  */
 
-public class SoundModule extends CommandReceiver{
+public class SoundModule extends RemoteEventHandler {
 
     private Track track;
     private String id;
 
-    public SoundModule(DAWModel model, String id){
+    public SoundModule(DAWModel model, Module.CreateSoundModule creationEvent){
         super(model);
-        this.id = id;
+        this.id = creationEvent.getSenderId();
 
         //Create a track at the beginning of the root level list of tracks
         model.app.createInstrumentTrack(0);
@@ -40,7 +35,7 @@ public class SoundModule extends CommandReceiver{
             model.router.addReceiver(this, id);
 
             //Confirm sound module creation with client
-            Command.SoundModuleCreated(model, id);
+            RemoteEventEmitter.OnSoundModuleCreated(model, id);
 
         }catch(NullPointerException e){
             model.host.println("Sound module could not create new track");
@@ -49,31 +44,10 @@ public class SoundModule extends CommandReceiver{
 
     /**
      * Requests for browser to open on the track for this sound module
-     * @param params
      */
-    public void openBrowser(ArrayList<String> params){
+    public void OpenBrowser(Protocol.Event e){
         model.host.println("Opening browser");
-        model.browser.openBrowser(this.track, params.get(0));
+        model.browser.openBrowser(this.track, e.getModuleEvent().getOpenBrowserEvent().getDeviceType());
     }
-
-
-    public void PlayMidiNote(ArrayList<String> params){
-        int note = Integer.parseInt(params.get(0));
-        int velocity = Integer.parseInt(params.get(1));
-        this.track.playNote(note, velocity);
-    }
-
-    public void OnAreaEntered(ArrayList<String> params){
-        model.router.setMidiReceiver(this);
-        model.host.println("SoundModule area entered");
-        track.getArm().set(true);
-    }
-
-    public void OnAreaExited(ArrayList<String> params){
-        model.router.clearMidiReceiever();
-        model.host.println("SoundModule area left");
-        track.getArm().set(false);
-    }
-
 
 }

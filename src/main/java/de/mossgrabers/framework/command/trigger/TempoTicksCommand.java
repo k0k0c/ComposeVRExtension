@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to toggle the segment display between ticks and tempo.
+ * Remote to toggle the segment display between ticks and tempo.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

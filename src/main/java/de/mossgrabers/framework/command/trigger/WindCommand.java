@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command handle the rewind and fast forward buttons.
+ * Remote handle the rewind and fast forward buttons.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

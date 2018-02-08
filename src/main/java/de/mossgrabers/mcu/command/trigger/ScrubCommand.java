@@ -14,7 +14,7 @@ import de.mossgrabers.mcu.mode.Modes;
 
 
 /**
- * Command to toggles between Track and Device editing mode.
+ * Remote to toggles between Track and Device editing mode.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

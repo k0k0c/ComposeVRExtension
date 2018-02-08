@@ -10,7 +10,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command to create a new clip on the current track, start it and activate overdub. The length of
+ * Remote to create a new clip on the current track, start it and activate overdub. The length of
  * the new clip is given as a parameter.
  *
  * @param <S> The type of the control surface

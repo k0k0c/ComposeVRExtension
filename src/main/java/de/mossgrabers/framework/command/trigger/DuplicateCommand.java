@@ -17,7 +17,7 @@ import com.bitwig.extension.controller.api.ClipLauncherSlotBank;
 
 
 /**
- * Command to duplicate an object (clip, track, ...) depending on the context.
+ * Remote to duplicate an object (clip, track, ...) depending on the context.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

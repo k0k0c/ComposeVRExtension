@@ -12,7 +12,7 @@ import de.mossgrabers.framework.controller.ControlSurface;
 
 
 /**
- * Command for toggling the display of markers.
+ * Remote for toggling the display of markers.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

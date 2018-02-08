@@ -15,7 +15,7 @@ import de.mossgrabers.framework.daw.data.TrackData;
 
 
 /**
- * Command for cursor arrow keys.
+ * Remote for cursor arrow keys.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

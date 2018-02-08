@@ -11,7 +11,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to handle pitchbend.
+ * Remote to handle pitchbend.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

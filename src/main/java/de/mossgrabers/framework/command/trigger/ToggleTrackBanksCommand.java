@@ -13,7 +13,7 @@ import de.mossgrabers.framework.daw.AbstractTrackBankProxy;
 
 
 /**
- * Command for toggling between the SoundModule/Audio/Hybrid tracks and the Effect tracks.
+ * Remote for toggling between the SoundModule/Audio/Hybrid tracks and the Effect tracks.
  *
  * @param <S> The type of the control surface
  * @param <C> The type of the configuration

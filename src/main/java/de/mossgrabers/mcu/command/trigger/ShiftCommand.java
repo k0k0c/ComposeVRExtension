@@ -12,7 +12,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command to handle the shift button.
+ * Remote to handle the shift button.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */

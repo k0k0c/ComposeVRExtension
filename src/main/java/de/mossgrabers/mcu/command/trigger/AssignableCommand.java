@@ -11,7 +11,7 @@ import de.mossgrabers.mcu.controller.MCUControlSurface;
 
 
 /**
- * Command for assignable functions.
+ * Remote for assignable functions.
  *
  * @author J&uuml;rgen Mo&szlig;graber
  */
