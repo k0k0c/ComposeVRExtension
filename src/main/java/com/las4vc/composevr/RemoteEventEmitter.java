@@ -2,6 +2,7 @@ package com.las4vc.composevr;
 
 import java.util.ArrayList;
 
+import com.las4vc.composevr.protocol.Browser;
 import com.las4vc.composevr.protocol.Browser.*;
 import com.las4vc.composevr.protocol.Protocol.*;
 import com.las4vc.composevr.protocol.Module.*;
@@ -64,12 +65,12 @@ public class RemoteEventEmitter {
      *
      * @param model
      * @param columnName
-     * @param upArrow Is the up arrow the arrow whose visibility changed?
+     * @param arrow
      * @param visible
      */
-    public static void OnArrowVisibilityChanged(DAWModel model, String columnName, boolean upArrow, boolean visible){
+    public static void OnArrowVisibilityChanged(DAWModel model, String columnName, Browser.OnArrowVisibilityChanged.Arrow arrow, boolean visible){
         OnArrowVisibilityChanged.Builder event = OnArrowVisibilityChanged.newBuilder();
-        event.setUpArrow(upArrow);
+        event.setArrow(arrow);
         event.setVisible(visible);
 
         BrowserEvent.Builder browserEvent = BrowserEvent.newBuilder();

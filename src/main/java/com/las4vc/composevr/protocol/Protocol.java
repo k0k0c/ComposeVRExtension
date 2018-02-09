@@ -1048,10 +1048,18 @@ public final class Protocol {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+     * </pre>
+     *
      * <code>string path = 1;</code>
      */
     java.lang.String getPath();
     /**
+     * <pre>
+     *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+     * </pre>
+     *
      * <code>string path = 1;</code>
      */
     com.google.protobuf.ByteString
@@ -1463,6 +1471,10 @@ public final class Protocol {
     public static final int PATH_FIELD_NUMBER = 1;
     private volatile java.lang.Object path_;
     /**
+     * <pre>
+     *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+     * </pre>
+     *
      * <code>string path = 1;</code>
      */
     public java.lang.String getPath() {
@@ -1478,6 +1490,10 @@ public final class Protocol {
       }
     }
     /**
+     * <pre>
+     *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+     * </pre>
+     *
      * <code>string path = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -2333,6 +2349,10 @@ public final class Protocol {
 
       private java.lang.Object path_ = "";
       /**
+       * <pre>
+       *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+       * </pre>
+       *
        * <code>string path = 1;</code>
        */
       public java.lang.String getPath() {
@@ -2348,6 +2368,10 @@ public final class Protocol {
         }
       }
       /**
+       * <pre>
+       *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+       * </pre>
+       *
        * <code>string path = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -2364,6 +2388,10 @@ public final class Protocol {
         }
       }
       /**
+       * <pre>
+       *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+       * </pre>
+       *
        * <code>string path = 1;</code>
        */
       public Builder setPath(
@@ -2377,6 +2405,10 @@ public final class Protocol {
         return this;
       }
       /**
+       * <pre>
+       *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+       * </pre>
+       *
        * <code>string path = 1;</code>
        */
       public Builder clearPath() {
@@ -2386,6 +2418,10 @@ public final class Protocol {
         return this;
       }
       /**
+       * <pre>
+       *For the front end, the path to a filter column is '/$column_name'. For the backend the path is /filter and the column name is supplied in the message
+       * </pre>
+       *
        * <code>string path = 1;</code>
        */
       public Builder setPathBytes(

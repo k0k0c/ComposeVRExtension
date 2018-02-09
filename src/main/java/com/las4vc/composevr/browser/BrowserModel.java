@@ -389,11 +389,11 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
     }
 
     private void handleResultsCanScrollForwardChanged(boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", false, val);
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
     }
 
     private void handleResultsCanScrollBackwardChanged(boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", true, val);
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.UP, val);
     }
 
     /**

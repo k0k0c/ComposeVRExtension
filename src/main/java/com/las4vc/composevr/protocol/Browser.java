@@ -4556,9 +4556,13 @@ public final class Browser {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bool up_arrow = 1;</code>
+     * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
      */
-    boolean getUpArrow();
+    int getArrowValue();
+    /**
+     * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
+     */
+    com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow getArrow();
 
     /**
      * <code>bool visible = 2;</code>
@@ -4578,7 +4582,7 @@ public final class Browser {
       super(builder);
     }
     private OnArrowVisibilityChanged() {
-      upArrow_ = false;
+      arrow_ = 0;
       visible_ = false;
     }
 
@@ -4614,8 +4618,9 @@ public final class Browser {
               break;
             }
             case 8: {
+              int rawValue = input.readEnum();
 
-              upArrow_ = input.readBool();
+              arrow_ = rawValue;
               break;
             }
             case 16: {
@@ -4647,13 +4652,118 @@ public final class Browser {
               com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.class, com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Builder.class);
     }
 
-    public static final int UP_ARROW_FIELD_NUMBER = 1;
-    private boolean upArrow_;
     /**
-     * <code>bool up_arrow = 1;</code>
+     * Protobuf enum {@code ComposeVR.OnArrowVisibilityChanged.Arrow}
      */
-    public boolean getUpArrow() {
-      return upArrow_;
+    public enum Arrow
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UP = 0;</code>
+       */
+      UP(0),
+      /**
+       * <code>DOWN = 1;</code>
+       */
+      DOWN(1),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>UP = 0;</code>
+       */
+      public static final int UP_VALUE = 0;
+      /**
+       * <code>DOWN = 1;</code>
+       */
+      public static final int DOWN_VALUE = 1;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static Arrow valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static Arrow forNumber(int value) {
+        switch (value) {
+          case 0: return UP;
+          case 1: return DOWN;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Arrow>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          Arrow> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Arrow>() {
+              public Arrow findValueByNumber(int number) {
+                return Arrow.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Arrow[] VALUES = values();
+
+      public static Arrow valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private Arrow(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:ComposeVR.OnArrowVisibilityChanged.Arrow)
+    }
+
+    public static final int ARROW_FIELD_NUMBER = 1;
+    private int arrow_;
+    /**
+     * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
+     */
+    public int getArrowValue() {
+      return arrow_;
+    }
+    /**
+     * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
+     */
+    public com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow getArrow() {
+      com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow result = com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.valueOf(arrow_);
+      return result == null ? com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.UNRECOGNIZED : result;
     }
 
     public static final int VISIBLE_FIELD_NUMBER = 2;
@@ -4677,8 +4787,8 @@ public final class Browser {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (upArrow_ != false) {
-        output.writeBool(1, upArrow_);
+      if (arrow_ != com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.UP.getNumber()) {
+        output.writeEnum(1, arrow_);
       }
       if (visible_ != false) {
         output.writeBool(2, visible_);
@@ -4691,9 +4801,9 @@ public final class Browser {
       if (size != -1) return size;
 
       size = 0;
-      if (upArrow_ != false) {
+      if (arrow_ != com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.UP.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(1, upArrow_);
+          .computeEnumSize(1, arrow_);
       }
       if (visible_ != false) {
         size += com.google.protobuf.CodedOutputStream
@@ -4715,8 +4825,7 @@ public final class Browser {
       com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged other = (com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged) obj;
 
       boolean result = true;
-      result = result && (getUpArrow()
-          == other.getUpArrow());
+      result = result && arrow_ == other.arrow_;
       result = result && (getVisible()
           == other.getVisible());
       result = result && unknownFields.equals(other.unknownFields);
@@ -4730,9 +4839,8 @@ public final class Browser {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + UP_ARROW_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getUpArrow());
+      hash = (37 * hash) + ARROW_FIELD_NUMBER;
+      hash = (53 * hash) + arrow_;
       hash = (37 * hash) + VISIBLE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getVisible());
@@ -4865,7 +4973,7 @@ public final class Browser {
       }
       public Builder clear() {
         super.clear();
-        upArrow_ = false;
+        arrow_ = 0;
 
         visible_ = false;
 
@@ -4891,7 +4999,7 @@ public final class Browser {
 
       public com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged buildPartial() {
         com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged result = new com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged(this);
-        result.upArrow_ = upArrow_;
+        result.arrow_ = arrow_;
         result.visible_ = visible_;
         onBuilt();
         return result;
@@ -4934,8 +5042,8 @@ public final class Browser {
 
       public Builder mergeFrom(com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged other) {
         if (other == com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.getDefaultInstance()) return this;
-        if (other.getUpArrow() != false) {
-          setUpArrow(other.getUpArrow());
+        if (other.arrow_ != 0) {
+          setArrowValue(other.getArrowValue());
         }
         if (other.getVisible() != false) {
           setVisible(other.getVisible());
@@ -4967,28 +5075,46 @@ public final class Browser {
         return this;
       }
 
-      private boolean upArrow_ ;
+      private int arrow_ = 0;
       /**
-       * <code>bool up_arrow = 1;</code>
+       * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
        */
-      public boolean getUpArrow() {
-        return upArrow_;
+      public int getArrowValue() {
+        return arrow_;
       }
       /**
-       * <code>bool up_arrow = 1;</code>
+       * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
        */
-      public Builder setUpArrow(boolean value) {
-        
-        upArrow_ = value;
+      public Builder setArrowValue(int value) {
+        arrow_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>bool up_arrow = 1;</code>
+       * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
        */
-      public Builder clearUpArrow() {
+      public com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow getArrow() {
+        com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow result = com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.valueOf(arrow_);
+        return result == null ? com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
+       */
+      public Builder setArrow(com.las4vc.composevr.protocol.Browser.OnArrowVisibilityChanged.Arrow value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         
-        upArrow_ = false;
+        arrow_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.OnArrowVisibilityChanged.Arrow arrow = 1;</code>
+       */
+      public Builder clearArrow() {
+        
+        arrow_ = 0;
         onChanged();
         return this;
       }
@@ -5136,10 +5262,12 @@ public final class Browser {
       "ctFilterItem\022\023\n\013column_name\030\001 \001(\t\022\022\n\nite" +
       "m_index\030\002 \001(\005\"Z\n\026OnBrowserColumnChanged\022" +
       "\030\n\020results_per_page\030\001 \001(\005\022\025\n\rtotal_resul" +
-      "ts\030\002 \001(\005\022\017\n\007results\030\003 \003(\t\"=\n\030OnArrowVisi" +
-      "bilityChanged\022\020\n\010up_arrow\030\001 \001(\010\022\017\n\007visib" +
-      "le\030\002 \001(\010B<\n\035com.las4vc.composevr.protoco" +
-      "l\252\002\032ComposeVR.Protocol.Browserb\006proto3"
+      "ts\030\002 \001(\005\022\017\n\007results\030\003 \003(\t\"\200\001\n\030OnArrowVis" +
+      "ibilityChanged\0228\n\005arrow\030\001 \001(\0162).ComposeV" +
+      "R.OnArrowVisibilityChanged.Arrow\022\017\n\007visi" +
+      "ble\030\002 \001(\010\"\031\n\005Arrow\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001B<\n\035" +
+      "com.las4vc.composevr.protocol\252\002\032ComposeV" +
+      "R.Protocol.Browserb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5212,7 +5340,7 @@ public final class Browser {
     internal_static_ComposeVR_OnArrowVisibilityChanged_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_OnArrowVisibilityChanged_descriptor,
-        new java.lang.String[] { "UpArrow", "Visible", });
+        new java.lang.String[] { "Arrow", "Visible", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -117,11 +117,11 @@ public class BrowserFilterModel extends RemoteEventHandler {
 
 
     private void handleFilterCanScrollForwardChanged(int i, boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], false, val);
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
     }
 
     private void handleFilterCanScrollBackwardChanged(int i, boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], true, val);
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], Browser.OnArrowVisibilityChanged.Arrow.UP, val);
     }
 
     /**
