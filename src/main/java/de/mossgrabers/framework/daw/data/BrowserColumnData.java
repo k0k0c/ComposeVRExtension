@@ -237,6 +237,8 @@ public class BrowserColumnData
 
     public int getTotalEntries(){ return this.column.entryCount().get(); }
 
+    public IntegerValue getEntryCount() { return this.column.entryCount(); }
+
     /**
      * Set the cursor index.
      *

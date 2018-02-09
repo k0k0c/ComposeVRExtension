@@ -57,29 +57,83 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BrowserModel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="399" column="41" lean-forward="false" selection-start-line="399" selection-start-column="41" selection-end-line="399" selection-end-column="41" />
+            <state relative-caret-position="329">
+              <caret line="252" column="18" lean-forward="false" selection-start-line="252" selection-start-column="18" selection-end-line="252" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#State#0;class#BrowserModel#0" expanded="false" />
+                <element signature="e#4990#4991#0" expanded="true" />
+                <element signature="e#5060#5061#0" expanded="true" />
+                <element signature="e#5397#5398#0" expanded="true" />
+                <element signature="e#5454#5455#0" expanded="true" />
+                <element signature="e#6126#6127#0" expanded="true" />
+                <element signature="e#6198#6199#0" expanded="true" />
                 <element signature="method#resetBrowser#0;class#BrowserModel#0" expanded="false" />
                 <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
+                <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
+                <element signature="method#changeResultsPage#0;class#BrowserModel#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BrowserFilterModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BrowserFilterModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserFilterModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="123" column="140" lean-forward="false" selection-start-line="123" selection-start-column="140" selection-end-line="123" selection-end-column="140" />
+            <state relative-caret-position="306">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
-                <element signature="method#setDeviceType#0;class#BrowserFilterModel#0" expanded="false" />
-                <element signature="method#handleFilterEntriesChanged#0;class#BrowserFilterModel#0" expanded="false" />
+                <element signature="method#setUpNumEntriesChangedCallback#0;class#BrowserFilterModel#0" expanded="false" />
+                <element signature="e#2770#2771#0" expanded="true" />
+                <element signature="e#2847#2848#0" expanded="true" />
+                <element signature="method#setUpEntryChangedCallbacks#0;class#BrowserFilterModel#0" expanded="false" />
+                <element signature="e#3881#3882#0" expanded="true" />
+                <element signature="e#3973#3974#0" expanded="true" />
+                <element signature="method#setUpCanScrollCallbacks#0;class#BrowserFilterModel#0" expanded="false" />
+                <element signature="e#5241#5242#0" expanded="true" />
+                <element signature="e#5324#5325#0" expanded="true" />
+                <element signature="e#5632#5633#0" expanded="true" />
+                <element signature="e#5716#5717#0" expanded="true" />
+                <element signature="method#SelectFilterItem#0;class#BrowserFilterModel#0" expanded="false" />
+                <element signature="method#ChangeFilterPage#0;class#BrowserFilterModel#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemoteEventEmitter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/RemoteEventEmitter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowserColumnData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="239" column="74" lean-forward="false" selection-start-line="239" selection-start-column="74" selection-end-line="239" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowserProxy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="482" column="37" lean-forward="false" selection-start-line="482" selection-start-column="37" selection-end-line="482" selection-end-column="37" />
+              <folding>
+                <element signature="e#12097#12098#0" expanded="true" />
+                <element signature="e#12160#12161#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,18 +145,6 @@
             <state relative-caret-position="0">
               <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RemoteEventEmitter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/RemoteEventEmitter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,7 +206,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/requests/BrowserRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnItemData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/ComposeVRConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/protocol/ModuleOuterClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/BrowserModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/Command.java" />
@@ -183,10 +224,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DAWController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/SoundModule.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/RemoteEventRouter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/RemoteEventEmitter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserFilterModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserModel.java" />
       </list>
     </option>
   </component>
@@ -748,18 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="460" column="55" lean-forward="false" selection-start-line="460" selection-start-column="55" selection-end-line="460" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#12096#12097#0" expanded="false" />
-            <element signature="e#12159#12160#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -890,17 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="223" column="80" lean-forward="false" selection-start-line="223" selection-start-column="80" selection-end-line="223" selection-end-column="80" />
-          <folding>
-            <element signature="e#3940#3941#0" expanded="false" />
-            <element signature="e#3973#3974#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/DAWController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -909,23 +928,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserModel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/BrowserProxy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="399" column="41" lean-forward="false" selection-start-line="399" selection-start-column="41" selection-end-line="399" selection-end-column="41" />
+        <state relative-caret-position="345">
+          <caret line="482" column="37" lean-forward="false" selection-start-line="482" selection-start-column="37" selection-end-line="482" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#State#0;class#BrowserModel#0" expanded="false" />
-            <element signature="method#resetBrowser#0;class#BrowserModel#0" expanded="false" />
-            <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
+            <element signature="e#12097#12098#0" expanded="true" />
+            <element signature="e#12160#12161#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/mossgrabers/framework/daw/data/BrowserColumnData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="239" column="74" lean-forward="false" selection-start-line="239" selection-start-column="74" selection-end-line="239" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/RemoteEventEmitter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+        <state relative-caret-position="155">
+          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -934,11 +959,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserFilterModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="123" column="140" lean-forward="false" selection-start-line="123" selection-start-column="140" selection-end-line="123" selection-end-column="140" />
+        <state relative-caret-position="306">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="method#setDeviceType#0;class#BrowserFilterModel#0" expanded="false" />
-            <element signature="method#handleFilterEntriesChanged#0;class#BrowserFilterModel#0" expanded="false" />
+            <element signature="method#setUpNumEntriesChangedCallback#0;class#BrowserFilterModel#0" expanded="false" />
+            <element signature="e#2770#2771#0" expanded="true" />
+            <element signature="e#2847#2848#0" expanded="true" />
+            <element signature="method#setUpEntryChangedCallbacks#0;class#BrowserFilterModel#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
+            <element signature="method#setUpCanScrollCallbacks#0;class#BrowserFilterModel#0" expanded="false" />
+            <element signature="e#5241#5242#0" expanded="true" />
+            <element signature="e#5324#5325#0" expanded="true" />
+            <element signature="e#5632#5633#0" expanded="true" />
+            <element signature="e#5716#5717#0" expanded="true" />
+            <element signature="method#SelectFilterItem#0;class#BrowserFilterModel#0" expanded="false" />
+            <element signature="method#ChangeFilterPage#0;class#BrowserFilterModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/las4vc/composevr/browser/BrowserModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="252" column="18" lean-forward="false" selection-start-line="252" selection-start-column="18" selection-end-line="252" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#State#0;class#BrowserModel#0" expanded="false" />
+            <element signature="e#4990#4991#0" expanded="true" />
+            <element signature="e#5060#5061#0" expanded="true" />
+            <element signature="e#5397#5398#0" expanded="true" />
+            <element signature="e#5454#5455#0" expanded="true" />
+            <element signature="e#6126#6127#0" expanded="true" />
+            <element signature="e#6198#6199#0" expanded="true" />
+            <element signature="method#resetBrowser#0;class#BrowserModel#0" expanded="false" />
+            <element signature="method#findDevice#0;class#BrowserModel#0" expanded="false" />
+            <element signature="method#loadDevice#0;class#BrowserModel#0" expanded="false" />
+            <element signature="method#changeResultsPage#0;class#BrowserModel#0" expanded="false" />
           </folding>
         </state>
       </provider>

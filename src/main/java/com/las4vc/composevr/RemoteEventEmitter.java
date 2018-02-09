@@ -35,18 +35,16 @@ public class RemoteEventEmitter {
 
 
     /**
-     * Emitted when any entries change in a browser column
+     * Emitted when the number of entries in a browser column changes
      * @param model
      * @param columnName
      * @param resultsPerPage
      * @param totalResults
-     * @param results
      */
-    public static void OnBrowserColumnChanged(DAWModel model, String columnName, int resultsPerPage, int totalResults, ArrayList<String> results){
+    public static void OnBrowserColumnChanged(DAWModel model, String columnName, int resultsPerPage, int totalResults){
         OnBrowserColumnChanged.Builder event = OnBrowserColumnChanged.newBuilder();
         event.setResultsPerPage(resultsPerPage);
         event.setTotalResults(totalResults);
-        event.addAllResults(results);
 
         BrowserEvent.Builder browserEvent = BrowserEvent.newBuilder();
         browserEvent.setPath("/"+columnName);
@@ -55,6 +53,22 @@ public class RemoteEventEmitter {
         Event.Builder remoteEvent = Event.newBuilder();
         remoteEvent.setBrowserEvent(browserEvent.build());
         remoteEvent.setMethodName("OnBrowserColumnChanged");
+
+        model.router.emitEvent(remoteEvent.build());
+    }
+
+    public static void OnBrowserItemChanged(DAWModel model, String columnName, int itemIndex, String itemName){
+        OnBrowserItemChanged.Builder event = OnBrowserItemChanged.newBuilder();
+        event.setItemIndex(itemIndex);
+        event.setItemName(itemName);
+
+        BrowserEvent.Builder browserEvent = BrowserEvent.newBuilder();
+        browserEvent.setPath("/"+columnName);
+        browserEvent.setOnBrowserItemChangedEvent(event.build());
+
+        Event.Builder remoteEvent = Event.newBuilder();
+        remoteEvent.setBrowserEvent(browserEvent.build());
+        remoteEvent.setMethodName("OnBrowserItemChanged");
 
         model.router.emitEvent(remoteEvent.build());
     }

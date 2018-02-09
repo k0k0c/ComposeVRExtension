@@ -3843,6 +3843,594 @@ public final class Browser {
 
   }
 
+  public interface OnBrowserItemChangedOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ComposeVR.OnBrowserItemChanged)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 item_index = 1;</code>
+     */
+    int getItemIndex();
+
+    /**
+     * <code>string item_name = 2;</code>
+     */
+    java.lang.String getItemName();
+    /**
+     * <code>string item_name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getItemNameBytes();
+  }
+  /**
+   * Protobuf type {@code ComposeVR.OnBrowserItemChanged}
+   */
+  public  static final class OnBrowserItemChanged extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ComposeVR.OnBrowserItemChanged)
+      OnBrowserItemChangedOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use OnBrowserItemChanged.newBuilder() to construct.
+    private OnBrowserItemChanged(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private OnBrowserItemChanged() {
+      itemIndex_ = 0;
+      itemName_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OnBrowserItemChanged(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              itemIndex_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              itemName_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.las4vc.composevr.protocol.Browser.internal_static_ComposeVR_OnBrowserItemChanged_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.las4vc.composevr.protocol.Browser.internal_static_ComposeVR_OnBrowserItemChanged_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.class, com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder.class);
+    }
+
+    public static final int ITEM_INDEX_FIELD_NUMBER = 1;
+    private int itemIndex_;
+    /**
+     * <code>int32 item_index = 1;</code>
+     */
+    public int getItemIndex() {
+      return itemIndex_;
+    }
+
+    public static final int ITEM_NAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object itemName_;
+    /**
+     * <code>string item_name = 2;</code>
+     */
+    public java.lang.String getItemName() {
+      java.lang.Object ref = itemName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        itemName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string item_name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getItemNameBytes() {
+      java.lang.Object ref = itemName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        itemName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (itemIndex_ != 0) {
+        output.writeInt32(1, itemIndex_);
+      }
+      if (!getItemNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, itemName_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (itemIndex_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, itemIndex_);
+      }
+      if (!getItemNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, itemName_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged)) {
+        return super.equals(obj);
+      }
+      com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged other = (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) obj;
+
+      boolean result = true;
+      result = result && (getItemIndex()
+          == other.getItemIndex());
+      result = result && getItemName()
+          .equals(other.getItemName());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ITEM_INDEX_FIELD_NUMBER;
+      hash = (53 * hash) + getItemIndex();
+      hash = (37 * hash) + ITEM_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getItemName().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ComposeVR.OnBrowserItemChanged}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ComposeVR.OnBrowserItemChanged)
+        com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.las4vc.composevr.protocol.Browser.internal_static_ComposeVR_OnBrowserItemChanged_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.las4vc.composevr.protocol.Browser.internal_static_ComposeVR_OnBrowserItemChanged_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.class, com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder.class);
+      }
+
+      // Construct using com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        itemIndex_ = 0;
+
+        itemName_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.las4vc.composevr.protocol.Browser.internal_static_ComposeVR_OnBrowserItemChanged_descriptor;
+      }
+
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getDefaultInstanceForType() {
+        return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+      }
+
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged build() {
+        com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged buildPartial() {
+        com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged result = new com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged(this);
+        result.itemIndex_ = itemIndex_;
+        result.itemName_ = itemName_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) {
+          return mergeFrom((com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged other) {
+        if (other == com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance()) return this;
+        if (other.getItemIndex() != 0) {
+          setItemIndex(other.getItemIndex());
+        }
+        if (!other.getItemName().isEmpty()) {
+          itemName_ = other.itemName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int itemIndex_ ;
+      /**
+       * <code>int32 item_index = 1;</code>
+       */
+      public int getItemIndex() {
+        return itemIndex_;
+      }
+      /**
+       * <code>int32 item_index = 1;</code>
+       */
+      public Builder setItemIndex(int value) {
+        
+        itemIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 item_index = 1;</code>
+       */
+      public Builder clearItemIndex() {
+        
+        itemIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object itemName_ = "";
+      /**
+       * <code>string item_name = 2;</code>
+       */
+      public java.lang.String getItemName() {
+        java.lang.Object ref = itemName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          itemName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string item_name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getItemNameBytes() {
+        java.lang.Object ref = itemName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          itemName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string item_name = 2;</code>
+       */
+      public Builder setItemName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        itemName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string item_name = 2;</code>
+       */
+      public Builder clearItemName() {
+        
+        itemName_ = getDefaultInstance().getItemName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string item_name = 2;</code>
+       */
+      public Builder setItemNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        itemName_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ComposeVR.OnBrowserItemChanged)
+    }
+
+    // @@protoc_insertion_point(class_scope:ComposeVR.OnBrowserItemChanged)
+    private static final com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged();
+    }
+
+    public static com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<OnBrowserItemChanged>
+        PARSER = new com.google.protobuf.AbstractParser<OnBrowserItemChanged>() {
+      public OnBrowserItemChanged parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OnBrowserItemChanged(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OnBrowserItemChanged> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OnBrowserItemChanged> getParserForType() {
+      return PARSER;
+    }
+
+    public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface OnBrowserColumnChangedOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ComposeVR.OnBrowserColumnChanged)
       com.google.protobuf.MessageOrBuilder {
@@ -3856,25 +4444,6 @@ public final class Browser {
      * <code>int32 total_results = 2;</code>
      */
     int getTotalResults();
-
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    java.util.List<java.lang.String>
-        getResultsList();
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    int getResultsCount();
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    java.lang.String getResults(int index);
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultsBytes(int index);
   }
   /**
    * Protobuf type {@code ComposeVR.OnBrowserColumnChanged}
@@ -3891,7 +4460,6 @@ public final class Browser {
     private OnBrowserColumnChanged() {
       resultsPerPage_ = 0;
       totalResults_ = 0;
-      results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -3935,15 +4503,6 @@ public final class Browser {
               totalResults_ = input.readInt32();
               break;
             }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                results_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              results_.add(s);
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3952,9 +4511,6 @@ public final class Browser {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          results_ = results_.getUnmodifiableView();
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -3971,7 +4527,6 @@ public final class Browser {
               com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged.class, com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged.Builder.class);
     }
 
-    private int bitField0_;
     public static final int RESULTS_PER_PAGE_FIELD_NUMBER = 1;
     private int resultsPerPage_;
     /**
@@ -3988,35 +4543,6 @@ public final class Browser {
      */
     public int getTotalResults() {
       return totalResults_;
-    }
-
-    public static final int RESULTS_FIELD_NUMBER = 3;
-    private com.google.protobuf.LazyStringList results_;
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getResultsList() {
-      return results_;
-    }
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    public int getResultsCount() {
-      return results_.size();
-    }
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    public java.lang.String getResults(int index) {
-      return results_.get(index);
-    }
-    /**
-     * <code>repeated string results = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultsBytes(int index) {
-      return results_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4037,9 +4563,6 @@ public final class Browser {
       if (totalResults_ != 0) {
         output.writeInt32(2, totalResults_);
       }
-      for (int i = 0; i < results_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, results_.getRaw(i));
-      }
       unknownFields.writeTo(output);
     }
 
@@ -4055,14 +4578,6 @@ public final class Browser {
       if (totalResults_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, totalResults_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < results_.size(); i++) {
-          dataSize += computeStringSizeNoTag(results_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getResultsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4084,8 +4599,6 @@ public final class Browser {
           == other.getResultsPerPage());
       result = result && (getTotalResults()
           == other.getTotalResults());
-      result = result && getResultsList()
-          .equals(other.getResultsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -4101,10 +4614,6 @@ public final class Browser {
       hash = (53 * hash) + getResultsPerPage();
       hash = (37 * hash) + TOTAL_RESULTS_FIELD_NUMBER;
       hash = (53 * hash) + getTotalResults();
-      if (getResultsCount() > 0) {
-        hash = (37 * hash) + RESULTS_FIELD_NUMBER;
-        hash = (53 * hash) + getResultsList().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4238,8 +4747,6 @@ public final class Browser {
 
         totalResults_ = 0;
 
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4262,16 +4769,8 @@ public final class Browser {
 
       public com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged buildPartial() {
         com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged result = new com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.resultsPerPage_ = resultsPerPage_;
         result.totalResults_ = totalResults_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          results_ = results_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.results_ = results_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -4319,16 +4818,6 @@ public final class Browser {
         if (other.getTotalResults() != 0) {
           setTotalResults(other.getTotalResults());
         }
-        if (!other.results_.isEmpty()) {
-          if (results_.isEmpty()) {
-            results_ = other.results_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureResultsIsMutable();
-            results_.addAll(other.results_);
-          }
-          onChanged();
-        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -4355,7 +4844,6 @@ public final class Browser {
         }
         return this;
       }
-      private int bitField0_;
 
       private int resultsPerPage_ ;
       /**
@@ -4405,100 +4893,6 @@ public final class Browser {
       public Builder clearTotalResults() {
         
         totalResults_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureResultsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          results_ = new com.google.protobuf.LazyStringArrayList(results_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getResultsList() {
-        return results_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public int getResultsCount() {
-        return results_.size();
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public java.lang.String getResults(int index) {
-        return results_.get(index);
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultsBytes(int index) {
-        return results_.getByteString(index);
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public Builder setResults(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public Builder addResults(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public Builder addAllResults(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureResultsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, results_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public Builder clearResults() {
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 3;</code>
-       */
-      public Builder addResultsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureResultsIsMutable();
-        results_.add(value);
         onChanged();
         return this;
       }
@@ -5234,6 +5628,11 @@ public final class Browser {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ComposeVR_SelectFilterItem_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ComposeVR_OnBrowserItemChanged_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ComposeVR_OnBrowserItemChanged_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ComposeVR_OnBrowserColumnChanged_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5260,14 +5659,15 @@ public final class Browser {
       "ange\030\001 \001(\005\"<\n\020ChangeFilterPage\022\023\n\013column" +
       "_name\030\001 \001(\t\022\023\n\013page_change\030\002 \001(\005\";\n\020Sele" +
       "ctFilterItem\022\023\n\013column_name\030\001 \001(\t\022\022\n\nite" +
-      "m_index\030\002 \001(\005\"Z\n\026OnBrowserColumnChanged\022" +
-      "\030\n\020results_per_page\030\001 \001(\005\022\025\n\rtotal_resul" +
-      "ts\030\002 \001(\005\022\017\n\007results\030\003 \003(\t\"\200\001\n\030OnArrowVis" +
-      "ibilityChanged\0228\n\005arrow\030\001 \001(\0162).ComposeV" +
-      "R.OnArrowVisibilityChanged.Arrow\022\017\n\007visi" +
-      "ble\030\002 \001(\010\"\031\n\005Arrow\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001B<\n\035" +
-      "com.las4vc.composevr.protocol\252\002\032ComposeV" +
-      "R.Protocol.Browserb\006proto3"
+      "m_index\030\002 \001(\005\"=\n\024OnBrowserItemChanged\022\022\n" +
+      "\nitem_index\030\001 \001(\005\022\021\n\titem_name\030\002 \001(\t\"I\n\026" +
+      "OnBrowserColumnChanged\022\030\n\020results_per_pa" +
+      "ge\030\001 \001(\005\022\025\n\rtotal_results\030\002 \001(\005\"\200\001\n\030OnAr" +
+      "rowVisibilityChanged\0228\n\005arrow\030\001 \001(\0162).Co" +
+      "mposeVR.OnArrowVisibilityChanged.Arrow\022\017" +
+      "\n\007visible\030\002 \001(\010\"\031\n\005Arrow\022\006\n\002UP\020\000\022\010\n\004DOWN" +
+      "\020\001B<\n\035com.las4vc.composevr.protocol\252\002\032Co" +
+      "mposeVR.Protocol.Browserb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5329,14 +5729,20 @@ public final class Browser {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_SelectFilterItem_descriptor,
         new java.lang.String[] { "ColumnName", "ItemIndex", });
-    internal_static_ComposeVR_OnBrowserColumnChanged_descriptor =
+    internal_static_ComposeVR_OnBrowserItemChanged_descriptor =
       getDescriptor().getMessageTypes().get(8);
+    internal_static_ComposeVR_OnBrowserItemChanged_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ComposeVR_OnBrowserItemChanged_descriptor,
+        new java.lang.String[] { "ItemIndex", "ItemName", });
+    internal_static_ComposeVR_OnBrowserColumnChanged_descriptor =
+      getDescriptor().getMessageTypes().get(9);
     internal_static_ComposeVR_OnBrowserColumnChanged_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_OnBrowserColumnChanged_descriptor,
-        new java.lang.String[] { "ResultsPerPage", "TotalResults", "Results", });
+        new java.lang.String[] { "ResultsPerPage", "TotalResults", });
     internal_static_ComposeVR_OnArrowVisibilityChanged_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_ComposeVR_OnArrowVisibilityChanged_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_OnArrowVisibilityChanged_descriptor,

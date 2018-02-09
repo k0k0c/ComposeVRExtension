@@ -1,5 +1,8 @@
 package com.las4vc.composevr.browser;
 
+import com.bitwig.extension.callback.IntegerValueChangedCallback;
+import com.bitwig.extension.callback.StringValueChangedCallback;
+import com.google.protobuf.StringValue;
 import com.las4vc.composevr.DAWModel;
 import com.las4vc.composevr.RemoteEventHandler;
 import com.las4vc.composevr.RemoteEventEmitter;
@@ -28,24 +31,12 @@ public class BrowserFilterModel extends RemoteEventHandler {
         this.model = model;
         targetDeviceType = "Any Device";
 
-        //Set up callbacks for when filter entries are updated
         for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
-            final int idx = i;
-            BooleanValueChangedCallback filterCanScrollForwardChanged = new BooleanValueChangedCallback() {
-                @Override
-                public void valueChanged(boolean b) {
-                    handleFilterCanScrollForwardChanged(idx, b);
-                }
-            };
-            browserProxy.getFilterColumn(i).hasNextFilterPage().addValueObserver(filterCanScrollForwardChanged);
+            final int columnIndex = i;
 
-            BooleanValueChangedCallback filterCanScrollBackwardChanged = new BooleanValueChangedCallback() {
-                @Override
-                public void valueChanged(boolean b) {
-                    handleFilterCanScrollBackwardChanged(idx, b);
-                }
-            };
-            browserProxy.getFilterColumn(i).hasPreviousFilterPage().addValueObserver(filterCanScrollBackwardChanged);
+            setUpEntryChangedCallbacks(i);
+            setUpNumEntriesChangedCallback(i);
+            setUpCanScrollCallbacks(i);
         }
     }
 
@@ -71,9 +62,7 @@ public class BrowserFilterModel extends RemoteEventHandler {
             }
 
             if(itemIndex != -1){
-                for(int i = 0; i < itemIndex; i++){
-                    deviceTypeColumn.selectNextItem();
-                }
+                deviceTypeColumn.getItemAt(itemIndex).isSelected().set(true);
             }
         }
     }
@@ -84,37 +73,94 @@ public class BrowserFilterModel extends RemoteEventHandler {
         return deviceTypeColumn.getCursorName();
     }
 
+
+    private void setUpNumEntriesChangedCallback(final int columnIndex){
+
+        //Num entries callback
+        IntegerValueChangedCallback numFilterEntriesChangedCallback = new IntegerValueChangedCallback() {
+            @Override
+            public void valueChanged(int i) {
+                handleNumFilterEntriesChanged(columnIndex, i);
+            }
+        };
+
+        browserProxy.getFilterColumn(columnIndex).getEntryCount().addValueObserver(numFilterEntriesChangedCallback);
+    }
+
+    /**
+     * Callback for changes in the number of filter entries
+     * @param columnIndex
+     * @param numEntries
+     */
+    public void handleNumFilterEntriesChanged(int columnIndex, int numEntries){
+        RemoteEventEmitter.OnBrowserColumnChanged(model,
+                browserProxy.getFilterColumn(columnIndex).getName(),
+                browserProxy.getNumResultsPerPage(),
+                numEntries);
+    }
+
+
+    private void setUpEntryChangedCallbacks(final int columnIndex){
+
+        //Entry changed callbacks
+        BrowserColumnItemData[] filterEntries = browserProxy.getFilterColumn(columnIndex).getItems();
+
+        for(int j = 0; j < filterEntries.length; j++){
+            final int entryIndex = j;
+            StringValueChangedCallback entryChangedCallback = new StringValueChangedCallback() {
+                @Override
+                public void valueChanged(String s) {
+                    handleFilterEntryChanged(columnIndex, entryIndex, s);
+                }
+            };
+
+            filterEntries[j].addNameObserver(entryChangedCallback);
+        }
+    }
+
     /**
      * Callback for changes in filter column entries. Sends new entries to client.
-     * @param i the index of the column whose entries changed
+     * @param columnIndex the index of the column whose entries changed
+     * @param entryIndex the index of the entry that changed
+     * @param entryName the new name of the entry
      */
-    public void handleFilterEntriesChanged(int i){
+    public void handleFilterEntryChanged(int columnIndex, int entryIndex, String entryName){
         if(!browserProxy.isActive()){
             return;
         }
 
-        if(!browserProxy.getFilterColumn(i).getName().equals("Tag") &&
-                !browserProxy.getFilterColumn(i).getName().equals("Creator") &&
-                !browserProxy.getFilterColumn(i).getName().equals("Category")){
+        if(!browserProxy.getFilterColumn(columnIndex).getName().equals("Tag") &&
+                !browserProxy.getFilterColumn(columnIndex).getName().equals("Creator") &&
+                !browserProxy.getFilterColumn(columnIndex).getName().equals("Category")){
             return;
         }
 
-        ArrayList<String> columnEntries = new ArrayList<>();
-        for(BrowserColumnItemData entry : browserProxy.getFilterColumn(i).getItems()){
-            if(entry.getName().length() > 0) {
-                columnEntries.add(entry.getName());
-            }
-        }
+        RemoteEventEmitter.OnBrowserItemChanged(model,
+                browserProxy.getFilterColumn(columnIndex).getName(),
+                entryIndex,
+                entryName);
 
-        if(columnEntries.size() > 0) {
-            RemoteEventEmitter.OnBrowserColumnChanged(model,
-                    browserProxy.getFilterColumn(i).getName(),
-                    browserProxy.getNumFilterColumnEntries(),
-                    browserProxy.getFilterColumn(i).getTotalEntries(),
-                    columnEntries);
-        }
     }
 
+
+    private void setUpCanScrollCallbacks(final int columnIndex){
+
+        BooleanValueChangedCallback filterCanScrollForwardChanged = new BooleanValueChangedCallback() {
+            @Override
+            public void valueChanged(boolean b) {
+                handleFilterCanScrollForwardChanged(columnIndex, b);
+            }
+        };
+        browserProxy.getFilterColumn(columnIndex).hasNextFilterPage().addValueObserver(filterCanScrollForwardChanged);
+
+        BooleanValueChangedCallback filterCanScrollBackwardChanged = new BooleanValueChangedCallback() {
+            @Override
+            public void valueChanged(boolean b) {
+                handleFilterCanScrollBackwardChanged(columnIndex, b);
+            }
+        };
+        browserProxy.getFilterColumn(columnIndex).hasPreviousFilterPage().addValueObserver(filterCanScrollBackwardChanged);
+    }
 
     private void handleFilterCanScrollForwardChanged(int i, boolean val){
         RemoteEventEmitter.OnArrowVisibilityChanged(model, browserProxy.getFilterColumnNames()[i], Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
@@ -177,8 +223,6 @@ public class BrowserFilterModel extends RemoteEventHandler {
                 filterPageChange += 1;
             }
         }
-
-        handleFilterEntriesChanged(i);
 
     }
 }

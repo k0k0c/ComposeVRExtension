@@ -1195,6 +1195,19 @@ public final class Protocol {
      */
     com.las4vc.composevr.protocol.Browser.CloseBrowserOrBuilder getCloseBrowserEventOrBuilder();
 
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    boolean hasOnBrowserItemChangedEvent();
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getOnBrowserItemChangedEvent();
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder getOnBrowserItemChangedEventOrBuilder();
+
     public com.las4vc.composevr.protocol.Protocol.BrowserEvent.EventCase getEventCase();
   }
   /**
@@ -1390,6 +1403,20 @@ public final class Protocol {
               eventCase_ = 11;
               break;
             }
+            case 98: {
+              com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder subBuilder = null;
+              if (eventCase_ == 12) {
+                subBuilder = ((com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_).toBuilder();
+              }
+              event_ =
+                  input.readMessage(com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_);
+                event_ = subBuilder.buildPartial();
+              }
+              eventCase_ = 12;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1428,6 +1455,7 @@ public final class Protocol {
       ON_BROWSER_COLUMN_CHANGED_EVENT(9),
       ON_ARROW_VISIBILITY_CHANGED_EVENT(10),
       CLOSE_BROWSER_EVENT(11),
+      ON_BROWSER_ITEM_CHANGED_EVENT(12),
       EVENT_NOT_SET(0);
       private final int value;
       private EventCase(int value) {
@@ -1453,6 +1481,7 @@ public final class Protocol {
           case 9: return ON_BROWSER_COLUMN_CHANGED_EVENT;
           case 10: return ON_ARROW_VISIBILITY_CHANGED_EVENT;
           case 11: return CLOSE_BROWSER_EVENT;
+          case 12: return ON_BROWSER_ITEM_CHANGED_EVENT;
           case 0: return EVENT_NOT_SET;
           default: return null;
         }
@@ -1770,6 +1799,32 @@ public final class Protocol {
       return com.las4vc.composevr.protocol.Browser.CloseBrowser.getDefaultInstance();
     }
 
+    public static final int ON_BROWSER_ITEM_CHANGED_EVENT_FIELD_NUMBER = 12;
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    public boolean hasOnBrowserItemChangedEvent() {
+      return eventCase_ == 12;
+    }
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getOnBrowserItemChangedEvent() {
+      if (eventCase_ == 12) {
+         return (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_;
+      }
+      return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+    }
+    /**
+     * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+     */
+    public com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder getOnBrowserItemChangedEventOrBuilder() {
+      if (eventCase_ == 12) {
+         return (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_;
+      }
+      return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1814,6 +1869,9 @@ public final class Protocol {
       }
       if (eventCase_ == 11) {
         output.writeMessage(11, (com.las4vc.composevr.protocol.Browser.CloseBrowser) event_);
+      }
+      if (eventCase_ == 12) {
+        output.writeMessage(12, (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_);
       }
       unknownFields.writeTo(output);
     }
@@ -1865,6 +1923,10 @@ public final class Protocol {
       if (eventCase_ == 11) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(11, (com.las4vc.composevr.protocol.Browser.CloseBrowser) event_);
+      }
+      if (eventCase_ == 12) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1928,6 +1990,10 @@ public final class Protocol {
           result = result && getCloseBrowserEvent()
               .equals(other.getCloseBrowserEvent());
           break;
+        case 12:
+          result = result && getOnBrowserItemChangedEvent()
+              .equals(other.getOnBrowserItemChangedEvent());
+          break;
         case 0:
         default:
       }
@@ -1984,6 +2050,10 @@ public final class Protocol {
         case 11:
           hash = (37 * hash) + CLOSE_BROWSER_EVENT_FIELD_NUMBER;
           hash = (53 * hash) + getCloseBrowserEvent().hashCode();
+          break;
+        case 12:
+          hash = (37 * hash) + ON_BROWSER_ITEM_CHANGED_EVENT_FIELD_NUMBER;
+          hash = (53 * hash) + getOnBrowserItemChangedEvent().hashCode();
           break;
         case 0:
         default:
@@ -2214,6 +2284,13 @@ public final class Protocol {
             result.event_ = closeBrowserEventBuilder_.build();
           }
         }
+        if (eventCase_ == 12) {
+          if (onBrowserItemChangedEventBuilder_ == null) {
+            result.event_ = event_;
+          } else {
+            result.event_ = onBrowserItemChangedEventBuilder_.build();
+          }
+        }
         result.eventCase_ = eventCase_;
         onBuilt();
         return result;
@@ -2299,6 +2376,10 @@ public final class Protocol {
           }
           case CLOSE_BROWSER_EVENT: {
             mergeCloseBrowserEvent(other.getCloseBrowserEvent());
+            break;
+          }
+          case ON_BROWSER_ITEM_CHANGED_EVENT: {
+            mergeOnBrowserItemChangedEvent(other.getOnBrowserItemChangedEvent());
             break;
           }
           case EVENT_NOT_SET: {
@@ -3795,6 +3876,142 @@ public final class Protocol {
         onChanged();;
         return closeBrowserEventBuilder_;
       }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged, com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder, com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder> onBrowserItemChangedEventBuilder_;
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public boolean hasOnBrowserItemChangedEvent() {
+        return eventCase_ == 12;
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged getOnBrowserItemChangedEvent() {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          if (eventCase_ == 12) {
+            return (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_;
+          }
+          return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+        } else {
+          if (eventCase_ == 12) {
+            return onBrowserItemChangedEventBuilder_.getMessage();
+          }
+          return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public Builder setOnBrowserItemChangedEvent(com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged value) {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          event_ = value;
+          onChanged();
+        } else {
+          onBrowserItemChangedEventBuilder_.setMessage(value);
+        }
+        eventCase_ = 12;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public Builder setOnBrowserItemChangedEvent(
+          com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder builderForValue) {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          event_ = builderForValue.build();
+          onChanged();
+        } else {
+          onBrowserItemChangedEventBuilder_.setMessage(builderForValue.build());
+        }
+        eventCase_ = 12;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public Builder mergeOnBrowserItemChangedEvent(com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged value) {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          if (eventCase_ == 12 &&
+              event_ != com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance()) {
+            event_ = com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.newBuilder((com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            event_ = value;
+          }
+          onChanged();
+        } else {
+          if (eventCase_ == 12) {
+            onBrowserItemChangedEventBuilder_.mergeFrom(value);
+          }
+          onBrowserItemChangedEventBuilder_.setMessage(value);
+        }
+        eventCase_ = 12;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public Builder clearOnBrowserItemChangedEvent() {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          if (eventCase_ == 12) {
+            eventCase_ = 0;
+            event_ = null;
+            onChanged();
+          }
+        } else {
+          if (eventCase_ == 12) {
+            eventCase_ = 0;
+            event_ = null;
+          }
+          onBrowserItemChangedEventBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder getOnBrowserItemChangedEventBuilder() {
+        return getOnBrowserItemChangedEventFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      public com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder getOnBrowserItemChangedEventOrBuilder() {
+        if ((eventCase_ == 12) && (onBrowserItemChangedEventBuilder_ != null)) {
+          return onBrowserItemChangedEventBuilder_.getMessageOrBuilder();
+        } else {
+          if (eventCase_ == 12) {
+            return (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_;
+          }
+          return com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.ComposeVR.OnBrowserItemChanged on_browser_item_changed_event = 12;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged, com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder, com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder> 
+          getOnBrowserItemChangedEventFieldBuilder() {
+        if (onBrowserItemChangedEventBuilder_ == null) {
+          if (!(eventCase_ == 12)) {
+            event_ = com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.getDefaultInstance();
+          }
+          onBrowserItemChangedEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged, com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged.Builder, com.las4vc.composevr.protocol.Browser.OnBrowserItemChangedOrBuilder>(
+                  (com.las4vc.composevr.protocol.Browser.OnBrowserItemChanged) event_,
+                  getParentForChildren(),
+                  isClean());
+          event_ = null;
+        }
+        eventCase_ = 12;
+        onChanged();;
+        return onBrowserItemChangedEventBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -5118,7 +5335,7 @@ public final class Protocol {
       "to\032\rBrowser.proto\"\207\001\n\005Event\022\023\n\013method_na" +
       "me\030\001 \001(\t\0220\n\rbrowser_event\030\002 \001(\0132\027.Compos" +
       "eVR.BrowserEventH\000\022.\n\014module_event\030\003 \001(\013" +
-      "2\026.ComposeVR.ModuleEventH\000B\007\n\005event\"\313\005\n\014" +
+      "2\026.ComposeVR.ModuleEventH\000B\007\n\005event\"\225\006\n\014" +
       "BrowserEvent\022\014\n\004path\030\001 \001(\t\022?\n\030change_fil" +
       "ter_page_event\030\002 \001(\0132\033.ComposeVR.ChangeF" +
       "ilterPageH\000\022?\n\030select_filter_item_event\030" +
@@ -5136,15 +5353,17 @@ public final class Protocol {
       "ngedH\000\022P\n!on_arrow_visibility_changed_ev" +
       "ent\030\n \001(\0132#.ComposeVR.OnArrowVisibilityC" +
       "hangedH\000\0226\n\023close_browser_event\030\013 \001(\0132\027." +
-      "ComposeVR.CloseBrowserH\000B\007\n\005event\"\355\001\n\013Mo" +
-      "duleEvent\022\022\n\nhandler_id\030\001 \001(\t\0224\n\022open_br" +
-      "owser_event\030\002 \001(\0132\026.ComposeVR.OpenBrowse" +
-      "rH\000\022A\n\031create_sound_module_event\030\003 \001(\0132\034" +
-      ".ComposeVR.CreateSoundModuleH\000\022H\n\035on_sou" +
-      "nd_module_created_event\030\004 \001(\0132\037.ComposeV" +
-      "R.OnSoundModuleCreatedH\000B\007\n\005eventB>\n\035com" +
-      ".las4vc.composevr.protocolB\010Protocol\252\002\022C" +
-      "omposeVR.Protocolb\006proto3"
+      "ComposeVR.CloseBrowserH\000\022H\n\035on_browser_i" +
+      "tem_changed_event\030\014 \001(\0132\037.ComposeVR.OnBr" +
+      "owserItemChangedH\000B\007\n\005event\"\355\001\n\013ModuleEv" +
+      "ent\022\022\n\nhandler_id\030\001 \001(\t\0224\n\022open_browser_" +
+      "event\030\002 \001(\0132\026.ComposeVR.OpenBrowserH\000\022A\n" +
+      "\031create_sound_module_event\030\003 \001(\0132\034.Compo" +
+      "seVR.CreateSoundModuleH\000\022H\n\035on_sound_mod" +
+      "ule_created_event\030\004 \001(\0132\037.ComposeVR.OnSo" +
+      "undModuleCreatedH\000B\007\n\005eventB>\n\035com.las4v" +
+      "c.composevr.protocolB\010Protocol\252\002\022Compose" +
+      "VR.Protocolb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5171,7 +5390,7 @@ public final class Protocol {
     internal_static_ComposeVR_BrowserEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_BrowserEvent_descriptor,
-        new java.lang.String[] { "Path", "ChangeFilterPageEvent", "SelectFilterItemEvent", "ChangeResultsPageEvent", "LoadDeviceAtIndexEvent", "LoadDeviceWithNameEvent", "OnDeviceLoadedEvent", "OnDeviceNotFoundEvent", "OnBrowserColumnChangedEvent", "OnArrowVisibilityChangedEvent", "CloseBrowserEvent", "Event", });
+        new java.lang.String[] { "Path", "ChangeFilterPageEvent", "SelectFilterItemEvent", "ChangeResultsPageEvent", "LoadDeviceAtIndexEvent", "LoadDeviceWithNameEvent", "OnDeviceLoadedEvent", "OnDeviceNotFoundEvent", "OnBrowserColumnChangedEvent", "OnArrowVisibilityChangedEvent", "CloseBrowserEvent", "OnBrowserItemChangedEvent", "Event", });
     internal_static_ComposeVR_ModuleEvent_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_ComposeVR_ModuleEvent_fieldAccessorTable = new

@@ -74,6 +74,7 @@ public class BrowserProxy
         this.resultsColumn = this.browser.resultsColumn ();
         this.resultsColumn.entryCount().markInterested();
 
+
         //this.result = this.resultsColumn.createCursorItem();
         //this.result.
 
@@ -501,6 +502,8 @@ public class BrowserProxy
     public int getNumTotalResults(){
         return this.resultsColumn.entryCount().get();
     }
+
+    public IntegerValue getResultEntryCount() { return this.resultsColumn.entryCount(); }
 
     /**
      * Get the number of filter items to display on a page.

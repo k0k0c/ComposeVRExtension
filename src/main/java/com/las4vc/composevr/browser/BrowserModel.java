@@ -1,4 +1,5 @@
 package com.las4vc.composevr.browser;
+import com.bitwig.extension.callback.IntegerValueChangedCallback;
 import com.las4vc.composevr.RemoteEventHandler;
 import com.las4vc.composevr.DAWModel;
 import com.las4vc.composevr.RemoteEventEmitter;
@@ -133,7 +134,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         };
         browserProxy.addActiveObserver(browserToggleCallback);
 
-        //Set up callback for when browser results are updated
+        //Set up callback for BrowserItemChanged messages
         browserResults = browserProxy.getResultColumnItems();
 
         for(int i = 0; i < browserResults.length; i++) {
@@ -141,11 +142,22 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             StringValueChangedCallback resultsChangedCallback = new StringValueChangedCallback() {
                 @Override
                 public void valueChanged(String s) {
-                    handleBrowserResultsChange(idx);
+                    handleResultItemChange(idx, s);
                 }
             };
             browserResults[i].addNameObserver(resultsChangedCallback);
         }
+
+        //Set up callback when for when total number of results changes
+        IntegerValueChangedCallback numResultsChangedCallback = new IntegerValueChangedCallback() {
+            @Override
+            public void valueChanged(int i) {
+                handleNumResultsChange(i);
+            }
+        };
+
+        browserProxy.getResultEntryCount().addValueObserver(numResultsChangedCallback);
+
 
         //Callbacks for scrollability
         BooleanValueChangedCallback canScrollForwardChangedCallback = new BooleanValueChangedCallback() {
@@ -199,29 +211,23 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         currentState = currentState.next(this, Event.BROWSER_ACTIVE_CHANGE);
     }
 
+    private void handleNumResultsChange(int numResults){
+        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults);
+    }
+
     /**
      * Callback for when the results column changes.
      * Sends results to client
      */
-    private void handleBrowserResultsChange(int idx){
+    private void handleResultItemChange(int idx, String itemName){
 
         State prevState = currentState;
         currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
 
+
         //Wrangling the browser to make the columns display all of their content on the first request
         if(currentState == State.LOADING_INITIAL_RESULTS){
             filterModel.setDeviceType();
-        }
-
-        if(currentState != State.LOADING_RESULTS || !browserProxy.isActive()){
-            return;
-        }
-
-        //Reset the browser to its initial state now that we have the
-        if(prevState == State.LOADING_INITIAL_RESULTS){
-            resetBrowser();
-            filterModel.setDeviceType();
-            return;
         }
 
         if(pageChange != 0){
@@ -243,27 +249,11 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             currentState = currentState.next(this, Event.CLOSE_REQUEST);
         }
 
-        BrowserColumnItemData[] pageResults = browserProxy.getResultColumnItems();
-
-        //Create list of results on current page
-        ArrayList<String> results = new ArrayList<>();
-
-        for(BrowserColumnItemData item : pageResults){
-            results.add(item.getName());
+        if(itemName.equals("Results")){
+            return;
         }
 
-        //Send page results to client
-        RemoteEventEmitter.OnBrowserColumnChanged(model,
-                "Results",
-                browserProxy.getNumResultsPerPage(),
-                browserProxy.getNumTotalResults(),
-                results);
-
-        //Send filter data
-        for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
-            filterModel.handleFilterEntriesChanged(i);
-        }
-
+        RemoteEventEmitter.OnBrowserItemChanged(model, "Results", idx, itemName);
     }
 
     /**
@@ -371,6 +361,13 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         }
     }
 
+    private void handleResultsCanScrollForwardChanged(boolean val){
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
+    }
+
+    private void handleResultsCanScrollBackwardChanged(boolean val){
+        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.UP, val);
+    }
 
     /**
      * Increment or decrement the results page by the specified amount
@@ -386,14 +383,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
         model.host.println("Trying to change page");
         changeResultsPage();
-    }
-
-    private void handleResultsCanScrollForwardChanged(boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
-    }
-
-    private void handleResultsCanScrollBackwardChanged(boolean val){
-        RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.UP, val);
     }
 
     /**
