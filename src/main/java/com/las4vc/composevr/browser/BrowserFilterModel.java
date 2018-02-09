@@ -67,10 +67,18 @@ public class BrowserFilterModel extends RemoteEventHandler {
         }
     }
 
-    public String getTargetDeviceType(){
+    public String getCurrentDeviceType(){
         int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
+        if(deviceTypeIndex == -1){
+            return "";
+        }
+
         BrowserColumnData deviceTypeColumn = browserProxy.getFilterColumn(deviceTypeIndex);
-        return deviceTypeColumn.getCursorName();
+        if(deviceTypeColumn.doesCursorExist()) {
+            return deviceTypeColumn.getCursorName();
+        }else{
+            return "";
+        }
     }
 
 
@@ -96,7 +104,8 @@ public class BrowserFilterModel extends RemoteEventHandler {
         RemoteEventEmitter.OnBrowserColumnChanged(model,
                 browserProxy.getFilterColumn(columnIndex).getName(),
                 browserProxy.getNumResultsPerPage(),
-                numEntries);
+                numEntries,
+                getCurrentDeviceType());
     }
 
 
@@ -134,6 +143,7 @@ public class BrowserFilterModel extends RemoteEventHandler {
                 !browserProxy.getFilterColumn(columnIndex).getName().equals("Category")){
             return;
         }
+
 
         RemoteEventEmitter.OnBrowserItemChanged(model,
                 browserProxy.getFilterColumn(columnIndex).getName(),

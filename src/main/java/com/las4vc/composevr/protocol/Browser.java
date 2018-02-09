@@ -4444,6 +4444,16 @@ public final class Browser {
      * <code>int32 total_results = 2;</code>
      */
     int getTotalResults();
+
+    /**
+     * <code>string device_type = 3;</code>
+     */
+    java.lang.String getDeviceType();
+    /**
+     * <code>string device_type = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDeviceTypeBytes();
   }
   /**
    * Protobuf type {@code ComposeVR.OnBrowserColumnChanged}
@@ -4460,6 +4470,7 @@ public final class Browser {
     private OnBrowserColumnChanged() {
       resultsPerPage_ = 0;
       totalResults_ = 0;
+      deviceType_ = "";
     }
 
     @java.lang.Override
@@ -4501,6 +4512,12 @@ public final class Browser {
             case 16: {
 
               totalResults_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              deviceType_ = s;
               break;
             }
           }
@@ -4545,6 +4562,40 @@ public final class Browser {
       return totalResults_;
     }
 
+    public static final int DEVICE_TYPE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object deviceType_;
+    /**
+     * <code>string device_type = 3;</code>
+     */
+    public java.lang.String getDeviceType() {
+      java.lang.Object ref = deviceType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        deviceType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string device_type = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDeviceTypeBytes() {
+      java.lang.Object ref = deviceType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        deviceType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -4563,6 +4614,9 @@ public final class Browser {
       if (totalResults_ != 0) {
         output.writeInt32(2, totalResults_);
       }
+      if (!getDeviceTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, deviceType_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4578,6 +4632,9 @@ public final class Browser {
       if (totalResults_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, totalResults_);
+      }
+      if (!getDeviceTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, deviceType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4599,6 +4656,8 @@ public final class Browser {
           == other.getResultsPerPage());
       result = result && (getTotalResults()
           == other.getTotalResults());
+      result = result && getDeviceType()
+          .equals(other.getDeviceType());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -4614,6 +4673,8 @@ public final class Browser {
       hash = (53 * hash) + getResultsPerPage();
       hash = (37 * hash) + TOTAL_RESULTS_FIELD_NUMBER;
       hash = (53 * hash) + getTotalResults();
+      hash = (37 * hash) + DEVICE_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getDeviceType().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4747,6 +4808,8 @@ public final class Browser {
 
         totalResults_ = 0;
 
+        deviceType_ = "";
+
         return this;
       }
 
@@ -4771,6 +4834,7 @@ public final class Browser {
         com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged result = new com.las4vc.composevr.protocol.Browser.OnBrowserColumnChanged(this);
         result.resultsPerPage_ = resultsPerPage_;
         result.totalResults_ = totalResults_;
+        result.deviceType_ = deviceType_;
         onBuilt();
         return result;
       }
@@ -4817,6 +4881,10 @@ public final class Browser {
         }
         if (other.getTotalResults() != 0) {
           setTotalResults(other.getTotalResults());
+        }
+        if (!other.getDeviceType().isEmpty()) {
+          deviceType_ = other.deviceType_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4893,6 +4961,75 @@ public final class Browser {
       public Builder clearTotalResults() {
         
         totalResults_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object deviceType_ = "";
+      /**
+       * <code>string device_type = 3;</code>
+       */
+      public java.lang.String getDeviceType() {
+        java.lang.Object ref = deviceType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          deviceType_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string device_type = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDeviceTypeBytes() {
+        java.lang.Object ref = deviceType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          deviceType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string device_type = 3;</code>
+       */
+      public Builder setDeviceType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        deviceType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string device_type = 3;</code>
+       */
+      public Builder clearDeviceType() {
+        
+        deviceType_ = getDefaultInstance().getDeviceType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string device_type = 3;</code>
+       */
+      public Builder setDeviceTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        deviceType_ = value;
         onChanged();
         return this;
       }
@@ -5660,14 +5797,15 @@ public final class Browser {
       "_name\030\001 \001(\t\022\023\n\013page_change\030\002 \001(\005\";\n\020Sele" +
       "ctFilterItem\022\023\n\013column_name\030\001 \001(\t\022\022\n\nite" +
       "m_index\030\002 \001(\005\"=\n\024OnBrowserItemChanged\022\022\n" +
-      "\nitem_index\030\001 \001(\005\022\021\n\titem_name\030\002 \001(\t\"I\n\026" +
+      "\nitem_index\030\001 \001(\005\022\021\n\titem_name\030\002 \001(\t\"^\n\026" +
       "OnBrowserColumnChanged\022\030\n\020results_per_pa" +
-      "ge\030\001 \001(\005\022\025\n\rtotal_results\030\002 \001(\005\"\200\001\n\030OnAr" +
-      "rowVisibilityChanged\0228\n\005arrow\030\001 \001(\0162).Co" +
-      "mposeVR.OnArrowVisibilityChanged.Arrow\022\017" +
-      "\n\007visible\030\002 \001(\010\"\031\n\005Arrow\022\006\n\002UP\020\000\022\010\n\004DOWN" +
-      "\020\001B<\n\035com.las4vc.composevr.protocol\252\002\032Co" +
-      "mposeVR.Protocol.Browserb\006proto3"
+      "ge\030\001 \001(\005\022\025\n\rtotal_results\030\002 \001(\005\022\023\n\013devic" +
+      "e_type\030\003 \001(\t\"\200\001\n\030OnArrowVisibilityChange" +
+      "d\0228\n\005arrow\030\001 \001(\0162).ComposeVR.OnArrowVisi" +
+      "bilityChanged.Arrow\022\017\n\007visible\030\002 \001(\010\"\031\n\005" +
+      "Arrow\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001B<\n\035com.las4vc.co" +
+      "mposevr.protocol\252\002\032ComposeVR.Protocol.Br" +
+      "owserb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5740,7 +5878,7 @@ public final class Browser {
     internal_static_ComposeVR_OnBrowserColumnChanged_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_OnBrowserColumnChanged_descriptor,
-        new java.lang.String[] { "ResultsPerPage", "TotalResults", });
+        new java.lang.String[] { "ResultsPerPage", "TotalResults", "DeviceType", });
     internal_static_ComposeVR_OnArrowVisibilityChanged_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_ComposeVR_OnArrowVisibilityChanged_fieldAccessorTable = new

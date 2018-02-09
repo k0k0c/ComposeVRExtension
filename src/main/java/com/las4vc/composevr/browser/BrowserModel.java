@@ -13,8 +13,6 @@ import com.las4vc.composevr.protocol.Protocol;
 import de.mossgrabers.framework.daw.BrowserProxy;
 import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
 
-import java.util.ArrayList;
-
 /**
  * The BrowserModel is responsible for manipulating Bitwig's PopupBrowser and providing access to PopupBrowser data
  *
@@ -92,7 +90,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
                     return CLOSED;
                 }
 
-                if(browser.browserProxy.getNumTotalResults() == 0 || !browser.filterModel.getTargetDeviceType().equals(browser.filterModel.targetDeviceType)){
+                if(browser.browserProxy.getNumTotalResults() == 0 || !browser.filterModel.getCurrentDeviceType().equals(browser.filterModel.targetDeviceType)){
                     return LOADING_INITIAL_RESULTS;
                 }
 
@@ -192,7 +190,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         currentState = State.CLOSED;
         currentState = currentState.next(this, Event.OPEN_REQUEST);
 
-
     }
 
 
@@ -212,7 +209,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
     }
 
     private void handleNumResultsChange(int numResults){
-        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults);
+        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults, filterModel.getCurrentDeviceType());
     }
 
     /**
@@ -221,11 +218,8 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
      */
     private void handleResultItemChange(int idx, String itemName){
 
-        State prevState = currentState;
         currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
 
-
-        //Wrangling the browser to make the columns display all of their content on the first request
         if(currentState == State.LOADING_INITIAL_RESULTS){
             filterModel.setDeviceType();
         }
@@ -247,10 +241,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         if(selectionIndex != -1){
             loadDevice();
             currentState = currentState.next(this, Event.CLOSE_REQUEST);
-        }
-
-        if(itemName.equals("Results")){
-            return;
         }
 
         RemoteEventEmitter.OnBrowserItemChanged(model, "Results", idx, itemName);

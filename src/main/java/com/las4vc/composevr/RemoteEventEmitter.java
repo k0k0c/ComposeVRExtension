@@ -41,10 +41,11 @@ public class RemoteEventEmitter {
      * @param resultsPerPage
      * @param totalResults
      */
-    public static void OnBrowserColumnChanged(DAWModel model, String columnName, int resultsPerPage, int totalResults){
+    public static void OnBrowserColumnChanged(DAWModel model, String columnName, int resultsPerPage, int totalResults, String deviceType){
         OnBrowserColumnChanged.Builder event = OnBrowserColumnChanged.newBuilder();
         event.setResultsPerPage(resultsPerPage);
         event.setTotalResults(totalResults);
+        event.setDeviceType(deviceType);
 
         BrowserEvent.Builder browserEvent = BrowserEvent.newBuilder();
         browserEvent.setPath("/"+columnName);

@@ -68,7 +68,7 @@ public class RemoteEventRouter {
         }
 
         try {
-            host.println("Emitting event "+msg.getMethodName());
+            //host.println("Emitting event "+msg.getMethodName());
             msg.writeDelimitedTo(outputStream);
 
             connection.send(outputStream.toByteArray());
