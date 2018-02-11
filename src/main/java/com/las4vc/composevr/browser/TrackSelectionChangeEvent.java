@@ -6,5 +6,5 @@ package com.las4vc.composevr.browser;
  * @author Lane Spangler
  */
 public interface TrackSelectionChangeEvent{
-    void OnTrackSelectionChange();
+    void onTrackSelectionChanged();
 }

@@ -80,7 +80,7 @@ public class DAWModel {
     private void handleTrackSelectionChange(){
 
         for(TrackSelectionChangeEvent e : trackSelectionChangeListeners) {
-            e.OnTrackSelectionChange();
+            e.onTrackSelectionChanged();
         }
 
         for(TrackSelectionChangeEvent e : toRemove){

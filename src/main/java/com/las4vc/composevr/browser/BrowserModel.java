@@ -124,14 +124,26 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         browserProxy = new BrowserProxy(model.host, model.cursorTrack, model.cursorDeviceProxy, 15, 15);
         browserProxy.enableObservers(true);
 
+        setUpBrowserToggleCallback();
+        setUpResultsChangedCallbacks();
+        setUpCanScrollCallbacks();
+
+        filterModel = new BrowserFilterModel(model, browserProxy);
+
+        currentState = State.CLOSED;
+    }
+
+    private void setUpBrowserToggleCallback(){
         BooleanValueChangedCallback browserToggleCallback = new BooleanValueChangedCallback() {
             @Override
             public void valueChanged(boolean b) {
-                handleBrowserActiveChange();
+                onBrowserActiveChanged();
             }
         };
         browserProxy.addActiveObserver(browserToggleCallback);
+    }
 
+    private void setUpResultsChangedCallbacks(){
         //Set up callback for BrowserItemChanged messages
         browserResults = browserProxy.getResultColumnItems();
 
@@ -140,7 +152,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             StringValueChangedCallback resultsChangedCallback = new StringValueChangedCallback() {
                 @Override
                 public void valueChanged(String s) {
-                    handleResultItemChange(idx, s);
+                    onResultItemChanged(idx, s);
                 }
             };
             browserResults[i].addNameObserver(resultsChangedCallback);
@@ -150,18 +162,19 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         IntegerValueChangedCallback numResultsChangedCallback = new IntegerValueChangedCallback() {
             @Override
             public void valueChanged(int i) {
-                handleNumResultsChange(i);
+                onNumResultsChanged(i);
             }
         };
 
         browserProxy.getResultEntryCount().addValueObserver(numResultsChangedCallback);
+    }
 
-
+    private void setUpCanScrollCallbacks(){
         //Callbacks for scrollability
         BooleanValueChangedCallback canScrollForwardChangedCallback = new BooleanValueChangedCallback() {
             @Override
             public void valueChanged(boolean b) {
-                handleResultsCanScrollForwardChanged(b);
+                onResultsCanScrollForwardChanged(b);
             }
         };
         browserProxy.hasNextResultPage().addValueObserver(canScrollForwardChangedCallback);
@@ -169,14 +182,10 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         BooleanValueChangedCallback canScrollBackwardChangedCallback = new BooleanValueChangedCallback() {
             @Override
             public void valueChanged(boolean b) {
-                handleResultsCanScrollBackwardChanged(b);
+                onResultsCanScrollBackwardChanged(b);
             }
         };
         browserProxy.hasPreviousResultPage().addValueObserver(canScrollBackwardChangedCallback);
-
-        filterModel = new BrowserFilterModel(model, browserProxy);
-
-        currentState = State.CLOSED;
     }
 
     /**
@@ -192,60 +201,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
     }
 
-
-    /**
-     * Callback when the track selection changes
-     */
-    public void OnTrackSelectionChange(){
-        currentState = currentState.next(this, Event.TRACK_SELECTION_CHANGE);
-    }
-
-
-    /**
-     * Callback when the browser's active state is changed
-     */
-    private void handleBrowserActiveChange(){
-        currentState = currentState.next(this, Event.BROWSER_ACTIVE_CHANGE);
-    }
-
-    private void handleNumResultsChange(int numResults){
-        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults, filterModel.getCurrentDeviceType());
-    }
-
-    /**
-     * Callback for when the results column changes.
-     * Sends results to client
-     */
-    private void handleResultItemChange(int idx, String itemName){
-
-        currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
-
-        if(currentState == State.LOADING_INITIAL_RESULTS){
-            filterModel.setDeviceType();
-        }
-
-        if(pageChange != 0){
-            changeResultsPage();
-        }
-
-        //Clamp page index
-        browserPage = Math.max(0, browserPage);
-
-
-        //Handle request by name
-        if(!deviceToFind.equals("")){
-            findDevice();
-        }
-
-        //Handle load request
-        if(selectionIndex != -1){
-            loadDevice();
-            currentState = currentState.next(this, Event.CLOSE_REQUEST);
-        }
-
-        RemoteEventEmitter.OnBrowserItemChanged(model, "Results", idx, itemName);
-    }
-
     /**
      * Sets cursor to point at the first item for the results column and every filter column
      */
@@ -259,7 +214,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             }
         }
     }
-
 
     /**
      * Finds the device with the same name as deviceToFind
@@ -303,7 +257,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         }
     }
 
-
     /**
      * Loads the device at selectionIndex
      */
@@ -330,6 +283,59 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         RemoteEventEmitter.OnDeviceLoaded(model);
     }
 
+    /* Local event handlers */
+
+    /**
+     * Callback when the track selection changes
+     */
+    public void onTrackSelectionChanged(){
+        currentState = currentState.next(this, Event.TRACK_SELECTION_CHANGE);
+    }
+
+    /**
+     * Callback when the browser's active state is changed
+     */
+    private void onBrowserActiveChanged(){
+        currentState = currentState.next(this, Event.BROWSER_ACTIVE_CHANGE);
+    }
+
+    private void onNumResultsChanged(int numResults){
+        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults, filterModel.getCurrentDeviceType());
+    }
+
+    /**
+     * Callback for when the results column changes.
+     * Sends results to client
+     */
+    private void onResultItemChanged(int idx, String itemName){
+
+        currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
+
+        if(currentState == State.LOADING_INITIAL_RESULTS){
+            filterModel.setDeviceType();
+        }
+
+        if(pageChange != 0){
+            changeResultsPage();
+        }
+
+        //Clamp page index
+        browserPage = Math.max(0, browserPage);
+
+
+        //Handle request by name
+        if(!deviceToFind.equals("")){
+            findDevice();
+        }
+
+        //Handle load request
+        if(selectionIndex != -1){
+            loadDevice();
+            currentState = currentState.next(this, Event.CLOSE_REQUEST);
+        }
+
+        RemoteEventEmitter.OnBrowserItemChanged(model, "Results", idx, itemName);
+    }
 
     /**
      * Changes the results page according to the value of pageChange
@@ -351,14 +357,15 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         }
     }
 
-    private void handleResultsCanScrollForwardChanged(boolean val){
+    private void onResultsCanScrollForwardChanged(boolean val){
         RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.DOWN, val);
     }
 
-    private void handleResultsCanScrollBackwardChanged(boolean val){
+    private void onResultsCanScrollBackwardChanged(boolean val){
         RemoteEventEmitter.OnArrowVisibilityChanged(model, "Results", Browser.OnArrowVisibilityChanged.Arrow.UP, val);
     }
 
+    /* Remote Event Handlers */
     /**
      * Increment or decrement the results page by the specified amount
      */
@@ -398,7 +405,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         Browser.LoadDeviceWithName params = e.getBrowserEvent().getLoadDeviceWithNameEvent();
         deviceToFind = params.getName();
     }
-
 
     /**
      * Close the browser
