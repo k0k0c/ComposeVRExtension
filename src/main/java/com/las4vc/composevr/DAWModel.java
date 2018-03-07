@@ -30,6 +30,7 @@ public class DAWModel {
     public CursorDeviceProxy cursorDeviceProxy;
 
     public BrowserModel browser;
+    public MidiIn midiInput;
 
     private ArrayList<TrackSelectionChangeEvent> trackSelectionChangeListeners;
     private ArrayList<TrackSelectionChangeEvent> toRemove;
@@ -62,6 +63,9 @@ public class DAWModel {
         cursorDeviceProxy = new CursorDeviceProxy(host, cursorDevice, valueChanger, 1, 1, 1,1,1);
 
         browser = new BrowserModel(this);
+
+        //Initialize MIDI
+        midiInput = host.getMidiInPort(0);
 
     }
 

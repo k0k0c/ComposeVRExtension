@@ -4114,6 +4114,19 @@ public final class Protocol {
      */
     com.las4vc.composevr.protocol.Module.OnSoundModuleCreatedOrBuilder getOnSoundModuleCreatedEventOrBuilder();
 
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    boolean hasMidiNoteEvent();
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    com.las4vc.composevr.protocol.Module.MIDINote getMidiNoteEvent();
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder getMidiNoteEventOrBuilder();
+
     public com.las4vc.composevr.protocol.Protocol.ModuleEvent.EventCase getEventCase();
   }
   /**
@@ -4211,6 +4224,20 @@ public final class Protocol {
               eventCase_ = 4;
               break;
             }
+            case 42: {
+              com.las4vc.composevr.protocol.Module.MIDINote.Builder subBuilder = null;
+              if (eventCase_ == 5) {
+                subBuilder = ((com.las4vc.composevr.protocol.Module.MIDINote) event_).toBuilder();
+              }
+              event_ =
+                  input.readMessage(com.las4vc.composevr.protocol.Module.MIDINote.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.las4vc.composevr.protocol.Module.MIDINote) event_);
+                event_ = subBuilder.buildPartial();
+              }
+              eventCase_ = 5;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4242,6 +4269,7 @@ public final class Protocol {
       OPEN_BROWSER_EVENT(2),
       CREATE_SOUND_MODULE_EVENT(3),
       ON_SOUND_MODULE_CREATED_EVENT(4),
+      MIDI_NOTE_EVENT(5),
       EVENT_NOT_SET(0);
       private final int value;
       private EventCase(int value) {
@@ -4260,6 +4288,7 @@ public final class Protocol {
           case 2: return OPEN_BROWSER_EVENT;
           case 3: return CREATE_SOUND_MODULE_EVENT;
           case 4: return ON_SOUND_MODULE_CREATED_EVENT;
+          case 5: return MIDI_NOTE_EVENT;
           case 0: return EVENT_NOT_SET;
           default: return null;
         }
@@ -4387,6 +4416,32 @@ public final class Protocol {
       return com.las4vc.composevr.protocol.Module.OnSoundModuleCreated.getDefaultInstance();
     }
 
+    public static final int MIDI_NOTE_EVENT_FIELD_NUMBER = 5;
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    public boolean hasMidiNoteEvent() {
+      return eventCase_ == 5;
+    }
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    public com.las4vc.composevr.protocol.Module.MIDINote getMidiNoteEvent() {
+      if (eventCase_ == 5) {
+         return (com.las4vc.composevr.protocol.Module.MIDINote) event_;
+      }
+      return com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+    }
+    /**
+     * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+     */
+    public com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder getMidiNoteEventOrBuilder() {
+      if (eventCase_ == 5) {
+         return (com.las4vc.composevr.protocol.Module.MIDINote) event_;
+      }
+      return com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -4411,6 +4466,9 @@ public final class Protocol {
       if (eventCase_ == 4) {
         output.writeMessage(4, (com.las4vc.composevr.protocol.Module.OnSoundModuleCreated) event_);
       }
+      if (eventCase_ == 5) {
+        output.writeMessage(5, (com.las4vc.composevr.protocol.Module.MIDINote) event_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4433,6 +4491,10 @@ public final class Protocol {
       if (eventCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, (com.las4vc.composevr.protocol.Module.OnSoundModuleCreated) event_);
+      }
+      if (eventCase_ == 5) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, (com.las4vc.composevr.protocol.Module.MIDINote) event_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4468,6 +4530,10 @@ public final class Protocol {
           result = result && getOnSoundModuleCreatedEvent()
               .equals(other.getOnSoundModuleCreatedEvent());
           break;
+        case 5:
+          result = result && getMidiNoteEvent()
+              .equals(other.getMidiNoteEvent());
+          break;
         case 0:
         default:
       }
@@ -4496,6 +4562,10 @@ public final class Protocol {
         case 4:
           hash = (37 * hash) + ON_SOUND_MODULE_CREATED_EVENT_FIELD_NUMBER;
           hash = (53 * hash) + getOnSoundModuleCreatedEvent().hashCode();
+          break;
+        case 5:
+          hash = (37 * hash) + MIDI_NOTE_EVENT_FIELD_NUMBER;
+          hash = (53 * hash) + getMidiNoteEvent().hashCode();
           break;
         case 0:
         default:
@@ -4677,6 +4747,13 @@ public final class Protocol {
             result.event_ = onSoundModuleCreatedEventBuilder_.build();
           }
         }
+        if (eventCase_ == 5) {
+          if (midiNoteEventBuilder_ == null) {
+            result.event_ = event_;
+          } else {
+            result.event_ = midiNoteEventBuilder_.build();
+          }
+        }
         result.eventCase_ = eventCase_;
         onBuilt();
         return result;
@@ -4734,6 +4811,10 @@ public final class Protocol {
           }
           case ON_SOUND_MODULE_CREATED_EVENT: {
             mergeOnSoundModuleCreatedEvent(other.getOnSoundModuleCreatedEvent());
+            break;
+          }
+          case MIDI_NOTE_EVENT: {
+            mergeMidiNoteEvent(other.getMidiNoteEvent());
             break;
           }
           case EVENT_NOT_SET: {
@@ -5258,6 +5339,142 @@ public final class Protocol {
         onChanged();;
         return onSoundModuleCreatedEventBuilder_;
       }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.las4vc.composevr.protocol.Module.MIDINote, com.las4vc.composevr.protocol.Module.MIDINote.Builder, com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder> midiNoteEventBuilder_;
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public boolean hasMidiNoteEvent() {
+        return eventCase_ == 5;
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public com.las4vc.composevr.protocol.Module.MIDINote getMidiNoteEvent() {
+        if (midiNoteEventBuilder_ == null) {
+          if (eventCase_ == 5) {
+            return (com.las4vc.composevr.protocol.Module.MIDINote) event_;
+          }
+          return com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+        } else {
+          if (eventCase_ == 5) {
+            return midiNoteEventBuilder_.getMessage();
+          }
+          return com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public Builder setMidiNoteEvent(com.las4vc.composevr.protocol.Module.MIDINote value) {
+        if (midiNoteEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          event_ = value;
+          onChanged();
+        } else {
+          midiNoteEventBuilder_.setMessage(value);
+        }
+        eventCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public Builder setMidiNoteEvent(
+          com.las4vc.composevr.protocol.Module.MIDINote.Builder builderForValue) {
+        if (midiNoteEventBuilder_ == null) {
+          event_ = builderForValue.build();
+          onChanged();
+        } else {
+          midiNoteEventBuilder_.setMessage(builderForValue.build());
+        }
+        eventCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public Builder mergeMidiNoteEvent(com.las4vc.composevr.protocol.Module.MIDINote value) {
+        if (midiNoteEventBuilder_ == null) {
+          if (eventCase_ == 5 &&
+              event_ != com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance()) {
+            event_ = com.las4vc.composevr.protocol.Module.MIDINote.newBuilder((com.las4vc.composevr.protocol.Module.MIDINote) event_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            event_ = value;
+          }
+          onChanged();
+        } else {
+          if (eventCase_ == 5) {
+            midiNoteEventBuilder_.mergeFrom(value);
+          }
+          midiNoteEventBuilder_.setMessage(value);
+        }
+        eventCase_ = 5;
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public Builder clearMidiNoteEvent() {
+        if (midiNoteEventBuilder_ == null) {
+          if (eventCase_ == 5) {
+            eventCase_ = 0;
+            event_ = null;
+            onChanged();
+          }
+        } else {
+          if (eventCase_ == 5) {
+            eventCase_ = 0;
+            event_ = null;
+          }
+          midiNoteEventBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public com.las4vc.composevr.protocol.Module.MIDINote.Builder getMidiNoteEventBuilder() {
+        return getMidiNoteEventFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      public com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder getMidiNoteEventOrBuilder() {
+        if ((eventCase_ == 5) && (midiNoteEventBuilder_ != null)) {
+          return midiNoteEventBuilder_.getMessageOrBuilder();
+        } else {
+          if (eventCase_ == 5) {
+            return (com.las4vc.composevr.protocol.Module.MIDINote) event_;
+          }
+          return com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.ComposeVR.MIDINote midi_note_event = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.las4vc.composevr.protocol.Module.MIDINote, com.las4vc.composevr.protocol.Module.MIDINote.Builder, com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder> 
+          getMidiNoteEventFieldBuilder() {
+        if (midiNoteEventBuilder_ == null) {
+          if (!(eventCase_ == 5)) {
+            event_ = com.las4vc.composevr.protocol.Module.MIDINote.getDefaultInstance();
+          }
+          midiNoteEventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.las4vc.composevr.protocol.Module.MIDINote, com.las4vc.composevr.protocol.Module.MIDINote.Builder, com.las4vc.composevr.protocol.Module.MIDINoteOrBuilder>(
+                  (com.las4vc.composevr.protocol.Module.MIDINote) event_,
+                  getParentForChildren(),
+                  isClean());
+          event_ = null;
+        }
+        eventCase_ = 5;
+        onChanged();;
+        return midiNoteEventBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -5355,15 +5572,16 @@ public final class Protocol {
       "hangedH\000\0226\n\023close_browser_event\030\013 \001(\0132\027." +
       "ComposeVR.CloseBrowserH\000\022H\n\035on_browser_i" +
       "tem_changed_event\030\014 \001(\0132\037.ComposeVR.OnBr" +
-      "owserItemChangedH\000B\007\n\005event\"\355\001\n\013ModuleEv" +
+      "owserItemChangedH\000B\007\n\005event\"\235\002\n\013ModuleEv" +
       "ent\022\022\n\nhandler_id\030\001 \001(\t\0224\n\022open_browser_" +
       "event\030\002 \001(\0132\026.ComposeVR.OpenBrowserH\000\022A\n" +
       "\031create_sound_module_event\030\003 \001(\0132\034.Compo" +
       "seVR.CreateSoundModuleH\000\022H\n\035on_sound_mod" +
       "ule_created_event\030\004 \001(\0132\037.ComposeVR.OnSo" +
-      "undModuleCreatedH\000B\007\n\005eventB>\n\035com.las4v" +
-      "c.composevr.protocolB\010Protocol\252\002\022Compose" +
-      "VR.Protocolb\006proto3"
+      "undModuleCreatedH\000\022.\n\017midi_note_event\030\005 " +
+      "\001(\0132\023.ComposeVR.MIDINoteH\000B\007\n\005eventB>\n\035c" +
+      "om.las4vc.composevr.protocolB\010Protocol\252\002" +
+      "\022ComposeVR.Protocolb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5396,7 +5614,7 @@ public final class Protocol {
     internal_static_ComposeVR_ModuleEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_ModuleEvent_descriptor,
-        new java.lang.String[] { "HandlerId", "OpenBrowserEvent", "CreateSoundModuleEvent", "OnSoundModuleCreatedEvent", "Event", });
+        new java.lang.String[] { "HandlerId", "OpenBrowserEvent", "CreateSoundModuleEvent", "OnSoundModuleCreatedEvent", "MidiNoteEvent", "Event", });
     com.las4vc.composevr.protocol.Module.getDescriptor();
     com.las4vc.composevr.protocol.Browser.getDescriptor();
   }

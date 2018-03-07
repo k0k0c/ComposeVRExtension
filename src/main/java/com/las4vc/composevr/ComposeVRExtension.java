@@ -60,12 +60,10 @@ public class ComposeVRExtension extends ControllerExtension
 
         final String ClientIP = this.configuration.getUDPClientIP();
         final int serverPort = this.configuration.getServerPort();
+        final int udpPort = this.configuration.getUDPPort();
 
         model = new DAWModel(getHost(), valueChanger);
 
-        //Initialize MIDI
-        port = host.getMidiInPort(0);
-        noteInput = port.createNoteInput("ComposeVR Midi");
 
         host.println ("Initializing ComposeVR.");
         host.println("Connecting to udp client at: "+ClientIP);
@@ -74,7 +72,8 @@ public class ComposeVRExtension extends ControllerExtension
         host.println("Server listening on port: "+ serverPort);
         socket.setClientConnectCallback(this::handleConnection);
 
-        host.addDatagramPacketObserver ("ComposeVR UDP Host", serverPort, this::handleDatagram);
+        host.addDatagramPacketObserver ("ComposeVR UDP Host", udpPort, this::handleDatagram);
+        host.println("Listening on UDP port "+udpPort);
 
     }
 
@@ -115,10 +114,14 @@ public class ComposeVRExtension extends ControllerExtension
     {
         try
         {
-            final ControllerHost host = this.getHost();
-            noteInput.sendRawMidiEvent(data[0]+256, data[1], data[2]);
+            ByteArrayInputStream messageStream = new ByteArrayInputStream(data);
 
-            //router.routeMidi(message);
+            try{
+                Protocol.Event msg = Protocol.Event.parseDelimitedFrom(messageStream);
+                model.router.routeEvent(msg);
+            }catch(IOException e){
+                getHost().println(e.getMessage());
+            }
 
             /*if(message.equals("Hello Bitwig")){
                 String reply = new String("Hello Unity");

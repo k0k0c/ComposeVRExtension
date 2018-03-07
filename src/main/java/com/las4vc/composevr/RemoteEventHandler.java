@@ -33,7 +33,7 @@ public class RemoteEventHandler {
 
         Method handlerMethod = methodMap.get(methodName);
 
-        model.host.println("Invoking "+event.getMethodName()+" on "+this.getClass().getName());
+        //model.host.println("Invoking "+event.getMethodName()+" on "+this.getClass().getName());
 
         if(handlerMethod == null){
             try {

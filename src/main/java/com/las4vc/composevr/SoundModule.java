@@ -2,6 +2,7 @@ package com.las4vc.composevr;
 
 import com.bitwig.extension.controller.api.*;
 import com.las4vc.composevr.protocol.*;
+import com.google.protobuf.ByteString;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
 /**
@@ -14,6 +15,7 @@ public class SoundModule extends RemoteEventHandler {
 
     private Track track;
     private String id;
+    private NoteInput input;
 
     public SoundModule(DAWModel model, Module.CreateSoundModule creationEvent){
         super(model);
@@ -27,6 +29,7 @@ public class SoundModule extends RemoteEventHandler {
 
         //Get the track
         this.track = model.mainTrackBank.getChannel(0);
+
 
         //Name the track
         try{
@@ -48,6 +51,18 @@ public class SoundModule extends RemoteEventHandler {
     public void OpenBrowser(Protocol.Event e){
         model.host.println("Opening browser");
         model.browser.openBrowser(this.track, e.getModuleEvent().getOpenBrowserEvent().getDeviceType());
+    }
+
+    public void PlayMIDINote(Protocol.Event e){
+        this.track.getArm().set(true);
+
+        ByteString MIDIData = e.getModuleEvent().getMidiNoteEvent().getMIDI();
+
+        if(MIDIData.byteAt(0) == 0x90){
+            this.track.startNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
+        }else{
+            this.track.stopNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
+        }
     }
 
 }
