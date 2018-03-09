@@ -58,9 +58,11 @@ public class SoundModule extends RemoteEventHandler {
 
         ByteString MIDIData = e.getModuleEvent().getMidiNoteEvent().getMIDI();
 
-        if(MIDIData.byteAt(0) == 0x90){
+        if(MIDIData.byteAt(0) == -112){
+            model.host.println("Note "+MIDIData.byteAt(1)+" on");
             this.track.startNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
         }else{
+            model.host.println("Note "+MIDIData.byteAt(1)+" off");
             this.track.stopNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
         }
     }
