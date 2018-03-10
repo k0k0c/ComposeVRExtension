@@ -1,8 +1,10 @@
 package com.las4vc.composevr;
 
+import com.bitwig.extension.api.opensoundcontrol.OscMessage;
 import com.bitwig.extension.controller.api.*;
 import com.las4vc.composevr.protocol.*;
 import com.google.protobuf.ByteString;
+import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
 /**
@@ -15,7 +17,6 @@ public class SoundModule extends RemoteEventHandler {
 
     private Track track;
     private String id;
-    private NoteInput input;
 
     public SoundModule(DAWModel model, Module.CreateSoundModule creationEvent){
         super(model);
@@ -51,18 +52,30 @@ public class SoundModule extends RemoteEventHandler {
     public void OpenBrowser(Protocol.Event e){
         model.host.println("Opening browser");
         model.browser.openBrowser(this.track, e.getModuleEvent().getOpenBrowserEvent().getDeviceType());
+        this.track.arm().set(true);
+    }
+
+    public void handleOSC(OscMessage msg){
+        String[] splitPath = msg.getAddressPattern().split("/");
+
+        int MIDI = msg.getInt(0);
+        int Note = MIDI & 0xFF;
+        int Velocity = MIDI >> 16;
+
+        if(splitPath[splitPath.length - 1].equals("on")){
+            this.track.startNote(Note, Velocity);
+        }else{
+            this.track.stopNote(Note, Velocity);
+        }
+
     }
 
     public void PlayMIDINote(Protocol.Event e){
-        this.track.getArm().set(true);
-
         ByteString MIDIData = e.getModuleEvent().getMidiNoteEvent().getMIDI();
 
         if(MIDIData.byteAt(0) == -112){
-            model.host.println("Note "+MIDIData.byteAt(1)+" on");
             this.track.startNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
         }else{
-            model.host.println("Note "+MIDIData.byteAt(1)+" off");
             this.track.stopNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
         }
     }

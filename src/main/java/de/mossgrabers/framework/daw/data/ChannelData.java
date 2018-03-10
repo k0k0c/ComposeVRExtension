@@ -44,14 +44,14 @@ public class ChannelData
         channel.exists ().markInterested ();
         channel.name ().markInterested ();
         channel.isActivated ().markInterested ();
-        channel.getMute ().markInterested ();
-        channel.getSolo ().markInterested ();
+        channel.mute().markInterested ();
+        channel.solo().markInterested ();
         channel.color ().markInterested ();
 
         channel.addIsSelectedInEditorObserver (this::handleChannelSelect);
 
-        this.volumeParameter = new ParameterData (channel.getVolume (), maxParameterValue);
-        this.panParameter = new ParameterData (channel.getPan (), maxParameterValue);
+        this.volumeParameter = new ParameterData (channel.volume (), maxParameterValue);
+        this.panParameter = new ParameterData (channel.pan (), maxParameterValue);
 
         channel.addVuMeterObserver (maxParameterValue, -1, true, value -> this.handleVUMeters (maxParameterValue, value));
 

@@ -9,8 +9,9 @@ import com.bitwig.extension.controller.api.*;
 import com.las4vc.composevr.protocol.Protocol;
 import de.mossgrabers.framework.controller.DefaultValueChanger;
 import de.mossgrabers.framework.scale.Scales;
-
 import java.io.ByteArrayInputStream;
+
+import com.bitwig.extension.api.opensoundcontrol.*;
 
 import java.io.IOException;
 
@@ -28,7 +29,6 @@ public class ComposeVRExtension extends ControllerExtension
 
     private DAWModel model;
 
-    private MidiIn port;
     private NoteInput noteInput;
     private int midiChannel = 1;
 
@@ -44,6 +44,7 @@ public class ComposeVRExtension extends ControllerExtension
 
         this.valueChanger = new DefaultValueChanger (128, 1, 0.5);
         this.configuration = new ComposeVRConfiguration(this.valueChanger);
+
     }
 
 
@@ -64,17 +65,29 @@ public class ComposeVRExtension extends ControllerExtension
 
         model = new DAWModel(getHost(), valueChanger);
 
-
         host.println ("Initializing ComposeVR.");
-        host.println("Connecting to udp client at: "+ClientIP);
 
         socket = host.createRemoteConnection("ComposeVR", serverPort);
-        host.println("Server listening on port: "+ serverPort);
+
+        host.println("Creating TCP socket on port: "+ serverPort);
         socket.setClientConnectCallback(this::handleConnection);
 
-        host.addDatagramPacketObserver ("ComposeVR UDP Host", udpPort, this::handleDatagram);
-        host.println("Listening on UDP port "+udpPort);
+        noteInput = host.getMidiInPort(0).createNoteInput("ComposeVR1");
 
+        final OscModule oscModule = host.getOscModule();
+        final OscAddressSpace addressSpace = oscModule.createAddressSpace();
+
+        OscMethodCallback oscCallback = new OscMethodCallback() {
+            @Override
+            public void handle(OscConnection oscConnection, OscMessage oscMessage) {
+                handleOsc(oscConnection, oscMessage);
+            }
+        };
+
+        addressSpace.registerDefaultMethod(oscCallback);
+
+        host.println("Listening for OSC on port "+udpPort);
+        oscModule.createUdpServer(udpPort, addressSpace);
     }
 
     private void handleConnection(RemoteConnection connection){
@@ -110,18 +123,22 @@ public class ComposeVRExtension extends ControllerExtension
     }
 
 
-    private void handleDatagram (final byte [] data)
+    private void handleOsc (final OscConnection source, final OscMessage msg)
     {
+        model.router.routeOSC(msg);
+
         try
         {
-            ByteArrayInputStream messageStream = new ByteArrayInputStream(data);
+            /*ByteArrayInputStream messageStream = new ByteArrayInputStream(data);
 
             try{
                 Protocol.Event msg = Protocol.Event.parseDelimitedFrom(messageStream);
                 model.router.routeEvent(msg);
             }catch(IOException e){
                 getHost().println(e.getMessage());
-            }
+            }*/
+
+            //noteInput.sendRawMidiEvent(status , note, 50);
 
             /*if(message.equals("Hello Bitwig")){
                 String reply = new String("Hello Unity");

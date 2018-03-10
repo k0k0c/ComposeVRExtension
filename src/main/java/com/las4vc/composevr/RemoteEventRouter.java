@@ -1,5 +1,6 @@
 package com.las4vc.composevr;
 
+import com.bitwig.extension.api.opensoundcontrol.OscMessage;
 import com.las4vc.composevr.protocol.Protocol;
 
 import java.io.ByteArrayOutputStream;
@@ -59,6 +60,16 @@ public class RemoteEventRouter {
 
         if(receiver != null){
             receiver.handleEvent(msg);
+        }
+    }
+
+    public void routeOSC(OscMessage msg){
+        String[] splitPath = msg.getAddressPattern().split("/");
+        String handlerID = splitPath[1];
+
+        RemoteEventHandler receiver = handlerDictionary.get(handlerID);
+        if(receiver != null){
+            receiver.handleOSC(msg);
         }
     }
 

@@ -1,4 +1,5 @@
 package com.las4vc.composevr;
+import com.bitwig.extension.api.opensoundcontrol.OscMessage;
 import com.las4vc.composevr.protocol.Protocol;
 
 import java.lang.reflect.Method;
@@ -28,9 +29,43 @@ public class RemoteEventHandler {
      * @param event
      */
     public void handleEvent(Protocol.Event event){
+        Method handlerMethod = getMethodByName(event.getMethodName());
 
-        String methodName = event.getMethodName();
+        try{
+            //Call the method on this object with the supplied params
+            handlerMethod.invoke(this, event);
+        }catch (IllegalArgumentException e) {
+            this.model.host.println("Method invoked via reflection with illegal arguments");
+            this.model.host.println(e.getMessage());
+        }
+        catch (IllegalAccessException e) {
+            this.model.host.println(e.getMessage());
+        }
+        catch (Exception e) {
+            this.model.host.println(e.getMessage());
+        }
+    }
 
+    public void handleOSC(OscMessage msg){
+        String methodName = "handleOSC";
+        Method handlerMethod = getMethodByName(methodName);
+
+        try{
+            //Call the method on this object with the supplied params
+            handlerMethod.invoke(this, msg);
+        }catch (IllegalArgumentException e) {
+            this.model.host.println("Method invoked via reflection with illegal arguments");
+            this.model.host.println(e.getMessage());
+        }
+        catch (IllegalAccessException e) {
+            this.model.host.println(e.getMessage());
+        }
+        catch (Exception e) {
+            this.model.host.println(e.getMessage());
+        }
+    }
+
+    public Method getMethodByName(String methodName){
         Method handlerMethod = methodMap.get(methodName);
 
         //model.host.println("Invoking "+event.getMethodName()+" on "+this.getClass().getName());
@@ -50,20 +85,7 @@ public class RemoteEventHandler {
             }
         }
 
-        try{
-            //Call the method on this object with the supplied params
-            handlerMethod.invoke(this, event);
-        }catch (IllegalArgumentException e) {
-            this.model.host.println("Method invoked via reflection with illegal arguments");
-            this.model.host.println(e.getMessage());
-        }
-        catch (IllegalAccessException e) {
-            this.model.host.println(e.getMessage());
-        }
-        catch (Exception e) {
-            this.model.host.println(e.getMessage());
-        }
-
+        return handlerMethod;
     }
 
 }

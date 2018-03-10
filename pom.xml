@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.bitwig</groupId>
 			<artifactId>extension-api</artifactId>
-			<version>2</version>
+			<version>5</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
