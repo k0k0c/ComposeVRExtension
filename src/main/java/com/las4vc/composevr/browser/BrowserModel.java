@@ -50,9 +50,9 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
                 browser.browserPage = 0;
 
-                //Move the cursorTrack to the desired track
+                //Move the mainCursorTrack to the desired track
                 browser.model.addTrackSelectionChangeListener(browser);
-                browser.model.cursorTrack.selectChannel(browser.selectedTrack);
+                browser.model.mainCursorTrack.selectChannel(browser.selectedTrack);
                 return SELECTING_TRACK;
             }
         },
@@ -121,7 +121,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         super(model);
         model.router.addReceiver(this, "browser");
 
-        browserProxy = new BrowserProxy(model.host, model.cursorTrack, model.cursorDeviceProxy, 15, 15);
+        browserProxy = new BrowserProxy(model.host, model.mainCursorTrack, model.cursorDeviceProxy, 15, 15);
         browserProxy.enableObservers(true);
 
         setUpBrowserToggleCallback();

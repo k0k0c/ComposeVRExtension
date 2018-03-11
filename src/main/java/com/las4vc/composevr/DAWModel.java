@@ -10,7 +10,10 @@ import com.bitwig.extension.controller.api.*;
 import de.mossgrabers.framework.controller.DefaultValueChanger;
 import de.mossgrabers.framework.daw.CursorDeviceProxy;
 
-
+class TrackReference{
+    public CursorTrack cursorTrack;
+    public boolean used = false;
+}
 
 /**
  * The DAWModel is a collection of objects that can be used to manipulate the DAW, access its information, and emit remote events.
@@ -25,7 +28,11 @@ public class DAWModel {
     public RemoteEventRouter router;
     public TrackBank mainTrackBank;
 
-    public CursorTrack cursorTrack;
+    public CursorTrack mainCursorTrack;
+
+    public ArrayList<TrackReference> tracks;
+    public final int numCursorTracks = 64;
+
     public CursorDevice cursorDevice;
     public CursorDeviceProxy cursorDeviceProxy;
 
@@ -51,7 +58,7 @@ public class DAWModel {
         mainTrackBank = host.createMainTrackBank(64, 8, 64);
         mainTrackBank.scrollToChannel(0);
 
-        cursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor", "Primary", 1, 1, false);
+            mainCursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor", "Primary", 1, 1, false);
 
         StringValueChangedCallback trackSelectionChangedCallback = new StringValueChangedCallback() {
             @Override
@@ -59,15 +66,26 @@ public class DAWModel {
                 handleTrackSelectionChange();
             }
         };
-        cursorTrack.name().addValueObserver(trackSelectionChangedCallback);
+            mainCursorTrack.name().addValueObserver(trackSelectionChangedCallback);
 
-        cursorDevice = cursorTrack.createCursorDevice("ComposeVRPrimaryDeviceCursor", "Primary", 1, CursorDeviceFollowMode.FIRST_DEVICE);
+        cursorDevice =
+            mainCursorTrack.createCursorDevice("ComposeVRPrimaryDeviceCursor", "Primary", 1, CursorDeviceFollowMode.FIRST_DEVICE);
         cursorDeviceProxy = new CursorDeviceProxy(host, cursorDevice, valueChanger, 1, 1, 1, 1, 1);
 
         browser = new BrowserModel(this);
 
         //Initialize MIDI
         midiInput = host.getMidiInPort(0);
+
+        //Create cursor tracks to store references to tracks
+        tracks = new ArrayList<TrackReference>();
+        for(int i = 0; i < numCursorTracks; i++){
+            TrackReference ref = new TrackReference();
+            ref.used = false;
+            ref.cursorTrack = host.createCursorTrack(0, 0);
+            ref.cursorTrack.isPinned().markInterested();
+            tracks.add(ref);
+        }
 
     }
 
@@ -109,6 +127,16 @@ public class DAWModel {
         numTracks += 1;
 
         return trackPosition;
+    }
+
+    public TrackReference getTrackReference(){
+        for(int i = 0; i < numCursorTracks; i++){
+            if(!tracks.get(i).used){
+                host.println("Getting track ref "+i);
+                return tracks.get(i);
+            }
+        }
+        return null;
     }
 
 }

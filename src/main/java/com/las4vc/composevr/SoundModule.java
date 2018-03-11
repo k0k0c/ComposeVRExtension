@@ -7,6 +7,7 @@ import com.las4vc.composevr.protocol.*;
 import com.google.protobuf.ByteString;
 import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import java.util.HashMap;
 
 /**
  * A SoundModule contains a reference to a track, an instrument, and a number of device modules
@@ -20,12 +21,14 @@ public class SoundModule extends RemoteEventHandler {
     private CursorDevice cursorDevice;
     private String id;
     private int trackPosition;
+    private HashMap<Integer, Integer> playingNotes;
 
     public SoundModule(DAWModel model, Module.CreateSoundModule creationEvent){
         super(model);
         this.id = creationEvent.getSenderId();
 
-        trackPosition = model.createNewInstrumentTrack();
+
+        int trackPosition = model.createNewInstrumentTrack();
 
         //Get the track
         this.track = model.mainTrackBank.getChannel(trackPosition);
@@ -42,6 +45,8 @@ public class SoundModule extends RemoteEventHandler {
         }catch(NullPointerException e){
             model.host.println("Sound module could not create new track");
         }
+
+        playingNotes = new HashMap<>();
     }
 
     /**
@@ -60,20 +65,26 @@ public class SoundModule extends RemoteEventHandler {
         int Note = MIDI & 0xFF;
         int Velocity = MIDI >> 16;
 
+
         if(splitPath[splitPath.length - 1].equals("on")){
+            //If the note is already playing, stop it before restarting
+            if(playingNotes.containsKey(Note)){
+                track.stopNote(Note, Velocity);
+                playingNotes.put(Note, playingNotes.get(Note).intValue() + 1);
+            }else{
+                playingNotes.put(Note, 1);
+            }
+
             track.startNote(Note, Velocity);
         }else{
-            track.stopNote(Note, Velocity);
-        }
-    }
-
-    public void PlayMIDINote(Protocol.Event e){
-        ByteString MIDIData = e.getModuleEvent().getMidiNoteEvent().getMIDI();
-
-        if(MIDIData.byteAt(0) == -112){
-            this.track.startNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
-        }else{
-            this.track.stopNote(MIDIData.byteAt(1), MIDIData.byteAt(2));
+            if(playingNotes.containsKey(Note)) {
+                if (playingNotes.get(Note) <= 1) {
+                    track.stopNote(Note, Velocity);
+                    playingNotes.remove(Note);
+                } else {
+                    playingNotes.put(Note, playingNotes.get(Note).intValue() - 1);
+                }
+            }
         }
     }
 
