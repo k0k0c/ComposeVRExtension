@@ -66,6 +66,7 @@ public class RemoteEventRouter {
     public void routeOSC(OscMessage msg){
         String[] splitPath = msg.getAddressPattern().split("/");
         String handlerID = splitPath[1];
+        host.println(handlerID);
 
         RemoteEventHandler receiver = handlerDictionary.get(handlerID);
         if(receiver != null){
