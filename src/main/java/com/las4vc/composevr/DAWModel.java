@@ -46,6 +46,8 @@ public class DAWModel {
     private DefaultValueChanger valueChanger;
     private int numTracks;
 
+    private final int MAX_TRACKS = 64;
+
     public DAWModel(ControllerHost host, DefaultValueChanger valueChanger) {
         this.host = host;
         this.valueChanger = valueChanger;
@@ -55,10 +57,15 @@ public class DAWModel {
 
         app = host.createApplication();
         router = new RemoteEventRouter(host);
-        mainTrackBank = host.createMainTrackBank(64, 8, 64);
+        mainTrackBank = host.createMainTrackBank(MAX_TRACKS, 8, MAX_TRACKS);
         mainTrackBank.scrollToChannel(0);
+        mainTrackBank.channelCount().markInterested();
 
-            mainCursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor", "Primary", 1, 1, false);
+        for(int i = 0; i < MAX_TRACKS; i++){
+            mainTrackBank.getChannel(i).volume().markInterested();
+        }
+
+        mainCursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor", "Primary", 1, 1, false);
 
         StringValueChangedCallback trackSelectionChangedCallback = new StringValueChangedCallback() {
             @Override

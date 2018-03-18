@@ -7,7 +7,7 @@ import com.las4vc.composevr.protocol.*;
 import com.google.protobuf.ByteString;
 import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import com.sun.org.apache.xpath.internal.operations.Mod;
-import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * A SoundModule contains a reference to a track, an instrument, and a number of device modules
@@ -21,12 +21,11 @@ public class SoundModule extends RemoteEventHandler {
     private CursorDevice cursorDevice;
     private String id;
     private int trackPosition;
-    private HashMap<Integer, Integer> playingNotes;
+    private HashSet<Integer> playingNotes;
 
     public SoundModule(DAWModel model, Module.CreateSoundModule creationEvent){
         super(model);
         this.id = creationEvent.getSenderId();
-
 
         int trackPosition = model.createNewInstrumentTrack();
 
@@ -46,7 +45,7 @@ public class SoundModule extends RemoteEventHandler {
             model.host.println("Sound module could not create new track");
         }
 
-        playingNotes = new HashMap<>();
+        playingNotes = new HashSet<>();
     }
 
     /**
@@ -61,31 +60,44 @@ public class SoundModule extends RemoteEventHandler {
     public void handleOSC(OscMessage msg){
         String[] splitPath = msg.getAddressPattern().split("/");
 
+        if(splitPath.length > 2){
+            String localDest = splitPath[2];
+
+            if(localDest.equals("note")){
+                handleNoteMessage(msg, splitPath[3]);
+            }else if(localDest.equals("trackParam")){
+                handleTrackParamChange(msg, splitPath[3]);
+            }
+        }
+
+    }
+
+    private void handleNoteMessage(OscMessage msg, String type){
         int MIDI = msg.getInt(0);
         int Note = MIDI & 0xFF;
         int Velocity = MIDI >> 16;
 
-
-        if(splitPath[splitPath.length - 1].equals("on")){
+        if(type.equals("on")){
             //If the note is already playing, stop it before restarting
-            if(playingNotes.containsKey(Note)){
+            if(playingNotes.contains(Note)){
                 track.stopNote(Note, Velocity);
-                playingNotes.put(Note, playingNotes.get(Note).intValue() + 1);
             }else{
-                playingNotes.put(Note, 1);
+                playingNotes.add(Note);
             }
 
             track.startNote(Note, Velocity);
-        }else{
-            if(playingNotes.containsKey(Note)) {
-                if (playingNotes.get(Note) <= 1) {
-                    track.stopNote(Note, Velocity);
-                    playingNotes.remove(Note);
-                } else {
-                    playingNotes.put(Note, playingNotes.get(Note).intValue() - 1);
-                }
+        }else if(type.equals("off")){
+            track.stopNote(Note, Velocity);
+            if(playingNotes.contains(Note)) {
+                playingNotes.remove(Note);
             }
         }
+    }
+
+    private void handleTrackParamChange(OscMessage msg, String paramName){
+       if(paramName.equals("volume")){
+          track.volume().set(msg.getFloat(0));
+       }
     }
 
 }
