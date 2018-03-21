@@ -53,7 +53,7 @@ public class SoundModule extends RemoteEventHandler {
      */
     public void OpenBrowser(Protocol.Event e){
         model.host.println("Opening browser");
-        model.browser.openBrowser(this.track, e.getModuleEvent().getOpenBrowserEvent().getDeviceType());
+        model.browser.openBrowser(trackPosition, e.getModuleEvent().getOpenBrowserEvent());
         this.track.arm().set(true);
     }
 

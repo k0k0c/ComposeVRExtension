@@ -26,7 +26,9 @@ public class DAWModel {
     public ControllerHost host;
     public Application app;
     public RemoteEventRouter router;
+
     public TrackBank mainTrackBank;
+    public CursorDevice[] mainCursorDevices;
 
     public CursorTrack mainCursorTrack;
 
@@ -61,11 +63,19 @@ public class DAWModel {
         mainTrackBank.scrollToChannel(0);
         mainTrackBank.channelCount().markInterested();
 
+        mainCursorDevices = new CursorDevice[MAX_TRACKS];
+
         for(int i = 0; i < MAX_TRACKS; i++){
             mainTrackBank.getChannel(i).volume().markInterested();
+            mainTrackBank.getChannel(i).position().markInterested();
+            mainCursorDevices[i] = mainTrackBank.getChannel(i).createCursorDevice();
+            mainCursorDevices[i].name().markInterested();
+            mainCursorDevices[i].exists().markInterested();
+            mainCursorDevices[i].position().markInterested();
         }
 
         mainCursorTrack = host.createCursorTrack("ComposeVRPrimaryTrackCursor", "Primary", 1, 1, false);
+        mainCursorTrack.position().markInterested();
 
         StringValueChangedCallback trackSelectionChangedCallback = new StringValueChangedCallback() {
             @Override
@@ -75,8 +85,7 @@ public class DAWModel {
         };
             mainCursorTrack.name().addValueObserver(trackSelectionChangedCallback);
 
-        cursorDevice =
-            mainCursorTrack.createCursorDevice("ComposeVRPrimaryDeviceCursor", "Primary", 1, CursorDeviceFollowMode.FIRST_DEVICE);
+        cursorDevice = mainCursorTrack.createCursorDevice("ComposeVRPrimaryDeviceCursor", "Primary", 1, CursorDeviceFollowMode.FIRST_DEVICE);
         cursorDeviceProxy = new CursorDeviceProxy(host, cursorDevice, valueChanger, 1, 1, 1, 1, 1);
 
         browser = new BrowserModel(this);

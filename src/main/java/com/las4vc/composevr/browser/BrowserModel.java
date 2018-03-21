@@ -9,6 +9,7 @@ import com.bitwig.extension.callback.StringValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
 import com.las4vc.composevr.protocol.Browser;
+import com.las4vc.composevr.protocol.Module;
 import com.las4vc.composevr.protocol.Protocol;
 import de.mossgrabers.framework.daw.BrowserProxy;
 import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
@@ -22,16 +23,18 @@ import de.mossgrabers.framework.daw.data.BrowserColumnItemData;
 public class BrowserModel extends RemoteEventHandler implements TrackSelectionChangeEvent {
 
     public BrowserProxy browserProxy;
+    public BrowserFilterModel filterModel;
     public BrowserColumnItemData[] browserResults;
-    public Track selectedTrack;
-    public int browserPage = 0;
 
+    public Track selectedTrack;
+    public CursorDevice cursorDevice;
+    public int browserPage = 0;
+    public boolean browseToReplace = false;
 
     private int selectionIndex = -1;
     private int pageChange = 0;
     private int scrollOffset = 0;
     private String deviceToFind = "";
-    public BrowserFilterModel filterModel;
 
     private enum Event {
         TRACK_SELECTION_CHANGE, BROWSER_ACTIVE_CHANGE, BROWSER_RESULTS_CHANGE, OPEN_REQUEST, CLOSE_REQUEST
@@ -42,7 +45,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             @Override
             State next(BrowserModel browser, Event e){
                 if(e != Event.OPEN_REQUEST){
-                    browser.model.host.println(e.toString());
                     return CLOSED;
                 }
 
@@ -50,33 +52,21 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
                 browser.browserPage = 0;
 
-                //Move the mainCursorTrack to the desired track
-                browser.model.addTrackSelectionChangeListener(browser);
-                browser.model.mainCursorTrack.selectChannel(browser.selectedTrack);
-                return SELECTING_TRACK;
-            }
-        },
-        SELECTING_TRACK{
-            @Override
-            State next(BrowserModel browser, Event e){
-                if(e == Event.CLOSE_REQUEST){
-                    if(browser.browserProxy.isActive()) {
-                        browser.browserProxy.stopBrowsing(false);
+                if(browser.browseToReplace){
+                    if(browser.cursorDevice.exists().get()){
+                        browser.cursorDevice.browseToReplaceDevice();
+                    }else{
+                        browser.selectedTrack.browseToInsertAtStartOfChain();
                     }
-                    return CLOSED;
+                }else{
+                    if(browser.cursorDevice.exists().get()){
+                        browser.cursorDevice.browseToInsertBeforeDevice();
+                    }else{
+                        browser.selectedTrack.browseToInsertAtStartOfChain();
+                    }
                 }
 
-                if(e != Event.TRACK_SELECTION_CHANGE){
-                    return SELECTING_TRACK;
-                }
-
-                browser.model.host.println("Opening browser");
-
-                //Selected track is now the desired track. Begin browsing
-                browser.browserProxy.browseToInsertBeforeDevice();
-                browser.model.removeTrackSelectionChangeListener(browser);
-
-                return State.LOADING_INITIAL_RESULTS;
+                return LOADING_INITIAL_RESULTS;
             }
         },
         LOADING_INITIAL_RESULTS{
@@ -192,13 +182,23 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
      * Opens the browser on a track
      * @param t The track to browse on
      */
-    public void openBrowser(Track t, String contentType){
-        this.selectedTrack = t;
-        filterModel.targetDeviceType = contentType;
+    public void openBrowser(int trackPosition, Module.OpenBrowser event){
+        selectedTrack = model.mainTrackBank.getChannel(trackPosition);
+
+        cursorDevice = model.mainCursorDevices[trackPosition];
+        cursorDevice.selectFirstInChannel(selectedTrack);
+        for(int i = 0; i < event.getDeviceIndex(); i++){
+            cursorDevice.selectNext();
+        }
+
+        model.host.println(cursorDevice.name().get()+" exists? "+cursorDevice.exists().get());
+
+        filterModel.targetDeviceType = event.getDeviceType();
+        filterModel.targetContentType = event.getContentType();
+        browseToReplace = event.getReplaceDevice();
 
         currentState = State.CLOSED;
         currentState = currentState.next(this, Event.OPEN_REQUEST);
-
     }
 
     /**

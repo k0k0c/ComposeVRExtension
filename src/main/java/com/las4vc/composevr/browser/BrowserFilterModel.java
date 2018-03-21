@@ -22,6 +22,7 @@ public class BrowserFilterModel extends RemoteEventHandler {
 
     private DAWModel model;
     public String targetDeviceType;
+    public String targetContentType;
 
     public BrowserFilterModel(DAWModel model, BrowserProxy browserProxy){
         super(model);

@@ -939,6 +939,26 @@ public final class Module {
      */
     com.google.protobuf.ByteString
         getDeviceTypeBytes();
+
+    /**
+     * <code>string content_type = 3;</code>
+     */
+    java.lang.String getContentType();
+    /**
+     * <code>string content_type = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentTypeBytes();
+
+    /**
+     * <code>int32 device_index = 4;</code>
+     */
+    int getDeviceIndex();
+
+    /**
+     * <code>bool replace_device = 5;</code>
+     */
+    boolean getReplaceDevice();
   }
   /**
    * Protobuf type {@code ComposeVR.OpenBrowser}
@@ -954,6 +974,9 @@ public final class Module {
     }
     private OpenBrowser() {
       deviceType_ = "";
+      contentType_ = "";
+      deviceIndex_ = 0;
+      replaceDevice_ = false;
     }
 
     @java.lang.Override
@@ -991,6 +1014,22 @@ public final class Module {
               java.lang.String s = input.readStringRequireUtf8();
 
               deviceType_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              contentType_ = s;
+              break;
+            }
+            case 32: {
+
+              deviceIndex_ = input.readInt32();
+              break;
+            }
+            case 40: {
+
+              replaceDevice_ = input.readBool();
               break;
             }
           }
@@ -1051,6 +1090,58 @@ public final class Module {
       }
     }
 
+    public static final int CONTENT_TYPE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object contentType_;
+    /**
+     * <code>string content_type = 3;</code>
+     */
+    public java.lang.String getContentType() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        contentType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string content_type = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentTypeBytes() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        contentType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DEVICE_INDEX_FIELD_NUMBER = 4;
+    private int deviceIndex_;
+    /**
+     * <code>int32 device_index = 4;</code>
+     */
+    public int getDeviceIndex() {
+      return deviceIndex_;
+    }
+
+    public static final int REPLACE_DEVICE_FIELD_NUMBER = 5;
+    private boolean replaceDevice_;
+    /**
+     * <code>bool replace_device = 5;</code>
+     */
+    public boolean getReplaceDevice() {
+      return replaceDevice_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1066,6 +1157,15 @@ public final class Module {
       if (!getDeviceTypeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deviceType_);
       }
+      if (!getContentTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, contentType_);
+      }
+      if (deviceIndex_ != 0) {
+        output.writeInt32(4, deviceIndex_);
+      }
+      if (replaceDevice_ != false) {
+        output.writeBool(5, replaceDevice_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1076,6 +1176,17 @@ public final class Module {
       size = 0;
       if (!getDeviceTypeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deviceType_);
+      }
+      if (!getContentTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, contentType_);
+      }
+      if (deviceIndex_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, deviceIndex_);
+      }
+      if (replaceDevice_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, replaceDevice_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1095,6 +1206,12 @@ public final class Module {
       boolean result = true;
       result = result && getDeviceType()
           .equals(other.getDeviceType());
+      result = result && getContentType()
+          .equals(other.getContentType());
+      result = result && (getDeviceIndex()
+          == other.getDeviceIndex());
+      result = result && (getReplaceDevice()
+          == other.getReplaceDevice());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1108,6 +1225,13 @@ public final class Module {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DEVICE_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getDeviceType().hashCode();
+      hash = (37 * hash) + CONTENT_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getContentType().hashCode();
+      hash = (37 * hash) + DEVICE_INDEX_FIELD_NUMBER;
+      hash = (53 * hash) + getDeviceIndex();
+      hash = (37 * hash) + REPLACE_DEVICE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getReplaceDevice());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1239,6 +1363,12 @@ public final class Module {
         super.clear();
         deviceType_ = "";
 
+        contentType_ = "";
+
+        deviceIndex_ = 0;
+
+        replaceDevice_ = false;
+
         return this;
       }
 
@@ -1262,6 +1392,9 @@ public final class Module {
       public com.las4vc.composevr.protocol.Module.OpenBrowser buildPartial() {
         com.las4vc.composevr.protocol.Module.OpenBrowser result = new com.las4vc.composevr.protocol.Module.OpenBrowser(this);
         result.deviceType_ = deviceType_;
+        result.contentType_ = contentType_;
+        result.deviceIndex_ = deviceIndex_;
+        result.replaceDevice_ = replaceDevice_;
         onBuilt();
         return result;
       }
@@ -1306,6 +1439,16 @@ public final class Module {
         if (!other.getDeviceType().isEmpty()) {
           deviceType_ = other.deviceType_;
           onChanged();
+        }
+        if (!other.getContentType().isEmpty()) {
+          contentType_ = other.contentType_;
+          onChanged();
+        }
+        if (other.getDeviceIndex() != 0) {
+          setDeviceIndex(other.getDeviceIndex());
+        }
+        if (other.getReplaceDevice() != false) {
+          setReplaceDevice(other.getReplaceDevice());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1399,6 +1542,127 @@ public final class Module {
   checkByteStringIsUtf8(value);
         
         deviceType_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object contentType_ = "";
+      /**
+       * <code>string content_type = 3;</code>
+       */
+      public java.lang.String getContentType() {
+        java.lang.Object ref = contentType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          contentType_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string content_type = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentTypeBytes() {
+        java.lang.Object ref = contentType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          contentType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string content_type = 3;</code>
+       */
+      public Builder setContentType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        contentType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string content_type = 3;</code>
+       */
+      public Builder clearContentType() {
+        
+        contentType_ = getDefaultInstance().getContentType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string content_type = 3;</code>
+       */
+      public Builder setContentTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        contentType_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int deviceIndex_ ;
+      /**
+       * <code>int32 device_index = 4;</code>
+       */
+      public int getDeviceIndex() {
+        return deviceIndex_;
+      }
+      /**
+       * <code>int32 device_index = 4;</code>
+       */
+      public Builder setDeviceIndex(int value) {
+        
+        deviceIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 device_index = 4;</code>
+       */
+      public Builder clearDeviceIndex() {
+        
+        deviceIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean replaceDevice_ ;
+      /**
+       * <code>bool replace_device = 5;</code>
+       */
+      public boolean getReplaceDevice() {
+        return replaceDevice_;
+      }
+      /**
+       * <code>bool replace_device = 5;</code>
+       */
+      public Builder setReplaceDevice(boolean value) {
+        
+        replaceDevice_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool replace_device = 5;</code>
+       */
+      public Builder clearReplaceDevice() {
+        
+        replaceDevice_ = false;
         onChanged();
         return this;
       }
@@ -1936,10 +2200,12 @@ public final class Module {
     java.lang.String[] descriptorData = {
       "\n\014Module.proto\022\tComposeVR\"&\n\021CreateSound" +
       "Module\022\021\n\tsender_id\030\001 \001(\t\"\026\n\024OnSoundModu" +
-      "leCreated\"\"\n\013OpenBrowser\022\023\n\013device_type\030" +
-      "\002 \001(\t\"\030\n\010MIDINote\022\014\n\004MIDI\030\001 \001(\014B;\n\035com.l" +
-      "as4vc.composevr.protocol\252\002\031ComposeVR.Pro" +
-      "tocol.Moduleb\006proto3"
+      "leCreated\"f\n\013OpenBrowser\022\023\n\013device_type\030" +
+      "\002 \001(\t\022\024\n\014content_type\030\003 \001(\t\022\024\n\014device_in" +
+      "dex\030\004 \001(\005\022\026\n\016replace_device\030\005 \001(\010\"\030\n\010MID" +
+      "INote\022\014\n\004MIDI\030\001 \001(\014B;\n\035com.las4vc.compos" +
+      "evr.protocol\252\002\031ComposeVR.Protocol.Module" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1970,7 +2236,7 @@ public final class Module {
     internal_static_ComposeVR_OpenBrowser_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ComposeVR_OpenBrowser_descriptor,
-        new java.lang.String[] { "DeviceType", });
+        new java.lang.String[] { "DeviceType", "ContentType", "DeviceIndex", "ReplaceDevice", });
     internal_static_ComposeVR_MIDINote_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_ComposeVR_MIDINote_fieldAccessorTable = new
