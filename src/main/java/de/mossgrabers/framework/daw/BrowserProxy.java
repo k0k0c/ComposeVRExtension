@@ -20,7 +20,7 @@ public class BrowserProxy
 {
     private CursorTrack              cursorTrack;
     private CursorDeviceProxy        cursorDevice;
-    private PopupBrowser             browser;
+    public PopupBrowser             browser;
 
     final BrowserFilterColumn []     filterColumns;
     final BrowserColumnData []       columnData;
@@ -57,8 +57,7 @@ public class BrowserProxy
         this.browser.selectedContentTypeName ().markInterested ();
         this.browser.contentTypeNames ().markInterested ();
 
-        this.filterColumns = new BrowserFilterColumn []
-        {
+        this.filterColumns = new BrowserFilterColumn []{
             this.browser.smartCollectionColumn (),
             this.browser.locationColumn (),
             this.browser.fileTypeColumn (),
@@ -241,11 +240,10 @@ public class BrowserProxy
         return this.browser.exists ().get ();
     }
 
-
     /**
      * Reset a filter to the default (all) value.
      *
-     * @param column The index of the column to reset
+     * @param column The index of the column to resetSelector
      */
     public void resetFilterColumn (final int column)
     {
@@ -255,7 +253,6 @@ public class BrowserProxy
     public void selectFilterItem(final int column, int pos){
         this.columnData[column].setScrollPosition(pos);
     }
-
 
     /**
      * Get a filter column.
@@ -270,15 +267,13 @@ public class BrowserProxy
 
     public int getFilterColumnIndex(String name, DAWModel model){
 
-        for(int i = 0; i < filterColumns.length; i++){
-            //model.host.println(filterColumns[i].name().get());
-            if(filterColumns[i].name().get().equals(name)){
+        for(int i = 0; i < getFilterColumnNames().length; i++){
+            if(getFilterColumnNames()[i].equals(name)){
                 return i;
             }
         }
         return -1;
     }
-
 
     /**
      * Get the number of filter columns.
@@ -371,7 +366,6 @@ public class BrowserProxy
         return this.columnData[columnIndex].getCursorIndex ();
     }
 
-
     /**
      * Set the index of the select filter item of a column.
      *
@@ -383,7 +377,6 @@ public class BrowserProxy
         this.columnData[columnIndex].setCursorIndex (index);
     }
 
-
     /**
      * Select the previous results item.
      */
@@ -391,7 +384,6 @@ public class BrowserProxy
     {
         this.cursorResult.selectPrevious ();
     }
-
 
     /**
      * Select the next results item.
@@ -419,7 +411,6 @@ public class BrowserProxy
         return this.cursorResult.name ().get ();
     }
 
-
     /**
      * Get the index of the selected result item.
      *
@@ -435,7 +426,6 @@ public class BrowserProxy
         return -1;
     }
 
-
     /**
      * Select the previous result page.
      */
@@ -449,6 +439,9 @@ public class BrowserProxy
         this.resultsItemBank.scrollPosition().set(i);
     }
 
+    public void selectResultAt(int i){
+        this.resultsItemBank.getItemAt(i).isSelected().set(true);
+    }
 
     /**
      * Select the next result page.

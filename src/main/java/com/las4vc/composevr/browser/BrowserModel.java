@@ -33,8 +33,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
     private int selectionIndex = -1;
     private int pageChange = 0;
-    private int scrollOffset = 0;
-    private String deviceToFind = "";
 
     private enum Event {
         TRACK_SELECTION_CHANGE, BROWSER_ACTIVE_CHANGE, BROWSER_RESULTS_CHANGE, OPEN_REQUEST, CLOSE_REQUEST
@@ -51,6 +49,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
                 browser.model.host.println("Selecting track");
 
                 browser.browserPage = 0;
+                browser.browserProxy.stopBrowsing(false);
 
                 if(browser.browseToReplace){
                     if(browser.cursorDevice.exists().get()){
@@ -66,6 +65,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
                     }
                 }
 
+                browser.model.host.println("Loading initial");
                 return LOADING_INITIAL_RESULTS;
             }
         },
@@ -80,7 +80,9 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
                     return CLOSED;
                 }
 
-                if(browser.browserProxy.getNumTotalResults() == 0 || !browser.filterModel.getCurrentDeviceType().equals(browser.filterModel.targetDeviceType)){
+
+                if(browser.browserProxy.getNumTotalResults() == 0 || !browser.filterModel.autoFiltersSet()){
+                    browser.filterModel.setTargetContentType();
                     return LOADING_INITIAL_RESULTS;
                 }
 
@@ -90,7 +92,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         LOADING_RESULTS{
             @Override
             State next(BrowserModel browser, Event e){
-
                 if(e == Event.CLOSE_REQUEST) {
                     if(browser.browserProxy.isActive()) {
                         browser.browserProxy.stopBrowsing(false);
@@ -180,7 +181,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
     /**
      * Opens the browser on a track
-     * @param t The track to browse on
      */
     public void openBrowser(int trackPosition, Module.OpenBrowser event){
         selectedTrack = model.mainTrackBank.getChannel(trackPosition);
@@ -191,70 +191,17 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
             cursorDevice.selectNext();
         }
 
-        model.host.println(cursorDevice.name().get()+" exists? "+cursorDevice.exists().get());
-
-        filterModel.targetDeviceType = event.getDeviceType();
         filterModel.targetContentType = event.getContentType();
+
         browseToReplace = event.getReplaceDevice();
+        if(browseToReplace){
+            filterModel.selectDevice(cursorDevice.name().get());
+        }
+
+        filterModel.selectDeviceType(event.getDeviceType());
 
         currentState = State.CLOSED;
         currentState = currentState.next(this, Event.OPEN_REQUEST);
-    }
-
-    /**
-     * Sets cursor to point at the first item for the results column and every filter column
-     */
-    private void resetBrowser(){
-        browserProxy.setResultsScrollPosition(0);
-        browserProxy.selectFirstResult();
-
-        for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
-            if(!browserProxy.getFilterColumn(i).getName().equals("Device Type")) {
-                browserProxy.getFilterColumn(i).selectFirst();
-            }
-        }
-    }
-
-    /**
-     * Finds the device with the same name as deviceToFind
-     */
-    private void findDevice(){
-        BrowserColumnItemData[] pageResults = browserProxy.getResultColumnItems();
-
-        boolean foundDevice = false;
-
-        for (int i = 0; i < pageResults.length; i++) {
-
-            String currentDevice = pageResults[i].getName();
-
-            if (currentDevice.equals("")) {
-                if (browserPage > 1) {
-                    //Can't find device
-                    deviceToFind = "";
-
-                    //Notify client
-                    RemoteEventEmitter.OnDeviceNotFound(model);
-                }
-                break;
-            }
-
-            if (currentDevice.equals(deviceToFind)) {
-                selectionIndex = pageResults[i].getIndex();
-
-                if (browserPage > 0) {
-                    selectionIndex += browserProxy.getResultsScrollPosition();
-                }
-
-                deviceToFind = "";
-                foundDevice = true;
-                break;
-            }
-        }
-
-        if(!foundDevice && !deviceToFind.equals("")){
-            browserPage += 1;
-            browserProxy.nextResultPage();
-        }
     }
 
     /**
@@ -276,11 +223,30 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
         selectionIndex = -1;
 
+        browserProxy.selectCurrentResult();
+
         //Load the selected device and stop browsing
         browserProxy.stopBrowsing(true);
 
-        //Send confirmation to client
-        RemoteEventEmitter.OnDeviceLoaded(model);
+    }
+
+    private void selectResult(){
+        int currentIndex = browserProxy.getSelectedResultIndex();
+
+        //Navigate to the supplied index
+        while (currentIndex != selectionIndex) {
+            if (currentIndex < selectionIndex) {
+                currentIndex++;
+                browserProxy.selectNextResult();
+            } else {
+                currentIndex--;
+                browserProxy.selectPreviousResult();
+            }
+        }
+
+        selectionIndex = -1;
+
+        browserProxy.selectCurrentResult();
     }
 
     /* Local event handlers */
@@ -300,7 +266,7 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
     }
 
     private void onNumResultsChanged(int numResults){
-        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults, filterModel.getCurrentDeviceType());
+        RemoteEventEmitter.OnBrowserColumnChanged(model, "Results", browserProxy.getNumResultsPerPage(), numResults, filterModel.getSelectedFilter("Device Type"));
     }
 
     /**
@@ -311,22 +277,12 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
 
         currentState = currentState.next(this, Event.BROWSER_RESULTS_CHANGE);
 
-        if(currentState == State.LOADING_INITIAL_RESULTS){
-            filterModel.setDeviceType();
-        }
-
         if(pageChange != 0){
             changeResultsPage();
         }
 
         //Clamp page index
         browserPage = Math.max(0, browserPage);
-
-
-        //Handle request by name
-        if(!deviceToFind.equals("")){
-            findDevice();
-        }
 
         //Handle load request
         if(selectionIndex != -1){
@@ -371,14 +327,8 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
      */
     public void ChangeResultsPage(Protocol.Event e){
         Browser.ChangeResultsPage params = e.getBrowserEvent().getChangeResultsPageEvent();
+        pageChange += params.getPageChange();
 
-        //Just check if the state is LOADING RESULT when the request is received
-        //Open browser, browser active change, browser results change-> state transition
-        if(currentState == State.LOADING_RESULTS){
-            pageChange += params.getPageChange();
-        }
-
-        model.host.println("Trying to change page");
         changeResultsPage();
     }
 
@@ -392,8 +342,29 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
         int deviceIndex = params.getIndex();
 
         if(deviceIndex != -1){
-            selectionIndex = deviceIndex + browserProxy.getResultsScrollPosition() + scrollOffset;
+            selectionIndex = deviceIndex;
             loadDevice();
+        }
+    }
+
+    public void SelectResult(Protocol.Event e){
+        Browser.SelectResult params = e.getBrowserEvent().getSelectResultEvent();
+
+        int deviceIndex = params.getIndex();
+
+        if(deviceIndex != -1){
+            browserProxy.selectResultAt(deviceIndex);
+        }
+    }
+
+    public void CommitSelection(Protocol.Event e){
+        if(e.getBrowserEvent().getCommitSelectionEvent().getCommit()) {
+            browserProxy.stopBrowsing(true);
+
+            //Send confirmation to client
+            RemoteEventEmitter.OnDeviceLoaded(model);
+        }else{
+            browserProxy.stopBrowsing(false);
         }
     }
 
@@ -403,7 +374,6 @@ public class BrowserModel extends RemoteEventHandler implements TrackSelectionCh
      */
     public void LoadDeviceWithName(Protocol.Event e){
         Browser.LoadDeviceWithName params = e.getBrowserEvent().getLoadDeviceWithNameEvent();
-        deviceToFind = params.getName();
     }
 
     /**

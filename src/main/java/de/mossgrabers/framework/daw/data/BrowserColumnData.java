@@ -16,9 +16,9 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 public class BrowserColumnData
 {
     private final int                 index;
-    private final BrowserFilterColumn column;
+    public final BrowserFilterColumn column;
     private BrowserColumnItemData []  items;
-    private BrowserItemBank<?>        itemBank;
+    public BrowserItemBank<?>        itemBank;
     private CursorBrowserFilterItem   cursorResult;
 
 
@@ -42,12 +42,14 @@ public class BrowserColumnData
         this.cursorResult = (CursorBrowserFilterItem)(column.createCursorItem());
         this.cursorResult.exists ().markInterested ();
         this.cursorResult.name ().markInterested ();
+        this.cursorResult.hitCount().markInterested();
 
         this.itemBank = cursorResult.createSiblingsBank (numFilterColumnEntries);
         this.itemBank.cursorIndex ().markInterested ();
         this.itemBank.scrollPosition().markInterested();
         this.itemBank.canScrollForwards().markInterested();
         this.itemBank.canScrollBackwards().markInterested();
+        this.itemBank.itemCount().markInterested();
 
         this.items = new BrowserColumnItemData [numFilterColumnEntries];
         for (int i = 0; i < numFilterColumnEntries; i++)
@@ -191,6 +193,22 @@ public class BrowserColumnData
         this.itemBank.scrollPosition().set(0);
         this.cursorResult.moveToFirst();
         this.cursorResult.isSelected().set(true);
+    }
+
+    public String getSelectedItemName(){
+        return this.cursorResult.name().get();
+    }
+
+    public int getItemCount(){
+        return this.itemBank.itemCount().get();
+    }
+
+    public IntegerValue getItemCountObservable(){
+        return this.itemBank.itemCount();
+    }
+
+    public int getBankSize(){
+        return this.itemBank.getSizeOfBank();
     }
 
     /**

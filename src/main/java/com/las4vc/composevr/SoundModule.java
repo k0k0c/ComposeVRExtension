@@ -27,7 +27,7 @@ public class SoundModule extends RemoteEventHandler {
         super(model);
         this.id = creationEvent.getSenderId();
 
-        int trackPosition = model.createNewInstrumentTrack();
+        trackPosition = model.createNewInstrumentTrack();
 
         //Get the track
         this.track = model.mainTrackBank.getChannel(trackPosition);

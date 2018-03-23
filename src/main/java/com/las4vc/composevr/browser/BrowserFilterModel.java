@@ -2,12 +2,9 @@ package com.las4vc.composevr.browser;
 
 import com.bitwig.extension.callback.IntegerValueChangedCallback;
 import com.bitwig.extension.callback.StringValueChangedCallback;
-import com.google.protobuf.StringValue;
 import com.las4vc.composevr.DAWModel;
 import com.las4vc.composevr.RemoteEventHandler;
 import com.las4vc.composevr.RemoteEventEmitter;
-
-import java.util.ArrayList;
 
 
 import com.bitwig.extension.callback.BooleanValueChangedCallback;
@@ -21,8 +18,10 @@ public class BrowserFilterModel extends RemoteEventHandler {
     public BrowserProxy browserProxy;
 
     private DAWModel model;
-    public String targetDeviceType;
     public String targetContentType;
+
+    private BrowserItemSelector deviceTypeSelector;
+    private BrowserItemSelector deviceSelector;
 
     public BrowserFilterModel(DAWModel model, BrowserProxy browserProxy){
         super(model);
@@ -30,7 +29,7 @@ public class BrowserFilterModel extends RemoteEventHandler {
 
         this.browserProxy = browserProxy;
         this.model = model;
-        targetDeviceType = "Any Device";
+        targetContentType = "Devices";
 
         for(int i = 0; i < browserProxy.getFilterColumnCount(); i++){
             final int columnIndex = i;
@@ -38,50 +37,70 @@ public class BrowserFilterModel extends RemoteEventHandler {
             setUpEntryChangedCallbacks(i);
             setUpNumEntriesChangedCallback(i);
             setUpCanScrollCallbacks(i);
+
+            if(browserProxy.getFilterColumn(i).column.equals(browserProxy.browser.deviceColumn())){
+               deviceSelector = new BrowserItemSelector(browserProxy.getFilterColumn(i).itemBank);
+            }else if(browserProxy.getFilterColumn(i).column.equals(browserProxy.browser.deviceTypeColumn())){
+               deviceTypeSelector = new BrowserItemSelector(browserProxy.getFilterColumn(i).itemBank);
+            }
         }
     }
 
     /**
-     * Set device type filter based on BrowserModel targetDeviceType
+     * Set the filters that are not controlled by the user
      */
-    public void setDeviceType(){
-
-        int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
-
-        if(deviceTypeIndex != -1) {
-            BrowserColumnData deviceTypeColumn = browserProxy.getFilterColumn(deviceTypeIndex);
-            deviceTypeColumn.selectFirst();
-
-            int itemIndex = -1;
-
-            for (int i = 0; i < deviceTypeColumn.getItems().length; i++) {
-
-                if (deviceTypeColumn.getItems()[i].getName().equals(targetDeviceType)) {
-                    itemIndex = i;
-                    break;
-                }
-            }
-
-            if(itemIndex != -1){
-                deviceTypeColumn.getItemAt(itemIndex).isSelected().set(true);
-            }
-        }
+    public void setTargetContentType(){
+        setContentType();
     }
 
-    public String getCurrentDeviceType(){
-        int deviceTypeIndex = browserProxy.getFilterColumnIndex("Device Type", model);
-        if(deviceTypeIndex == -1){
+    public void selectDeviceType(String deviceType){
+        deviceTypeSelector.attemptToSelect(deviceType);
+    }
+
+    public void selectDevice(String deviceName){
+        deviceSelector.attemptToSelect(deviceName);
+    }
+
+    public String getSelectedFilter(String filterName){
+        int filterIndex = browserProxy.getFilterColumnIndex(filterName, model);
+        if(filterIndex == -1){
             return "";
         }
 
-        BrowserColumnData deviceTypeColumn = browserProxy.getFilterColumn(deviceTypeIndex);
-        if(deviceTypeColumn.doesCursorExist()) {
-            return deviceTypeColumn.getCursorName();
+        BrowserColumnData filterColumn = browserProxy.getFilterColumn(filterIndex);
+        if(filterColumn.doesCursorExist()) {
+            return filterColumn.getCursorName();
         }else{
             return "";
         }
     }
 
+    private void setContentType(){
+        if(browserProxy.getSelectedContentType().equals(targetContentType) || targetContentType.isEmpty()){
+            return;
+        }
+
+        String[] contentTypes = browserProxy.getContentTypeNames();
+
+        for(int i = 0; i < contentTypes.length; i++){
+            if(contentTypes[i].equals(targetContentType)){
+                browserProxy.setContentType(i);
+                break;
+            }
+        }
+    }
+
+    public boolean autoFiltersSet(){
+        if(deviceSelector.isSelecting()){
+            return false;
+        }else if(deviceTypeSelector.isSelecting()){
+            return false;
+        }else if(!browserProxy.getSelectedContentType().equals(targetContentType)){
+            return false;
+        }
+
+        return true;
+    }
 
     private void setUpNumEntriesChangedCallback(final int columnIndex){
 
@@ -102,11 +121,16 @@ public class BrowserFilterModel extends RemoteEventHandler {
      * @param numEntries
      */
     public void handleNumFilterEntriesChanged(int columnIndex, int numEntries){
-        RemoteEventEmitter.OnBrowserColumnChanged(model,
-                browserProxy.getFilterColumn(columnIndex).getName(),
-                browserProxy.getNumResultsPerPage(),
-                numEntries,
-                getCurrentDeviceType());
+        BrowserColumnData column = browserProxy.getFilterColumn(columnIndex);
+        String colName = browserProxy.getFilterColumnNames()[columnIndex];
+
+        if(colName.equals("Device Type")){
+            RemoteEventEmitter.OnBrowserColumnChanged(model,
+                    browserProxy.getFilterColumn(columnIndex).getName(),
+                    browserProxy.getNumResultsPerPage(),
+                    numEntries,
+                    getSelectedFilter("Device Type"));
+        }
     }
 
 
@@ -153,7 +177,6 @@ public class BrowserFilterModel extends RemoteEventHandler {
 
     }
 
-
     private void setUpCanScrollCallbacks(final int columnIndex){
 
         BooleanValueChangedCallback filterCanScrollForwardChanged = new BooleanValueChangedCallback() {
@@ -198,7 +221,7 @@ public class BrowserFilterModel extends RemoteEventHandler {
             return;
         }
 
-        int selection = params.getItemIndex() + browserProxy.getFilterColumn(i).getScrollPosition();
+        int selection = params.getItemIndex();
 
         //Todo: test with multi-page filters to ensure that selection works properly
         browserProxy.getFilterColumn(i).getItemAt(selection).isSelected().set(true);
